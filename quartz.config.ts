@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Home",
+    pageTitle: "cbarkr",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
@@ -28,7 +28,7 @@ const config: QuartzConfig = {
         lightMode: {
           light: "#f8f8f8",
           lightgray: "#f8f8f8",
-          gray: "#f8f8f8",
+          gray: "#b8b8b8",
           darkgray: "#111111",
           dark: "#111111",
           secondary: "#284b63",
@@ -38,7 +38,7 @@ const config: QuartzConfig = {
         darkMode: {
           light: "#111111",
           lightgray: "#111111",
-          gray: "#111111",
+          gray: "#646464",
           darkgray: "#f8f8f8",
           dark: "#f8f8f8",
           secondary: "#7b97aa",
