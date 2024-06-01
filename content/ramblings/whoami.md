@@ -1,3 +1,7 @@
+---
+title: Who Am I?
+---
+
 _Previously titled "Koans for Dummies"_
 
 This is not a autobiography or anything of the sort. Rather, it is a collection of thoughts I had while wrestling with the koan _who are you?_
