@@ -1,5 +1,5 @@
 ---
-title: Who Am I?
+title: who am I?
 ---
 
 > Previously titled _Koans for Dummies_

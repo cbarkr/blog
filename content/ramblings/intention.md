@@ -1,5 +1,5 @@
 ---
-title: Intention
+title: intention
 ---
 
 Design does not disclose itself to the world. A designer ideates, reiteratively revises their idea, hates everything, starts over, and repeats until their vision is formed. They start with intention; a compulsion to convey something. Execution of that idea, however, determines how that message is ultimately conveyed.
