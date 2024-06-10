@@ -1,45 +1,53 @@
 ---
-title: Adobe and FOSS
+title: Adobe's new TOS are troubling
 ---
+## Background
+Terms of Service (TOS) are the legal agreements between a service provider and a prospective user of said service. The prospective user, upon agreeing to the terms, enters a legally binding relationship with the provider. But as we're all aware, few people actually read the TOS before clicking *accept*. Few are willing to dedicate the time to carefully read and understand the lengthy, nauseating, but mostly inconsequential legal jargon. I am certainly guilty of this.
 
-I think it's fair to say that most people don't actually read the Terms of Service (TOS) before clicking "accept". I know I certainly used to skip them. Why spend hours reviewing pages upon pages of nauseating (but mostly inconsequential) legal jargon when I could be doing something productive? 
-It turns out that sitting down and reviewing the TOS can be productive (to some). You might discover that the service you already pay to use has now claimed rights over the works you create with that service. At least, this is the case with the latest updates to Adobe's TOS, which has sparked outrage among creatives and professionals. Adobe [responded](https://blog.adobe.com/en/publish/2024/06/06/clarification-adobe-terms-of-use) with a blog post clarifying the new terms, but it does not explain much. 
+The service provider has sole authorship over the TOS. As such, they can (and will) often sneak some suspicious terms, obfuscated by lengthy sentences and complex vocabulary, into the agreement without sounding any alarms. Services like [Terms of Service; Didn't Read](https://tosdr.org) (TOS;DR) and [TOSBack](https://tosback.org/) exist for the sole purpose of elucidating these challenging agreements. 
 ## Adobe's TOS
-At the time of writing (June, 10th, 2024),  [Adobe's Terms of Service](https://www.adobe.com/legal/terms.html) (TOS) contain the following (troublesome) clauses:
-### The Changes
-#### Privacy
+*[TOS;DR has assigned Adobe](https://tosdr.org/en/service/417) a grade of E (their lowest grade).*
+
+Recent changes to [Adobe's Terms of Service](https://www.adobe.com/legal/terms.html) have sparked outrage over their suspicious terms. The TL;DR is that Adobe claims a number of rights over the works you create with any of their services. Moreover, Adobe has a dubious history [1](https://www.techradar.com/news/adobe-is-almost-definitely-using-your-content-to-train-ai) [2](https://techcrunch.com/2023/01/06/is-adobe-using-your-photos-to-train-its-ai-its-complicated/) [3](https://x.com/Stretchedwiener/status/1799093882619347262) with how it exercises its supposed rights to user's work. Hence, users already have little reason to trust the company.
+
+Adobe has [responded](https://blog.adobe.com/en/publish/2024/06/06/clarification-adobe-terms-of-use) to public outcry with a blog post clarifying the new terms, but the post itself has raised more questions than it answered. Some of these questions will be discussed below.
+
+At the time of writing (June, 9th, 2024), [Adobe's TOS](https://www.adobe.com/legal/terms.html) contain the following (troublesome) clauses:
+### Privacy
 > 2.2 **Our Access to Your Content.** We may access, view, or listen to your Content (defined in section 4.1 (Content) below) through both automated and manual methods, but only in limited ways, and only as permitted by law. For example, in order to provide the Services and Software, we may need to access, view, or listen to your Content to (A) respond to Feedback or support requests; (B) detect, prevent, or otherwise address fraud, security, legal, or technical issues; and (C) enforce the Terms, as further set forth in Section 4.1 below. Our automated systems may analyze your Content and Creative Cloud Customer Fonts (defined in section 3.10 (Creative Cloud Customer Fonts) below) using techniques such as machine learning in order to improve our Services and Software and the user experience. Information on how Adobe uses machine learning can be found here: [http://www.adobe.com/go/machine_learning](http://www.adobe.com/go/machine_learning).
 
-Translation: "We can snoop through your files and do with them as we please. Maybe we'll train our ML models on them."
-#### Your Content
+*Translation: "We can snoop through your files and do with them as we please."*
+
+Before proceeding any further, I would like to point out one thing: Adobe has adopted opt-out policies for data and analysis. This means that a user's (personal) information and content is shared, and may be analyzed by Adobe, unless the user has explicitly opted out. For example, in the case of the events linked to Adobe's "dubious history", an Adobe spokesperson suggested users adjust their privacy preferences and settings (according to [1](an Adobe spokesperson suggested users adjust their privacy preferences and settings)).
+
+Many users have been [vocal](https://9to5mac.com/2024/06/06/change-to-adobe-terms-amp-conditions/) in their concerns over their data being accessed via "manual methods": do non-disclosure agreements (NDA) mean nothing? Adobe reserves the right to disclose content bound by NDAs to their human operators. More interestingly, Adobe may invoke their right to manually access a user's content to "enforce the Terms", which can basically mean anything they want it to mean. Adobe does not address or deny this concern whatsoever; their response merely provides some examples of when they may invoke this right for a just cause. 
+### Your Content
 > 4.2 **Licenses to Your Content.** Solely for the purposes of operating or improving the Services and Software, you grant us a non-exclusive, worldwide, royalty-free sublicensable, license, to use, reproduce, publicly display, distribute, modify, create derivative works based on, publicly perform, and translate the Content. For example, we may sublicense our right to the Content to our service providers or to other users to allow the Services and Software to operate as intended, such as enabling you to share photos with others. Separately, section 4.6 (Feedback) below covers any Feedback that you provide to us.
 
-Translation: "We can and will do whatever we want with your creations, and there's nothing you can do about it."
-#### Dispute Resolution, Class Action Waiver, Arbitration Agreement
+*Translation: "We can and will do whatever we want with your creations, and there's nothing you can do about it."*
+
+The license granted to Adobe by use of their services is a powerful one. As stated above, this license essentially gives Adobe the right to do whatever they please with your content. The rights granted by this license resemble those of the [GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.en.html), a very liberal license often used in open source software projects. There is, however, a stark contrast between how each of these licenses are granted. In the case of the GPL license, a software author *explicitly* grants the GPL license to end-users. Meanwhile, creatives or professionals that use Adobe products *implicitly* grant Adobe's license to Adobe (it is assumed, after all, that they fully read and understood the TOS). 
+
+In particular, this license grants Adobe the right to *sublicense* your content. That is, not only may they use it for their own purposes, but they may also sell it to others. Adobe has already been [sued for selling the personal data of its customers](https://petapixel.com/2023/12/14/adobe-sued-by-watchdog-over-mass-data-collection-of-dutch-citizens/), but this new license permits them to sell your content (i.e. your works created with Adobe products). The following passage of Adobe's blog post in response to the controversy thus takes a new meaning:
+
+> **Adobe does not train Firefly Gen AI models on customer content.** Firefly generative AI models are trained on a dataset of licensed content, such as Adobe Stock, and public domain content where copyright has expired. Read more here: [https://helpx.adobe.com/firefly/faq.html#training-data](https://helpx.adobe.com/firefly/faq.html#training-data)
+
+Adobe is awfully specific that they will not train customer content on *their* AI models, but who's to say that they won't sell that customer content to be trained on *other* AI models? This, they do not deny.
+### Dispute Resolution, Class Action Waiver, Arbitration Agreement
 > 14.2 **No Class Actions. You may only resolve disputes with us on an individual basis, and you may not bring a claim as a plaintiff or a class member in a class, consolidated, or representative action. Nonetheless, if any portion of this class action waiver is deemed unenforceable or invalid as to a particular remedy, then that remedy (and only that remedy) must be severed from the arbitration and may be sought in court. The parties agree, however, that any adjudication of remedies not subject to arbitration shall be stayed pending the outcome of any arbitrable claims and remedies.**
 
-Translation: "We deny you the right to hold us accountable for our unethical practices"
+*Translation: We are aware of the widespread harm our practices may cause, but absolve ourselves of all accountability.*
 
-Note/Question: Is this legally binding? It's like saying "I cannot be held accountable for what I'm about to do", \*then proceeds to do something bad\*
-### The Implications
-The latest updates to Adobe's TOS state that they claim a right to *your* work. With this right, [as others have pointed out](https://9to5mac.com/2024/06/06/change-to-adobe-terms-amp-conditions/) online, Adobe can access your works (manually (i.e. with human eyes on said work)), which could violate Non-Disclosure Agreements (NDA). They also hold the right to train their machine learning (ML) models with your data in the name of "improving the Services" (which, let's be real, can be just about anything). 
-## Free and Open Source (FOSS)
-### Free
-> Not *necessarily* free as in no-cost, but [free as in freedom](https://www.gnu.org/philosophy/free-sw.html): free to use, study, modify, improve, redistribute, etc.
-### Open Source
-> The source code is publicly available
-### Why should I care? 
-- Transparency
-- Security
-- Privacy
-- Liberty
-### Alternatives to Adobe Products
+I find this clause rather odd; it's like saying "I cannot be held accountable for what I'm about to do", \*then proceeds to do something bad\* (or vice versa). My question to the scholars and lawyers present: is this even legally binding? 
+### Other Implications
+Adobe's blog post closes like so: 
 
-| Adobe        | FOSS                                                                               | Free ($0))                                                                  |
-| ------------ | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Lightroom    | [Darktable](https://www.darktable.org/)<br>[RawTherapee](https://rawtherapee.com/) |                                                                             |
-| Photoshop    | [Krita](https://krita.org/en/)<br>[GIMP](https://www.gimp.org/)                    | [Photopea](https://www.photopea.com/)                                       |
-| Premiere     | [Kdenlive](https://kdenlive.org/en/)                                               | [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve) |
-| Illustrator  | [Inkscape](https://inkscape.org/)                                                  | [Vectr](https://vectr.com/)                                                 |
-| InDesign     | [Scribus](https://www.scribus.net/)                                                |                                                                             |
-| AfterEffects | [Blender](https://www.blender.org/)                                                | [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve) |
+> We will be clarifying the Terms of Use acceptance customers see when opening applications.
+
+This "Terms of Use acceptance" refers to the summary of TOS changes that are presented to users before they can continue using a service. Note, however, they do say they will update the TOS itself, just the summary. Rather than address the suspicious terms inserted into the TOS, they will merely soften the language that describes those changes, effectively sweeping it under the rug. I think this is unacceptable. The terms are problematic, not for their language, but for their implications. If these terms are to remain in the TOS, Adobe is left with the right to use your content however they please, despite their "clarifications" as described in the blog post. 
+
+I would like to remind you that Adobe does not deny the harm that its new terms may bring to creators or professionals, nor do they deny the potential for misuse of these newfound rights (though I suppose it's only misuse if they did not design things this way). They do, instead, say how they *can* use these rights for good. There is no guarantee that they will *only* do what they say they will do. If these terms remain in the TOS, Adobe will still have the power to use user's content as they please.
+## My $0.02
+Have you ever heard the phrase: "you'll own nothing and you'll be happy"? Service providers appear to have taken this phrase to heart: software is no longer a one-time payment, it's now subscription-based; your data is no longer yours, but to be used for marketing purposes. These measures were introduced to reduce the cost of the product to the consumer, but with repeated price increases and reduced privacy and autonomy, what benefit is there to the consumer? If a user is already paying for a service, why should that service have any right to squeeze a little bit more out of them? **Why should the user not have sole ownership over their creations?** And under these circumstances, what incentive is there for the consumer to support the company instead of pirating that software? With a pirated copy of the software, the consumer could disable all networking capabilities of that software, thereby preventing their personal information and creative content from being disseminated. A legitimate copy of the software, however, could prevent you from doing so in order for the service provider to continue using your data and content. Therefore, I believe these practices only encourage piracy (that is, if the consumer chooses to use this particular software instead of a free and/or open source alternative). 
+
+I have used Adobe products, such as Lightroom and Photoshop, for 5+ years. But recently (prior to the latest controversy), I have made the switch to free and open source software (FOSS). This switch was not necessarily due to my disdain for Adobe as a company (though that does play a part); it was a natural progression for me, as a software developer, to support the projects that inspire me. FOSS may come with a learning curve, but the benefits are immense (especially considering the topics discussed above). I will have a follow-up post on FOSS and FOSS alternatives to Adobe software. I hope you, too, will make the switch.
