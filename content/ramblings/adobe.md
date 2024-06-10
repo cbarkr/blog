@@ -2,7 +2,7 @@
 title: Adobe's New TOS
 ---
 ## Background
-Terms of Service (TOS) are the legal agreements between a service provider and a prospective user of said service. The prospective user, upon agreeing to the terms, enters a legally binding relationship with the provider. But as we're all aware, few people actually read the TOS before clicking *accept*. Few are willing to dedicate the time to carefully read and understand the lengthy, nauseating, but mostly inconsequential legal jargon. I am certainly guilty of this.
+Terms of service (TOS) are the legal agreements between a service provider and a prospective user of said service. The prospective user, upon agreeing to the terms, enters a legally binding relationship with the provider. But as we're all aware, few people actually read the TOS before clicking *accept*. Few are willing to dedicate the time to carefully read and understand the lengthy, nauseating, but mostly inconsequential legal jargon. I am certainly guilty of this.
 
 The service provider has sole authorship over the TOS. As such, they can (and will) often sneak some suspicious terms, obfuscated by lengthy sentences and complex vocabulary, into the agreement without sounding any alarms. Services like [Terms of Service; Didn't Read](https://tosdr.org) (TOS;DR) and [TOSBack](https://tosback.org/) exist for the sole purpose of elucidating these challenging agreements. 
 ## Adobe's TOS
