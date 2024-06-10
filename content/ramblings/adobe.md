@@ -1,5 +1,5 @@
 ---
-title: Adobe's new TOS
+title: Adobe's New TOS
 ---
 ## Background
 Terms of Service (TOS) are the legal agreements between a service provider and a prospective user of said service. The prospective user, upon agreeing to the terms, enters a legally binding relationship with the provider. But as we're all aware, few people actually read the TOS before clicking *accept*. Few are willing to dedicate the time to carefully read and understand the lengthy, nauseating, but mostly inconsequential legal jargon. I am certainly guilty of this.
