@@ -12,7 +12,7 @@ Recent changes to [Adobe's Terms of Service](https://www.adobe.com/legal/terms.h
 
 Adobe has [responded](https://blog.adobe.com/en/publish/2024/06/06/clarification-adobe-terms-of-use) to public outcry with a blog post clarifying the new terms, but the post itself has raised more questions than it answered. Some of these questions will be discussed below.
 
-At the time of writing (June, 9th, 2024), [Adobe's TOS](https://www.adobe.com/legal/terms.html) contain the following (troublesome) clauses:
+At the time of writing (June, 9th, 2024), Adobe's TOS contain the following (troublesome) clauses:
 ### Privacy
 > 2.2 **Our Access to Your Content.** We may access, view, or listen to your Content (defined in section 4.1 (Content) below) through both automated and manual methods, but only in limited ways, and only as permitted by law. For example, in order to provide the Services and Software, we may need to access, view, or listen to your Content to (A) respond to Feedback or support requests; (B) detect, prevent, or otherwise address fraud, security, legal, or technical issues; and (C) enforce the Terms, as further set forth in Section 4.1 below. Our automated systems may analyze your Content and Creative Cloud Customer Fonts (defined in section 3.10 (Creative Cloud Customer Fonts) below) using techniques such as machine learning in order to improve our Services and Software and the user experience. Information on how Adobe uses machine learning can be found here: [http://www.adobe.com/go/machine_learning](http://www.adobe.com/go/machine_learning).
 
