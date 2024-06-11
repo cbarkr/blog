@@ -2,7 +2,7 @@
 title: FOSS
 ---
 If you read my last post on [[adobe|Adobe's new TOS]], you'll know that Adobe now reserves the right to access your content and grant themselves highly permissive licenses to use/abuse your content. I also mentioned that there are many free and open-source (FOSS) alternatives to Adobe software. Here, I'll briefly describe FOSS, why you should care, and some FOSS alternatives that don't suck.
-## Free and Open Source
+## Free and Open-Source
 ### Free
 
 > Not *necessarily* free as in no-cost, but [free as in freedom](https://www.gnu.org/philosophy/free-sw.html): free to use, study, modify, improve, redistribute, etc.
@@ -11,7 +11,7 @@ If you read my last post on [[adobe|Adobe's new TOS]], you'll know that Adobe no
 > A project's source code and/or design is publicly available
 ## Why should I care? 
 ### 1. Transparency
-Transparency is inherent to open source software. The source code is available for all to see, which means the author's claims about what the software does can be validated. No funny business.
+Transparency is inherent to open-source software. The source code is available for all to see, which means the author's claims about what the software does can be validated. No funny business.
 ### 2. Security
 Given the transparent nature of FOSS, there are more eyes looking for potential vulnerabilities. Yes, some of these eyes will belong to malicious actors, but a far greater number will belong to people maintaining the software; hence, it's more likely that such vulnerabilities will be patched before they're exploited, whereas vulnerabilities in closed-source software may only be known to the vendor (who may not patch the vulnerabilities immediately due to a false sense of security) and the malicious actors.
 Open-source software also resists the insertion of malicious or undesirable features, since all updates are also publicly available and verified via communal code review.
