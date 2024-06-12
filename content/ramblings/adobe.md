@@ -38,7 +38,7 @@ That being said, if there is even a small chance of catching those who engage in
 
 *Translation: "We can and will do whatever we want with your creations, and there's nothing you can do about it."*
 
-*Note: This type of license is very common. For example, [Instagram](https://www.facebook.com/help/instagram/478745558852511), [Facebook](https://www.facebook.com/legal/terms/), [Pinterest](https://policy.pinterest.com/en/terms-of-service), [Twitter](https://x.com/en/tos),  [Tumblr](https://www.tumblr.com/policy/en/terms-of-service), etc. all specify the exact same terms. These terms allow the service to profit from your content. This is usually expected of free services (such as those mentioned above), but certainly not of a service you already spend a significant amount of money on.*
+*Note: This type of license is very common. For example, [Instagram](https://www.facebook.com/help/instagram/478745558852511), [Facebook](https://www.facebook.com/legal/terms/), [Pinterest](https://policy.pinterest.com/en/terms-of-service), [Twitter](https://x.com/en/tos),  [Tumblr](https://www.tumblr.com/policy/en/terms-of-service), etc. all specify the exact same terms. These terms allow the service to profit from your content. This is usually expected of free services (such as those mentioned above), but certainly not of a service you already spend a significant amount of money on (such as Adobe's products).*
 
 The license granted to Adobe by use of their services is a powerful one. **By using Adobe software, you lose your exclusive control over *your* intellectual property**. As stated above, this license essentially gives Adobe the right to do whatever it pleases with your content. 
 
