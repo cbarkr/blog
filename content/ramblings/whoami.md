@@ -2,7 +2,7 @@
 title: who am I?
 tags:
   - idea
-  - ramblings
+  - ramble
 ---
 > Previously titled _Koans for Dummies_
 
