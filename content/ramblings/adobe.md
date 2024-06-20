@@ -1,5 +1,9 @@
 ---
-title: Adobe's New TOS
+title: adobe's new terms of use
+tags:
+  - idea
+  - foss
+  - ramblings
 ---
 ## Background
 Terms of service (TOS) are the legal agreements between a service provider and a prospective user of said service. The prospective user, upon agreeing to the terms, enters a legally binding relationship with the provider. But as we're all aware, few people actually read the TOS before clicking *accept*. Few are willing to dedicate the time to carefully read and understand the lengthy, nauseating, but mostly inconsequential legal jargon. I am certainly guilty of this.
@@ -75,6 +79,20 @@ Adobe has been storing user's data and content since long before the new terms c
 ### Adobe's New TOS Encourages Piracy
 Have you ever heard the phrase: "you'll own nothing and you'll be happy"? Service providers appear to have taken this phrase to heart: software is no longer a one-time payment, it's now subscription-based; your data is no longer yours, but to be used for marketing purposes. These measures were introduced to reduce the cost of the product to the consumer, but with repeated price increases and reduced privacy and autonomy, what benefit is there to the consumer? If a user is already paying for a service, why should that service have any right to squeeze a little bit more out of them? **Why should the creator not have sole ownership over their creations?** And under these circumstances, what incentive is there for the consumer to support the company instead of pirating that software? A legitimate copy of the software could prevent the consumer from disabling it's networking capabilities in order to "provide the service" (such as what Creative Cloud does). A pirated copy of the software, however, would not have any incentive to maintain a network connection (in fact, it has incentive to *disable* networking capabilities in order to avoid detection). The pirated version has an air-gap that prevents a user's personal information and content from being disseminated to a third (and potentially fourth and so on) party. The pirated version would therefore protect the user's intellectual property.
 
-Rather than sail the seas, however, I suggest to those who wish to simultaneously create and own their creations to choose free and/or open-source alternatives. See the closing remarks below for more information.
-## Personal Experience / Closing Remarks
-I have used Adobe products, such as Lightroom and Photoshop, for 5+ years. But recently (prior to the latest controversy), I have made the switch to free and open-source software (FOSS). This switch was not necessarily due to my contempt for Adobe as a company (though that does play a part); it was a natural progression for me, as a software developer, to support the projects that inspire me. FOSS may come with a learning curve, but the benefits are immense (especially considering the topics discussed above). The "free" part means *freedom*; FOSS won't grant itself a right to your creations. I have a whole post on FOSS, including **FOSS and free ($0) alternatives to Adobe software [[foss|here]]**. I hope you, too, will make the switch.
+Rather than sail the seas, however, I suggest to those who wish to simultaneously create and own their creations to choose free and/or open-source alternatives. 
+## Personal Experience
+I have used Adobe products, such as Lightroom and Photoshop, for 5+ years. But recently (prior to the latest controversy), I have made the switch to free and open-source software (FOSS). This switch was not necessarily due to my contempt for Adobe as a company (though that does play a part); it was a natural progression for me, as a software developer, to support the projects that inspire me. FOSS may come with a learning curve, but the benefits are immense (especially considering the topics discussed above). The "free" part means *freedom*; FOSS won't grant itself a right to your creations. More about FOSS [[foss|here]].
+## Alternatives to Adobe Products
+
+| Adobe        | FOSS                                                                               | Free ($0)                                                                                          | Paid                                                      |
+| ------------ | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Lightroom    | [Darktable](https://www.darktable.org/)<br>[RawTherapee](https://rawtherapee.com/) |                                                                                                    | [Capture One](https://www.captureone.com/en)              |
+| Photoshop    | [Krita](https://krita.org/en/)<br>[GIMP](https://www.gimp.org/)                    | [Photopea](https://www.photopea.com/)                                                              | [Affinity Photo](https://affinity.serif.com/en-us/photo/) |
+| Premiere     | [Kdenlive](https://kdenlive.org/en/)                                               | [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)                        |                                                           |
+| Illustrator  | [Inkscape](https://inkscape.org/)                                                  | [Vectr](https://vectr.com/)                                                                        |                                                           |
+| InDesign     | [Scribus](https://www.scribus.net/)                                                |                                                                                                    |                                                           |
+| AfterEffects | [Blender](https://www.blender.org/)                                                | [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)                        |                                                           |
+| Acrobat      | [LibreOffice](https://www.libreoffice.org/download/download-libreoffice/)          | [Master PDF Editor](https://code-industry.net/masterpdfeditor/)<br>[Sejda](https://www.sejda.com/) |                                                           |
+### Notes
+I personally use DarkTable, GIMP, and LibreOffice regularly, and have used Photopea and Sejda a number of times in the past. Although some of these (DarkTable and GIMP, specifically) have steep learning curves, don't let this dissuade you from migrating to them. They're not worse, just different. I hope you, too, will make the switch.
+

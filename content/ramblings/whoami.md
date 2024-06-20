@@ -1,7 +1,9 @@
 ---
 title: who am I?
+tags:
+  - idea
+  - ramblings
 ---
-
 > Previously titled _Koans for Dummies_
 
 This is not a autobiography or anything of the sort. Rather, it is a collection of thoughts I had while wrestling with the koan _who are you?_
