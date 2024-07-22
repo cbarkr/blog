@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     analytics: null,
     locale: "en-US",
     baseUrl: "blog.cbarkr.com",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "templates", ".obsidian", "!(media)**/!(*.md)", "!(*.md)"],
     defaultDateType: "created",
     theme: {
       fontOrigin: "local",
