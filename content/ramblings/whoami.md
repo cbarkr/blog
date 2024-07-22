@@ -3,6 +3,7 @@ title: who am I?
 tags:
   - idea
   - ramble
+date: 2024-01-04
 ---
 > Previously titled _Koans for Dummies_
 
