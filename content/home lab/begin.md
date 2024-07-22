@@ -37,6 +37,7 @@ Then I plugged it in, booted it up, and double checked that everything worked (w
 1. All of their files were still on the computer
 2. No authentication of any kind was required to access these files
 3. I would be formatting the drives without touching any of the files (to hopefully give them some peace of mind)
+
 Let this be a reminder to use all to **always** wipe drives before selling them. Or better yet, take them out and smash them with a hammer until they're nothing but shards and dust of metal and plastic. 
 
 Anyways, after formatting the drives, I created a Debian install disk (because Windows sucks), and set everything up. I chose Debian because it's familiar (I use Ubuntu as my daily driver), but also because it's simple, stable, and secure. Even though I'm primarily going to be accessing the lab via terminal, I installed KDE Plasma as the desktop environment, and oh is it pretty. I guess it'll be something nice to look at whenever I do actually use the GUI. Here's the obligatory neofetch screenshot. 
