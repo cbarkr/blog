@@ -23,7 +23,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Search(),
     Component.Darkmode(),
     Component.DesktopOnly(Component.Explorer()),
-    Component.DesktopOnly(Component.RecentNotes({ linkToMore: "/tags" as SimpleSlug })),
+    // Component.DesktopOnly(Component.RecentNotes({ linkToMore: "/tags" as SimpleSlug })),
   ],
   right: [
     Component.Graph(),
