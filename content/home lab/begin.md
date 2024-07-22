@@ -1,12 +1,12 @@
 ---
-title: begin
+title: humble beginning
 date: 2024-07-22
 ---
-# Motivation
+## Motivation
 As I grow more comfortable with technology, I grow less comfortable with the idea of letting someone else manage my data. Naturally, I want to control my data myself! And with the means to do so, it was only a matter of time before I caved in and bought a little server to tinker around with. 
-# Prologue
+## Prologue
 I originally planned on using a Raspberry Pi 5 to begin my home lab journey. The small but mighty RasPi could handle just about everything I want it to, occupies very little space, and draws a negligible amount of power. It seems like the perfect way to start a home lab. The only off putting aspect is price; it's just a bit more money than I wanted to spend. As a result, I delayed getting one until I had good reason to.
-# The Start
+## The Start
 Without good reason, I was was recently browsing VarageSale (a local buy/sell platform), and noticed a Lenovo ThinkCentre m710e SFF for sale. I recall, at one point, browsing Lenovo's "tiny" offerings as a buffed-up alternative to a RasPi, but was worried about cooling issues since everything is crammed into a tiny case with little airflow. The SFF version, however, has a bigger fan and more airflow, which gives me more peace of mind. 
 
 This machine was listed with the factory specs: "an Intel Core i5 processor, 8GB of RAM, and a 256GB solid-state drive". The seller didn't mention which i5 offering was installed, so, as you do, I asked. A few hours later, I received the following messages:
@@ -45,7 +45,7 @@ Anyways, after formatting the drives, I created a Debian install disk (because W
 ![[homelab_rice.png]]
 
 Now that everything is set up, all that's left is to actually start tinkering!
-# What's Next
+## What's Next
 I have a few plans for this machine:
 1. Break free from Google Drive by hosting my own NAS
 2. Run an AdGuard Home instance for network-wide ad and tracker blocking
