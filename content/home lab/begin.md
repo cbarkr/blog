@@ -1,6 +1,8 @@
 ---
-title: humble beginning
+title: humble beginnings
 date: 2024-07-22
+tags:
+  - blog
 ---
 ## Motivation
 As I grow more comfortable with technology, I grow less comfortable with the idea of letting someone else manage my data. Naturally, I want to control my data myself! And with the means to do so, it was only a matter of time before I caved in and bought a little server to tinker around with. 
