@@ -51,6 +51,6 @@ I have a few plans for this machine:
 2. Run an AdGuard Home instance for network-wide ad and tracker blocking
 3. Set up a media server
 4. Host a VPN for accessing my home network on the go
-5. Playing around and learning networking and security
+5. Just play around to learn practical networking and security skills
 
-I plan on adding updates in this folder, maybe sharing things I learn along the way.
+I plan on adding updates in this folder, maybe sharing things I learn along the way. Stay tuned!
