@@ -1,8 +1,8 @@
 ---
 title: "part 1: humble beginnings"
-date: 2024-07-22
 tags:
   - blog
+date: 2024-07-22
 ---
 ## Original plan
 I originally planned on using a Raspberry Pi 5 to begin my home lab journey. The small but mighty RasPi can handle just about everything I want it to, occupies very little space, and draws a negligible amount of power. It seems like the perfect way to start a home lab. The only off putting aspect is price; it's just a bit more money than I wanted to spend. As a result, I decided against getting one until I had good reason to.
@@ -38,7 +38,7 @@ Then I plugged it in, booted it up, and double checked that everything worked. H
 
 Let this be a reminder to use all to **always** wipe drives before selling them. Or better yet, take them out and smash them with a hammer until they're nothing but shards and dust of metal and plastic. 
 
-Anyways, after formatting the drives, I created a Debian install disk, and began the install. I chose Debian because it's familiar (I use Ubuntu as my daily driver), but also because it's simple, stable, and secure. Even though I'm primarily going to be accessing the lab via terminal, I installed KDE Plasma as the desktop environment, and oh is it pretty. I guess it'll be something nice to look at whenever I do actually use the GUI. Here's the obligatory neofetch screenshot. 
+Since I wanted to use these drives, I didn't choose the former option, but I did make sure to format everything. Then I created a Debian install disk, and began the install. I chose Debian because it's familiar (I use Ubuntu as my daily driver), but also because it's simple, stable, and secure. I installed KDE Plasma as the desktop environment, and oh is it pretty. Here's the obligatory neofetch screenshot. 
 
 ![[homelab_rice.png]]
 
