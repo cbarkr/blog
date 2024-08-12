@@ -2,7 +2,7 @@
 title: "part 1: humble beginnings"
 tags:
   - blog
-date: 2024-07-22
+date: 2024-08-11
 ---
 ## Original plan
 I originally planned on using a Raspberry Pi 5 to begin my home lab journey. The small but mighty RasPi can handle just about everything I want it to, occupies very little space, and draws a negligible amount of power. It seems like the perfect way to start a home lab. The only off putting aspect is price; it's just a bit more money than I wanted to spend. As a result, I decided against getting one until I had good reason to.
