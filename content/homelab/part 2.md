@@ -36,7 +36,7 @@ apt install -t ${VERSION_CODENAME}-backports cockpit
 ```
 
 > [!note] Note
-> I had issues installing the `...-backports` as described above, so I omitted them
+> I had issues installing the `...-backports` as described above, so I omitted them (i.e. `apt install`ed `cockpit`)
 
 I also installed some extensions that I thought might come in handy (including Podman): 
 
@@ -45,7 +45,7 @@ apt install cockpit-storaged cockpit-networkmanager cockpit-podman
 ```
 
 > [!note] Note
-> Contrary to many tutorials that suggest that you need to first start cockpit using `systemctl start --now cockpit`, I simply did the next step instead
+> Contrary to many tutorials that suggest that you need to first start cockpit using `systemctl start --now cockpit`, I found that this is unnecessary
 
 Cockpit will start on demand when a browser accesses `localhost:9090` (or whichever port it is configured to use). This should produce the following login page:
 
