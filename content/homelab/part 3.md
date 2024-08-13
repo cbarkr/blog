@@ -7,9 +7,9 @@ date: 2024-08-13
 ## Background
 DNS sinkholes are DNS servers that refuse to translate domain name -> IP address for a certain set of domain names. For example, suppose a website instructs a client's browser to request content from www.eviladvertisementcompany.com, but the DNS sinkhole has blacklisted that domain; the DNS sinkhole will return a non-routable IP address instead of the actual IP address, thereby blocking the content from www.eviladvertisementcompany.com.
 ## Preamble
-When I first learned of DNS sinkholes, my mind was blown. Despite taking multiple networking courses and learning about DNS, it hadn't occurred to me that a DNS server could intentionally misbehave and still be considered useful. But since then, I have been looking forward to setting one up for myself. Here, I go over how I set up of [AdGuard Home](https://adguard.com/en/adguard-home/overview.html), a [[foss|FOSS]] DNS sinkhole.
+When I first learned of DNS sinkholes, my mind was blown. Despite taking multiple networking courses and learning about DNS, it hadn't occurred to me that a DNS server could intentionally misbehave and still be considered useful. But since then, I have been looking forward to setting one up for myself. Here, I go over how I set up of [AdGuard Home](https://adguard.com/en/adguard-home/overview.html), a [[foss|FOSS]] DNS sinkhole that I mentioned in [[part 0]] of this series.
 ## Setup
-AdGuard offers a nice alpine-based image over on [Docker Hub](https://hub.docker.com/r/adguard/adguardhome), which contains all the relevant documentation necessary to get everything up and running. The setup process is straightforward, but since I did not find any guides online that covered running AdGuard as a *user container* in Podman, I decided to document the process here in case anyone finds it useful.
+AdGuard offers a nice alpine-based image over on [Docker Hub](https://hub.docker.com/r/adguard/adguardhome). The Docker Hub page contains all the relevant documentation necessary to get everything up and running. The setup process is straightforward, but since I did not find any guides online that covered running AdGuard as a *user container* in Podman, I decided to document the process here in case anyone finds it useful.
 
 Using Podman, there are two paths for deploying an AdGuard container:
 1. As a system container
@@ -61,7 +61,7 @@ From the "Podman containers" tab in Cockpit, I created a new pod named "services
 ![[homelab_cockpit_podman_adguard_ports.png]]
 ![[homelab_cockpit_podman_adguard_volumes.png]]
 ### Step 5 (Optional): Pull a specific AdGuard version
-In my testing, `cockpit-podman` won't fetch a specific image tag for whatever reason. And since I wanted to fix my version at `v0.107.52` for now, I worked around this issue by pulling the image directly:
+In my testing, `cockpit-podman` refused to fetch a specific image tag for whatever reason. And since I wanted to fix my version at `v0.107.52` for now, I worked around this issue by pulling the image directly:
 ```bash
 podman pull docker.io/adguard/adguardhome:v0.107.52
 ```
