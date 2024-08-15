@@ -9,7 +9,7 @@ DNS sinkholes are DNS servers that refuse to translate domain name -> IP address
 ## Preamble
 When I first learned of DNS sinkholes, my mind was blown. Despite taking multiple networking courses and learning about DNS, it hadn't occurred to me that a DNS server could intentionally misbehave and still be considered useful. But since then, I have been looking forward to setting one up for myself. Here, I go over how I set up of [AdGuard Home](https://adguard.com/en/adguard-home/overview.html), a [[foss|FOSS]] DNS sinkhole that I mentioned in [[part 0]] of this series.
 ## Setup
-AdGuard offers a nice alpine-based image over on [Docker Hub](https://hub.docker.com/r/adguard/adguardhome). The Docker Hub page contains all the relevant documentation necessary to get everything up and running. The setup process is straightforward, but since I did not find any guides online that covered running AdGuard as a *user container* in Podman, I decided to document the process here in case anyone finds it useful.
+AdGuard offers an Alpine-based image over on [Docker Hub](https://hub.docker.com/r/adguard/adguardhome). The Docker Hub page contains all the relevant documentation necessary to get everything up and running. The setup process is straightforward, but since I did not find any guides online that covered running AdGuard as a *user container* in Podman, I decided to document the process here in case anyone finds it useful.
 
 Using Podman, there are two paths for deploying an AdGuard container:
 1. As a system container
@@ -39,6 +39,11 @@ To set a restart policy on user containers, lingering must be enabled[^1]. If th
 loginctl enable-linger <username>
 ```
 
+or for the current user, 
+```bash
+loginctl enable-linger $USER
+```
+
 > [!warning] Warning
 > The `cockpit-podman` team does not support or recommend this[^2]
 ### Step 3: Create the necessary volumes
@@ -56,7 +61,7 @@ These volumes will be created in `/home/$USER/.local/share/containers/storage/vo
 > [!info] Info
 > If you skip this step, make sure to set the port mappings and volume mounts on the container in the "Integrations" tab (see step 6)
 
-From the "Podman containers" tab in Cockpit, I created a new pod named "services". Here, I defined the relevant port mappings and volumes for AdGuard (using the volume mounts created in the last step):
+From the "Podman containers" tab in Cockpit, I created a new pod named "services". Here, I defined the relevant port mappings and volumes for AdGuard (using the volume mounts created in the previous step):
 ![[homelab_cockpit_podman_pod.png]]
 ![[homelab_cockpit_podman_adguard_ports.png]]
 ![[homelab_cockpit_podman_adguard_volumes.png]]

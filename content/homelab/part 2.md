@@ -20,7 +20,11 @@ Here, I define a few self-imposed requirements:
 2. Root access must be minimal
 3. [[foss|Free and open-source software]] must be used wherever possible
 ### 3. Threats
-Since this is a *home*lab and is therefore confined to my home network (for now), few threats are posed. I will eventually want to access my home network while away, which will warrant more serious threat modelling. Some vectors that come to mind now are:
+Since this is a *home*lab and is therefore confined to my home network, the greatest threat is myself. Even so, and even if only for good practice, I plan to treat it as if much greater threats than myself are looming. 
+
+That being said, I will eventually want/need to access my home network remotely, which opens the door to new threats. I intend to mitigate these potential threats by only opening up the network via a VPN. 
+
+Another thing to consider, specifically when working with containers, are some of their attack vectors:
 
 | Vector                | Mitigation                                                      |
 | --------------------- | --------------------------------------------------------------- |
@@ -58,8 +62,8 @@ apt install cockpit-storaged cockpit-networkmanager cockpit-podman
 ```
 ### Entering the Cockpit
 
-> [!note] Note
-> Contrary to many tutorials that suggest that you need to first start cockpit using `systemctl start --now cockpit`, I found that this is unnecessary
+> [!info] Info
+> Contrary to many tutorials' suggestions that Cockpit must be started using `systemctl start --now cockpit`, Cockpit will start on demand (as below)
 
 Cockpit will start on demand when a browser accesses `localhost:9090` (or whichever port it is configured to use). This should produce the following login page:
 
