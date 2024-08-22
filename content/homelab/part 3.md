@@ -66,9 +66,11 @@ From the "Podman containers" tab in Cockpit, I created a new pod named "services
 ![[homelab_cockpit_podman_adguard_ports.png]]
 ![[homelab_cockpit_podman_adguard_volumes.png]]
 ### Step 5 (Optional): Pull a specific AdGuard version
-In my testing, `cockpit-podman` refused to fetch a specific image tag for whatever reason. And since I wanted to fix my version at `v0.107.52` for now, I worked around this issue by pulling the image directly:
+In my testing, `cockpit-podman` refused to fetch a specific image tag in the "Create container" UI, so I first had to download the image directly. There are two ways of doing so:
+1. Under the "Images" section, select "Download new image" and specify the desired tag on the "Search for an image" popup
+2. Pull the image using `podman`:
 ```bash
-podman pull docker.io/adguard/adguardhome:v0.107.52
+podman pull docker.io/adguard/adguardhome:<tag>
 ```
 
 Once the image is pulled, it will show up in Cockpit.
