@@ -2,6 +2,7 @@
 title: tor
 tags:
   - note
+date: 2024-08-23
 ---
 ## Etymology
 ### Tor
