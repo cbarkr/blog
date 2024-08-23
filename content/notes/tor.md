@@ -5,9 +5,9 @@ tags:
 ---
 ## Etymology
 ### Tor
-Tor (note the capitalization) was originally an abbreviation for *The Onion Routing*[^history] (**not** *The Onion Rout**er*** as some suggest). After the original project's conception, other onion routing projects sprouted up, so the original was named *The* Onion Routing to cement its place[^history].
+Tor (note the capitalization) was *originally* an abbreviation for *The Onion Routing*[^history] (**not** *The Onion Rout**er***). After the original project's conception, similar projects sprouted up, so the original was named *The* Onion Routing to cement its place[^history].
 ### Onion
-Like layers of an onion, Tor encrypts messages in multiple different layers. When this onionized message passes through the network, intermediary router peels off one layer that only they can peel, before passing it off to the next router that will do the same. 
+Like layers of an onion, onion routing networks encrypt messages in multiple layers. When this onionized message passes through the network, each intermediary router peels off one layer that only they can peel, before passing it off to the next router to do the same with the next layer. 
 ## Terminology
 - *Circuit*: A path through the Tor network
 - *Relay*: A node in a circuit
@@ -33,16 +33,26 @@ This process then repeats for all other relays to be added to the circuit. Circu
 #### Summary
 ##### First Relay
 
-1. Alice -> Relay 1: $(c_1, E_{k_{relay1}}(g^X))$
+1. Alice -> Relay 1: $(c_1, E_{k_{relay_1}}(g^X))$
 2. Relay 1 -> Alice: $(c_1, g^Y, H(g^{XY}))$
 ##### Second Relay
 
-1. Alice -> Relay 1: $(c_1, E_{k_{relay2}(g^{X_2})})$
-2. Relay 1 -> Relay 2: $(c_2, E_{k_{relay2}(g^{X_2})})$
+1. Alice -> Relay 1: $(c_1, E_{k_{relay_2}(g^{X_2})})$
+2. Relay 1 -> Relay 2: $(c_2, E_{k_{relay_2}(g^{X_2})})$
 3. Relay 2 -> Relay 1: $(c_2, g^{Y_2}, H(g^{X_2Y_2})$
 4. Relay 1 -> Alice: $(c_1, g^{Y_2}, H(g^{X_2Y_2})$
+##### $n$th Relay
+1. Alice -> Relay 1: $(c_1, E_{k_{relay_n}(g^{X_n})})$
+2. $\dots$
+3. Relay $(n-1)$ -> Relay $n$: $(c_n, E_{k_{relay_n}(g^{X_n})})$
+4. Relay $n$ -> Relay $(n-1)$: $(c_n, g^{Y_n}, H(g^{X_nY_n})$
+5. $\dots$
+6. Relay 1 -> Alice: $(c_1, g^{Y_n}, H(g^{X_nY_n})$
 ### Using A Circuit
 Suppose Alice now has a complete circuit, and thus the keys $\set{k_1, k_2, \dots, k_n}$ with all $n$ relays. To send a message $M$ through the circuit, she creates a relay cell $C = E_{k_1, k_2, \dots, k_n}(M) = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ and sends it to the entry. The entry peels the first layer like $C_1 = D_{k_1}(C) = D_{k_1}(E_{k_1, k_2, \dots, k_n}(M)) = D_{k_1}(E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))) = E_{k_2}(\dots(E_{k_n}(M))) = E_{k_2, \dots, k_n}(M)$, sets $C_1$'s origin to itself, then sends $C_1$ to relay 2. Relays $2, \dots, n-1$ repeat the same process. Relay $n$, the exit, finally peels $C_n = D_{k_n}(E_{k_n}(M)) = M$, and sends $M$ to the destination.
+
+> [!note] Note
+> Almost all traffic these days is TLS-encrypted[^httpsadoption], so the exit does not actually see $M$ itself, but instead, $E_{k_{TLS}}(M)$. The only information the exit knows is the message's destination, which is necessary for forwarding the message.
 
 Throughout this process, relay $i$ only knows of relays $i-1$ and $i+1$, hence only the entry knows the sender and only the exit knows the receiver.
 ## Attacks
@@ -76,7 +86,7 @@ Once an attacker has confirmed their control over a circuit, they must correlate
 ### 1. Traffic Correlation
 Use guard nodes, do not choose the same router twice for the same path, do not choose any router in the same family as another router in the same path, do not choose more than one router in a given network range[^constraints]
 ### 2. Website Fingerprinting
-There are more website fingerprinting defences than I can conceivably compile here (I have changed this reply many times already as I keep encountering more), so I'll include some of the common techniques, categorized into two main classes: Randomization and Regularization.
+Website fingerprinting is an active research topic within the Tor community and many defences have been presented over the years, thus there are more than I can conceivably compile here. Instead, I'll include some techniques that I came across, categorized into two main classes: *Randomization* and *Regularization*. Others will be placed into an *Other* category.
 #### 1. Randomization
 > These defences use randomness such that no two traces from the same webpage have the same pattern.
 - Adaptive padding[^ad]: introduce dummy packets into traffic to mask traffic bursts and their corresponding features
@@ -94,12 +104,13 @@ There are more website fingerprinting defences than I can conceivably compile he
 - TrafficSilver[^trafficsilver]: split traffic over several "sub-circuits" (i.e. circuits containing distinct entry nodes) in a random manner
 - Surakav[^surakav]: train a generator that is able to generate various reference traces, then sample reference traces from the trained generator and send bursts of data based on the reference trace
 ### 3. Browser Fingerprinting
-Give standardized answers for everything (implemented in Tor Browser)
+Give standardized answers for everything (implemented in Tor Browser). For example, always return 1920x1080 for the screen size, UTC for the time zone, and Comic Sans as the only font (jk), etc.
 ### 4. Canvas Fingerprinting
 Disable canvassing (implemented in Tor Browser)
 
 [^history]: https://www.torproject.org/about/history/
 [^spec]: https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.html#subsec:circuits
+[^httpsadoption]: https://radar.cloudflare.com/adoption-and-usage#http-vs-https
 [^knn]: https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/wang_tao
 [^cumul]: https://doi.org/10.14722/ndss.2016.23477
 [^kfp]: https://doi.org/10.48550/arXiv.1509.00789
