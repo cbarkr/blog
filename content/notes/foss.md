@@ -1,7 +1,7 @@
 ---
 title: FOSS
 tags:
-  - foss
+  - note
 date: 2024-06-11
 ---
 ## Free and Open-Source (FOSS)
