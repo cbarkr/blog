@@ -33,6 +33,10 @@ To allow an unprivileged user to use these ports, run the following:
 sudo sysctl net.ipv4.ip_unprivileged_port_start=53
 ```
 ### Step 2 (Optional): Enable lingering
+
+> [!warning] Warning
+> The `cockpit-podman` team does not support or recommend this[^2]
+
 To set a restart policy on user containers, lingering must be enabled[^1]. If this is something you would like, run the following to enable it:
 
 ```bash
@@ -43,9 +47,6 @@ or for the current user,
 ```bash
 loginctl enable-linger $USER
 ```
-
-> [!warning] Warning
-> The `cockpit-podman` team does not support or recommend this[^2]
 ### Step 3: Create the necessary volumes
 AdGuard requires two volumes for persistence. Create these with Podman like so:
 ```bash
@@ -69,6 +70,7 @@ From the "Podman containers" tab in Cockpit, I created a new pod named "services
 In my testing, `cockpit-podman` refused to fetch a specific image tag in the "Create container" UI, so I first had to download the image directly. There are two ways of doing so:
 1. Under the "Images" section, select "Download new image" and specify the desired tag on the "Search for an image" popup
 2. Pull the image using `podman`:
+
 ```bash
 podman pull docker.io/adguard/adguardhome:<tag>
 ```
