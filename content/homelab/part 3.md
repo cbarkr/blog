@@ -64,7 +64,15 @@ These volumes will be created in `/home/$USER/.local/share/containers/storage/vo
 
 From the "Podman containers" tab in Cockpit, I created a new pod named "services". Here, I defined the relevant port mappings and volumes for AdGuard (using the volume mounts created in the previous step):
 ![[homelab_cockpit_podman_pod.png]]
+> [!info]
+> See [this](https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#create-and-run-the-container) for more details about port mappings
+
 ![[homelab_cockpit_podman_adguard_ports.png]]
+> [!info]
+> The volumes are mounted like so:
+> 1. `/home/$USER/.local/share/containers/storage/volumes/adguard-work`  -> `/opt/adguardhome/work`
+> 2. `/home/$USER/.local/share/containers/storage/volumes/adguard-conf`  -> `/opt/adguardhome/conf`
+
 ![[homelab_cockpit_podman_adguard_volumes.png]]
 ### Step 5 (Optional): Pull a specific AdGuard version
 In my testing, `cockpit-podman` refused to fetch a specific image tag in the "Create container" UI, so I first had to download the image directly. There are two ways of doing so:
