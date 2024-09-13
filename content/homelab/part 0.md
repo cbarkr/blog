@@ -5,7 +5,7 @@ tags:
 date: 2024-08-11
 ---
 ## What is a "homelab"? 
-A homelab is (1) a collection of computing and networking hardware, and (2) a low-stakes environment for experimenting with various technologies. The hardware can be as simple as an old laptop and your ISPs modem, or as complex as enterprise-grade servers, switches, routers, etc. 
+A homelab is (1) a collection of computing and networking hardware, and (2) a low-stakes environment for experimenting with various technologies. The hardware can be as simple as an old laptop and your ISP's modem, or as complex as enterprise-grade servers, switches, routers, etc. 
 ## Why do I want a homelab?
 ### 1. Experimentation
 I learn by doing. And by doing, I mean breaking things, fixing them, breaking them again, and repeating until things eventually work. By process of enumeration, I learn what works and what doesn't. 
