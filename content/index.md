@@ -5,4 +5,4 @@ enableTags: false
 
 Conversations with myself
 
-This is where I #ramble, explore an #idea or two, or share #blog posts
+This is where I share #blog posts, #notes, or anything else on my mind
