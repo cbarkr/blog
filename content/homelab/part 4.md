@@ -28,7 +28,7 @@ So we need two images:
 
 While not necessary, I chose to pull a specific version of each image (`30.0` and `11.5.2`, respectively).
 #### Using Podman CLI
-```
+```bash
 podman pull docker.io/library/nextcloud:<tag>
 podman pull docker.io/library/mariadb:<tag>
 ```
