@@ -8,7 +8,7 @@ Since [[part 3]], I made 2 small differences to my setup:
 1. I got rid of the `services` pod, and have AdGuard Home running as a standalone container
 2. I changed AdGuard's HTTP port binding from `80:80` to `8080:80`
 ## Preamble
-I don't like Google Drive; I don't like the idea of storing my personal files on an advertising company's servers and I don't like overpaying for storage. The latter point is particularly pertinent: at the time of writing, 2 TB of storage from Google costs $14 CAD per month; meanwhile, I already have a 2 TB HDD and 2 TB SSD collecting dust ($0 per month). 
+I don't like Google Drive; I don't like the idea of storing my personal files on an advertising company's servers and I don't like overpaying for storage. The latter point is particularly pertinent: at the time of writing, 2 TB of storage from Google costs \$14 CAD per month; meanwhile, I already have a 2 TB HDD and 2 TB SSD collecting dust (\$0 per month). 
 
 This is where Nextcloud comes in. Nextcloud is the [[foss|FOSS]] file storage / management system that I mentioned in [[part 0]]; it's something like a self-hosted Google Drive. 
 ## Setup
