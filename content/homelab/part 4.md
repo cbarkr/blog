@@ -18,9 +18,9 @@ Unlike the last part, this service requires multiple communicating containers, w
 ### Step 1: Acquire the necessary images
 Apart from the main Nextcloud container, two additional containers, while not necessary, are recommended to improve the performance of Nextcloud. The first is an external database and the second is in-memory storage which will be used as a cache. 
 
-While Nextcloud comes with a SQLite database by default, MySQL/MariaDB or PostgreSQL are preferable. Since I've used PostgreSQL in the past, I decided to branch out and try MariaDB (which is also emphasized in the documentation, though setup with PostgreSQL should be nearly identical). 
+While Nextcloud comes with a SQLite database by default, it's simply too lite for most loads; heavy-hitters like MySQL/MariaDB or PostgreSQL are greatly preferable. Since I've used PostgreSQL in the past, I decided to branch out and try MariaDB for a change. MariaDB is emphasized in the documentation, though setup with PostgreSQL should be nearly identical.
 
-As for in-memory storage, Redis is usually the first that comes to mind (for me, at least), and that also seems to be the case with the Nextcloud team since Redis is the only solution suggested here. 
+As for in-memory storage, Redis is usually the first that comes to mind (for me, at least). This also appears to be the case with the Redis team! That is, Redis is the only "option" given :P
 
 So we need three images:
 1. Nextcloud
@@ -50,7 +50,7 @@ The `nextcloud` container provides 5 directories that can be mounted as volumes:
 - `/var/www/html/data`: The actual data of your Nextcloud
 - `/var/www/html/themes/<YOUR_CUSTOM_THEME>`: Theming/branding
 
-For simplicity, I decided to store `/var/www/html` all together (although I would rather isolate the data). Speaking of data, I want to store this on a separate drive, as opposed to a regular volume, so I will be skipping this one down below. If you want to put your data in a regular volume, the steps to create such a volume are identical to any other. 
+For simplicity's sake, I decided to store `/var/www/html` all together although I would rather isolate the data. This will be mounted to a local directory on a separate drive, as opposed to a regular volume. If you would like to put your data in a regular volume, simply create another volume for it, and point  `/var/www/html` to it in step 3.
 
 Next, the database needs somewhere to put it's data, so a volume for that is a good idea. The directory in the container that will be mounted to is `/var/lib/mysql` for MySQL/MariaDB (and `/var/lib/postgresql/data` for PostgreSQL). The volume is created like so:
 
