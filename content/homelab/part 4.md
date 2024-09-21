@@ -20,7 +20,7 @@ Apart from the main Nextcloud container, two additional containers, while not ne
 
 While Nextcloud comes with a SQLite database by default, it's simply too lite for most loads; heavy-hitters like MySQL/MariaDB or PostgreSQL are greatly preferable. Since I've used PostgreSQL in the past, I decided to branch out and try MariaDB for a change. MariaDB is emphasized in the documentation, though setup with PostgreSQL should be nearly identical.
 
-As for in-memory storage, Redis is usually the first that comes to mind (for me, at least). This also appears to be the case with the Redis team! That is, Redis is the only "option" given :P
+As for in-memory storage, Redis is usually the first that comes to mind (for me, at least). This also appears to be the case with the Redis team! That is, Redis is the only "option" given :P (on the Docker Hub page, at least). More options are given on the [official docs](https://docs.nextcloud.com/server/19/admin_manual/configuration_server/caching_configuration.html#).
 
 So we need three images:
 1. Nextcloud
@@ -35,8 +35,8 @@ podman pull docker.io/library/mariadb:<tag>
 podman pull docker.io/library/redis:<tag>
 ```
 #### Using Cockpit GUI
-##### 1. Nextcloud
 ![[homalab_cockpit_podman_add_image.png]]
+##### 1. Nextcloud
 ![[homelab_cockpit_podman_nextcloud_image.png]]
 ##### 2. MariaDB
 ![[homelab_cockpit_podman_mariadb_image.png]]
@@ -65,40 +65,39 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 1. To start, I name the pod "nextcloud"
 2. Then, I specify the port mapping for the Nextcloud web server. I don't want this running on port `80` on my host, so I simply set it to something else. Since I already have something running on `8080`, I chose `8081`
 3. The main folder `/var/www/html` is mounted to a local directory where I want the data to persist. This is on one of those 2TB drives I mentioned earlier
-4. The database `/var/lib/mysql` is mounted to the volume `nextcloud-db` created earlier, which is located at `/home/$USER/.local/share/containers/storage/volumes/nextcloud-db/`
+4. The database `/var/lib/mysql` is mounted to the volume `nextcloud-db` created earlier, which is located at `/home/$USER/.local/share/containers/storage/volumes/nextcloud-db/` 
 ### Step 4: Create the MariaDB container
 ![[homelab_cockpit_podman_mariadb_container.png]]
 ![[homelab_cockpit_podman_mariadb_container2.png]]
 #### Breakdown
-1. I name the container `nextcloud-db`
-2. I set a memory limit of 256MB to the container
-3. Since I want my database to be available, I set the restart policy to "always"
-4. Volume mappings can be skipped since they will be handled by the pod
-5. Instead of manually configuring the DB, we can set environment variables
+1. The container is named `nextcloud-db`
+2. A memory limit of 256MB is applied to the container
+3. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
+4. Volume mappings are skipped since they will be handled by the pod
+5. Instead of manually configuring the DB, environment variables are used to pass configurations in
 	1. `MYSQL_USER`: The name for the user
 	2. `MYSQL_DATABASE`: The name of the database
 	3. `MYSQL_PASSWORD`: The password for the user
 	4. `MYSQL_ROOT_PASSWORD`: The root password
 
 > [!note]
-> `MYSQL_USER`, `MYSQL_DATABASE`, and `MYSQL_PASSWORD` will be used in the next step
+> `MYSQL_USER`, `MYSQL_DATABASE`, and `MYSQL_PASSWORD` will be used in step 6
 ### Step 5: Create the Redis container
 ![[homelab_cockpit_podman_redis_container.png]]
 #### Breakdown
-1. I name the container `nextcloud-redis`
-2. In the command field, I added `--requirepass <password>` to set a default password for Redis
-3. I set a memory limit of 128MB to the container
-4. Since I want my database to be available, I set the restart policy to "always"
+1. The container is named `nextcloud-redis`
+2. In the command field, the parameter `--requirepass` is used to set a default password
+3. A memory limit of 128MB is applied to the container
+4. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
 ### Step 6: Create the Nextcloud container
 ![[media/homelab_cockpit_podman_nextcloud_container.png]]
 ![[homelab_cockpit_podman_nextcloud_container2.png]]
 #### Breakdown
-Similar to the last step,
-1. I name the container `nextcloud-main`
-2. I set a memory limit of 128MB to the container
-3. Since I want the web server to be available, I set the restart policy to "always"
-4. Port and volume mappings can be skipped since they will be handled by the pod
-5. Let Nextcloud automatically configure the DB connection via environment variables. 
+1. The container is named `nextcloud-main`
+2. A memory limit of 128MB is applied to the container
+3. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
+4. Port and volume mappings are skipped since they will be handled by the pod
+5. Instead of manually configuring the DB, environment variables are used to pass configurations in. Nextcloud will automatically configure the database and Redis connections using these values
 	1. `MYSQL_USER`: Same as earlier
 	2. `MYSQL_DATABASE`: Same as earlier
 	3. `MYSQL_PASSWORD`: Same as earlier
@@ -125,6 +124,16 @@ The first thing I added was a small collection of silly tech memes that I had ki
 
 ![[homelab_nextcloud_memes.png]]
 
-The next thing I did was employ [Google Takeout](https://takeout.google.com/) to export my entire Google Drive as one big `.tgz` (which I know how to extract thanks to `IMG.3881.jpeg`, shown above). The big task is to organize 7+ years of old files...
+The next thing I did was employ [Google Takeout](https://takeout.google.com/) to export my entire Google Drive as one big `.tgz` (which I know how to extract thanks to `IMG.3881.jpeg` shown above!). For nearly 8 years, I've stored most of [my photography](https://www.cbarkr.com/photos) on Google Drive, so this archive is quite big. Fortunately, it's *mostly* organized, so uploading everything to Nextcloud won't be too painful.
+
+## Thoughts
+My only complaint thus far is that thumbnails are *very* slow to generate. Even with Redis and the [Preview Generator](https://apps.nextcloud.com/apps/previewgenerator) app installed (and configured according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976)), plus [preview quality downscaled](https://docs.nextcloud.com/server/19/admin_manual/configuration_files/previews_configuration.html?highlight=thumbnail#jpeg-quality-setting), my "photo" library mostly appears as grey or blue boxes.
+
+I was hopeful that Preview Generator would help, but I found that running the recommended `./occ preview:generate-all -vvv` command only tried the first folder in my drive before giving up. 
+
+After some more experimentation, I found that CPU usage skyrockets while trying to generate image previews. 
+![[homelab_cockpit_podman_preview_cpu_usage.png]]
+
+I find all this quite frustrating, and I do not wish the same frustration on others, so I will update this post if/when I find a solution.
 ## Summary
-In this post, I discussed how to setup Nextcloud using MariaDB and Redis as user containers in Cockpit using Podman.
+In this post, I discussed how to setup Nextcloud using MariaDB and Redis as user containers in Cockpit using Podman. 
