@@ -125,15 +125,31 @@ The first thing I added was a small collection of silly tech memes that I had ki
 ![[homelab_nextcloud_memes.png]]
 
 The next thing I did was employ [Google Takeout](https://takeout.google.com/) to export my entire Google Drive as one big `.tgz` (which I know how to extract thanks to `IMG.3881.jpeg` shown above!). For nearly 8 years, I've stored most of [my photography](https://www.cbarkr.com/photos) on Google Drive, so this archive is quite big. Fortunately, it's *mostly* organized, so uploading everything to Nextcloud won't be too painful.
+## Update
+My main complaint thus far is that thumbnails are *very* slow to generate. And when I say *very* slow, I mean painfully so. So much so that I want to scrap Nextcloud altogether and try something else.
 
-## Thoughts
-My only complaint thus far is that thumbnails are *very* slow to generate. Even with Redis and the [Preview Generator](https://apps.nextcloud.com/apps/previewgenerator) app installed (and configured according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976)), plus [preview quality downscaled](https://docs.nextcloud.com/server/19/admin_manual/configuration_files/previews_configuration.html?highlight=thumbnail#jpeg-quality-setting), my "photo" library mostly appears as grey or blue boxes.
+Here's what I've tried to do to combat the problem, as of yet finding no success:
+1. Use Redis (as I did in this post!)
+2. [Downscale preview quality](https://docs.nextcloud.com/server/19/admin_manual/configuration_files/previews_configuration.html?highlight=thumbnail#jpeg-quality-setting) by 50%
+3. Install the [Preview Generator](https://apps.nextcloud.com/apps/previewgenerator) app (and configure it according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976))
+4. Configure cron jobs (which seem to be a bit of a nightmare with Nextcloud)
 
-I was hopeful that Preview Generator would help, but I found that running the recommended `./occ preview:generate-all -vvv` command only tried the first folder in my drive before giving up. 
+I hoped the Preview Generator app specifically would help, but so far it appears to have no effect. As instructed in the docs, I ran `./occ preview:generate-all -vvv` and found that it only tries the first folder in my drive before giving up. 
 
-After some more experimentation, I found that CPU usage skyrockets while trying to generate image previews. 
+Or since cron jobs seemingly weren't working for me, I tried
+
+```bash
+podman exec -u www-data nextcloud-main php /var/www/html/cron.php
+```
+
+and found that Nextcloud literally DoS'd itself in the process. I didn't get a screenshot of that particular instance, but what follows is one I took shortly beforehand, in which CPU usage skyrockets while (presumably) trying to generate image previews:
+
 ![[homelab_cockpit_podman_preview_cpu_usage.png]]
 
-I find all this quite frustrating, and I do not wish the same frustration on others, so I will update this post if/when I find a solution.
+I still have two avenues left:
+1. Fix cron jobs
+2. Downgrade the MariaDB version (Nextcloud complains that it would prefer >=10.6 and <=11.4)
+
+If neither of these solve my problems, I shall be moving on to something else. [Seafile](https://www.seafile.com/en/home/) seems like a good option for my use case.
 ## Summary
 In this post, I discussed how to setup Nextcloud using MariaDB and Redis as user containers in Cockpit using Podman. 
