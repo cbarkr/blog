@@ -1,7 +1,7 @@
 ---
 title: tor
 tags:
-  - note
+  - notes
 date: 2024-08-23
 ---
 ## Etymology
