@@ -25,7 +25,7 @@ While the silhouette remains mostly faithful to its inspiration, there are a few
 ### Function
 The vest bag is simultaneously unobstructive and voluminous; it remains close to one's body while the massive front pockets hold just about everything one needs. Moreover, the locations of the zippers are ergonomic and intuitive, making opening and closing of the pockets a natural and convenient procedure, even one-handed. 
 ### Form
-The vest, like most military designs, stands at the intersection of industrial and anatomical design. It's rugged, but conforms and contours to the body. It's unique yet modest. It's simple without sacrificing style. To me, it is beautiful.
+The vest, like most military designs, stands at the intersection of industrial and anatomical design. It is rugged, but conforms and contours to the body. It is unique yet modest. It is simple without sacrificing style. To me, it is beautiful.
 ### Feeling
 I like the idea of clothing as armour. Physically, yes, cloth acts as a layer which separates one from the elements; but metaphysically, too, it protects one from unwelcome eyes, thus acting as shield behind which one may safely navigate the world. 
 
