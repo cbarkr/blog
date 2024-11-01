@@ -57,9 +57,11 @@ The second bath produced a relatively uniform shade of black which I was content
 ### Zippers
 I plan to wear this vest until it falls apart, repair it, then repeat. Therefore I needed durable but smooth zippers. And to meet these requirements, I didn't mind paying up a little. So I went with the "Rolls Royce of Zippers", Riri. 
 
-I picked out some Riri M6 zippers from [Sewing Supply Depot](https://sewingsupplydepot.com/) since they were the only Canadian retailer of Riri I could find (and they charged much less than their American counterparts). The only caveat of this is their selection: I would have much preferred a titanium, matte silver, or blackened bronze finish, but they only stock nickel. So nickel I got. 
+I picked out some Riri M6 zippers from [Sewing Supply Depot](https://sewingsupplydepot.com/) since they were the only Canadian retailer of Riri I could find (and they charged much less than their American counterparts). The only caveat is their selection of finishes: they only stock nickel. So nickel I got. 
 
-IDK how to sew so I sent the vest and zippers to a local tailor. After some show and tell, miming how I wanted the zippers to be installed, and sending them some sample images, I left the pieces in their hands. One week later I picked up the final product:
+In retrospect, I was impatient. I should have taken more time to source a more suitable finish, such as gunmetal or aged brass. Nickel contrasts the naturally ageing brass of the other hardware, and as a result, appears out of place.
+
+Anyways, IDK how to sew so I sent the vest and zippers to a local tailor. After some show and tell, miming how I wanted the zippers to be installed, and sending them some sample images, I left the pieces in their hands. One week later I picked up the final product:
 
 ![[mil-l-17653_zips.jpeg]]
 ![[mil-l-17653_closeup.jpeg]]
