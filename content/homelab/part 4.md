@@ -130,9 +130,10 @@ My main complaint thus far is that thumbnails are *very* slow to generate. And w
 
 Here's what I've tried to do to combat the problem, as of yet finding no success:
 1. Use Redis (as I did in this post!)
-2. [Downscale preview quality](https://docs.nextcloud.com/server/19/admin_manual/configuration_files/previews_configuration.html?highlight=thumbnail#jpeg-quality-setting) by 50%
-3. Install the [Preview Generator](https://apps.nextcloud.com/apps/previewgenerator) app (and configure it according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976))
-4. Configure cron jobs (which seem to be a bit of a nightmare with Nextcloud)
+2. Increase memory limits for all Nextcloud containers
+3. [Downscale preview quality](https://docs.nextcloud.com/server/19/admin_manual/configuration_files/previews_configuration.html?highlight=thumbnail#jpeg-quality-setting) by 50%
+4. Install the [Preview Generator](https://apps.nextcloud.com/apps/previewgenerator) app (and configure it according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976))
+5. Configure cron jobs (which seem to be a bit of a nightmare with Nextcloud)
 
 I hoped the Preview Generator app specifically would help, but so far it appears to have no effect. As instructed in the docs, I ran `./occ preview:generate-all -vvv` and found that it only tries the first folder in my drive before giving up. 
 
@@ -146,10 +147,10 @@ and found that Nextcloud literally DoS'd itself in the process. I didn't get a s
 
 ![[homelab_cockpit_podman_preview_cpu_usage.png]]
 
-I still have two avenues left:
+Two things left to try are:
 1. Fix cron jobs
 2. Downgrade the MariaDB version (Nextcloud complains that it would prefer >=10.6 and <=11.4)
-
-If neither of these solve my problems, I shall be moving on to something else. [Seafile](https://www.seafile.com/en/home/) seems like a good option for my use case.
+## Update 2
+I gave up on Nextcloud in favour of [Seafile](https://www.seafile.com/en/home/) and boy am I glad I did. It was very easy to set up and is blazingly fast by comparison. Perhaps I will make a follow up post explaining the setup and differences. 
 ## Summary
 In this post, I discussed how to setup Nextcloud using MariaDB and Redis as user containers in Cockpit using Podman. 
