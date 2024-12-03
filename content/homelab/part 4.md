@@ -5,7 +5,7 @@ tags:
 date: 2024-09-19
 ---
 ## Preamble
-I don't like Google Drive; something about storing my personal files on an advertising company's servers makes me uncomfortable. Moreover, why should I pay $14 CAD per month for 2 TB of storage while I already have 5+ TB of drives collecting dust (\$0 per month)?
+I don't like Google Drive; something about storing my personal files on an advertising company's servers makes me uncomfortable. Moreover, why should I pay \$14 CAD per month for 2 TB of storage while I already have 5+ TB of drives collecting dust (\$0 per month)?
 
 This is where Nextcloud comes in. Nextcloud is the [[foss|FOSS]] file storage / management system that I mentioned in [[part 0]]; it's something like a self-hosted Google Drive with similar bells and whistles. I don't need or particularly care for the bells and whistles, but since they're available, maybe I'll make some noise. 
 ## Setup
