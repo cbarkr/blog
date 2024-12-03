@@ -72,3 +72,9 @@ Cockpit uses the system's normal user login. After logging in, the user is greet
 
 ![[homelab_cockpit_dashboard.png]]
 With that, the server should be ready to do some serving!
+
+---
+
+| Previous   | Next       |
+| ---------- | ---------- |
+| [[part 1]] | [[part 3]] |

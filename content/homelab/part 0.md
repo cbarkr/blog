@@ -15,6 +15,13 @@ Of course, this type of experimentation is frowned upon in a corporate setting; 
 Homelabs provide the means to host services on your own terms. Sick of invasive ads and trackers? Me too! Not comfortable with letting someone else manage your data? Me neither! Who wants access to subscription-free, restriction-free services? Me!
 ## What am I going to do with a homelab?
 1. Host an ad/tracker-blocking DNS server, such as [Pi-hole](https://pi-hole.net/) or [AdGuard Home](https://adguard.com/en/adguard-home/overview.html)
-2. Ditch Google Drive for [ownCloud](https://owncloud.com/) or [NextCloud](https://nextcloud.com/)
+2. Ditch Google Drive for ~~[ownCloud](https://owncloud.com/)~~, ~~[NextCloud](https://nextcloud.com/)~~, or [Seafile](https://www.seafile.com/en/home/)
 3. Run a media server like [Jellyfin](https://jellyfin.org/) or [Plex](https://www.plex.tv/)
-4. Break stuff, fix stuff, (hopefully) learn stuff
+4. Integrate an IPS/IDS, such as [Suricata](https://suricata.io/) or [Snort](https://www.snort.org/)
+5. Break stuff, fix stuff, (hopefully) learn stuff
+
+---
+
+| Previous | Next       |
+| -------- | ---------- |
+| N/A      | [[part 1]] |

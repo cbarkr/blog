@@ -11,11 +11,11 @@ When I first learned of DNS sinkholes, my mind was blown. Despite taking multipl
 ## Setup
 AdGuard offers an Alpine-based image over on [Docker Hub](https://hub.docker.com/r/adguard/adguardhome). The Docker Hub page contains all the relevant documentation necessary to get everything up and running. The setup process is straightforward, but since I did not find any guides online that covered running AdGuard as a *user container* in Podman, I decided to document the process here in case anyone finds it useful.
 
-Using Podman, there are two paths for deploying an AdGuard container:
+Using Podman, there are two paths for deploying an AdGuard container (or any container, really):
 1. As a system container
 2. As a user container
 
-Running system containers is far easier, and the setup will be nearly identical to setting up a Docker container. For this reason, I focus the following steps on running AdGuard as a user container. 
+Running system containers is far easier, and the setup will be nearly identical to setting up a Docker container. There are already a million guides for this, so I'll instead focus on user containers.
 
 > [!info] Info
 > To deploy AdGuard as a system container, enable admin access in Cockpit, start the system Podman service, then skip to step 1 below
@@ -106,8 +106,20 @@ In order to get the benefits of network-wide ad/tracker-blocking, AdGuard must b
 
 > [!note] Note
 > Since AdGuard is running as a container, the guide will use the *container's IP address*, **not** the host's. Using the container's IP address is useless since it is *contained* on the host machine. So instead, I used the IP address of the host running the AdGuard container.
+## Update
+Since originally writing this, I've made a few changes that are worth mentioning:
+1. The `services` pod is no more. Instead, AdGuard runs as a standalone container
+2. `adguardhome` now binds to port `8080` on the host rather than `80`
+3. Superfluous port bindings were removed, leaving only `53:53`, `53:53/udp`, and `8080:80`
 ## Summary
-In this post, I discussed how to setup AdGuard Home as a user container in Cockpit using Podman. 
+In this post, I discussed how to setup AdGuard Home as a user container in Cockpit using Podman. The process isn't perfect, but it can be improved using a reverse proxy (which I will hopefully demonstrate at a later date!). 
+
+---
+
+| Previous   | Next       |
+| ---------- | ---------- |
+| [[part 2]] | [[part 4]] |
+
 
 [^1]: https://github.com/cockpit-project/cockpit-podman/issues/921#issuecomment-1068200897
 [^2]: https://github.com/cockpit-project/cockpit-podman/issues/1741#issuecomment-2144320260

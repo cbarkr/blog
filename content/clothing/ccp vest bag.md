@@ -70,4 +70,8 @@ Not everything is perfect, but that's alright. For example, I'm not a fan of the
 
 Overall, I am very happy with the final product. This is something I have been dreaming of for years (beyond those in which I was actively searching). Since the day the vest entered my hands, I have worn it almost daily. I plan to continue wearing it almost daily; I want it to age alongside me and develop its own charms. 
 
+> Just as a man lives and grows old, so too does fabric live and age. When fabric is left to age for a year or two, it naturally contracts, and at this point it reveals its charm. The threads have a life of their own, they pass through the seasons and mature. It is only through this process that the true appeal of the fabric is revealed. 
+
+\- Yohji Yamamoto, *My Dear Bomb*
+
 [^spec]: https://www.govinfo.gov/content/pkg/CFR-2023-title46-vol6/pdf/CFR-2023-title46-vol6-sec160-053-4.pdf

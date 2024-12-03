@@ -43,3 +43,9 @@ Since I wanted to use these drives, I didn't choose the former option, but I did
 ![[homelab_rice.png]]
 
 Now that everything is set up, all that's left is to actually start tinkering!
+
+---
+
+| Previous   | Next       |
+| ---------- | ---------- |
+| [[part 0]] | [[part 2]] |
