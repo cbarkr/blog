@@ -47,7 +47,7 @@ The `nextcloud` container provides 5 directories that can be mounted as volumes:
 
 `/var/www/html`holds all of the uploaded data. I mounted it to a local directory on a 2 TB SSD as opposed to in a regular volume.
 
-The database stores file metadata and indexing information, which should be mounted to a volume. For MySQL/MariaDB, this is `/var/lib/mysql`; while for PostgreSQL, this is `/var/lib/postgresql/data`.
+The database stores file indexing information, which should be mounted to a volume. For MySQL/MariaDB, this is `/var/lib/mysql`; while for PostgreSQL, this is `/var/lib/postgresql/data`.
 
 The database volume can be created like so:
 
@@ -61,8 +61,8 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 
 ![[homelab_cockpit_podman_nextcloud_pod.png]]
 #### Breakdown
-1. To start, I name the pod "nextcloud"
-2. Then, I specify the port mapping for the Nextcloud web server. I don't want this running on port `80` on my host, so I simply set it to something else. Since I already have something running on `8080`, I chose `8081`
+1. The pod is named `nextcloud`
+2. Port mappings for the containers are specified ahead of time. In this case, port `8081` on the host is mapped to `80` in the container
 3. The main folder `/var/www/html` is mounted to a local directory where I want the data to persist. This is on a 2 TB SSD for now
 4. The database `/var/lib/mysql` is mounted to the volume `nextcloud-db` created earlier, which is located at `/home/$USER/.local/share/containers/storage/volumes/nextcloud-db/` 
 
@@ -73,7 +73,7 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 ![[homelab_cockpit_podman_mariadb_container2.png]]
 #### Breakdown
 1. The container is named `nextcloud-db`
-2. A memory limit of 256MB is applied to the container
+2. A memory limit of 256 MB is applied to the container
 3. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
 4. Volume mappings are skipped since they will be handled by the pod
 5. Instead of manually configuring the DB, environment variables are used to pass configurations in
@@ -89,7 +89,7 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 #### Breakdown
 1. The container is named `nextcloud-redis`
 2. In the command field, the parameter `--requirepass` is used to set a default password. The password itself can be wrapped in double quotes (i.e. `--requirepass "mysupersecretredispassword"`) if needed[^1]
-3. A memory limit of 128MB is applied to the container
+3. A memory limit of 128 MB is applied to the container
 4. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
 
 > [!note] 
@@ -99,7 +99,8 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 ![[homelab_cockpit_podman_nextcloud_container2.png]]
 #### Breakdown
 1. The container is named `nextcloud-main`
-2. A memory limit of 128MB is applied to the container
+2. A memory limit of 128 MB is applied to the container. 
+	1. Edit: According to the [system requirements](https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html#memory), this is the absolute minimum, but the Nextcloud teams suggests at least 512 MB per process. The [AIO wiki](https://github.com/nextcloud/all-in-one/discussions/1335) additionally recommends at least 1 GB per active user. 
 3. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
 4. Port and volume mappings are skipped since they will be handled by the pod
 5. Instead of manually configuring the DB, environment variables are used to pass configurations in. Nextcloud will automatically configure the database and Redis connections using these values
@@ -129,24 +130,24 @@ The first thing I added was a small collection of silly tech memes that I had ki
 
 The next thing I did was employ [Google Takeout](https://takeout.google.com/) to export my entire Google Drive as one big `.tgz` (which I know how to extract thanks to `IMG.3881.jpeg` shown above!). For nearly 8 years, I've stored most of [my photography](https://www.cbarkr.com/photos) on Google Drive, so this archive is quite large. Fortunately, it's *mostly* organized (by years > months > events), so uploading everything to Nextcloud won't be too painful.
 ## Update
-Nextcloud is slow. *Very* slow. Here's what I tried to change that:
+While Nextcloud works, it is slow. *Very* slow. Here's what I tried to change that:
 1. Use Redis (originally I only used Nextcloud and MariaDB)
 2. [Downscale preview quality](https://docs.nextcloud.com/server/19/admin_manual/configuration_files/previews_configuration.html?highlight=thumbnail#jpeg-quality-setting) by 50%
 3. Install the [Preview Generator](https://apps.nextcloud.com/apps/previewgenerator) app
 4. Configure cron jobs
 5. Increase container memory limits
 ### Preview Generator App
-I configured the preview generator app according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976) since the docs did not seem very useful. As instructed in the docs, I ran `./occ preview:generate-all -vvv` and found that it only tries the first folder in my drive before giving up. This is a known issue that has been reported many times over the years[^2][^3][^4][^5]. I then tried `preview:pre-generate`, which had the same result. 
+I configured the preview generator app according to [this](https://github.com/nextcloud/previewgenerator/issues/211#issuecomment-739731976) since the docs did not seem very useful. As instructed in the docs, I ran `./occ preview:generate-all -vvv` and found that it only tries the first folder in my drive before giving up. I then tried `preview:pre-generate`, which had the same result. These are known issues that have been reported many times over the years[^2][^3][^4][^5] with no indication of being fixed anytime soon. 
 ### Cron Jobs
 Another thing that I found bizarre is that Nextcloud recommends cron for background jobs, but cron is not the default option ...? Here's a slightly hilarious excerpt from the [documentation](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html#ajax):
 
 > The AJAX scheduling method is the default option. Unfortunately, however, it is also the least reliable.
 
-Lovely. Shouldn't defaults be sensible? This almost seems nonsensical, though they do elaborate that AJAX is the default because it "does not require access to the system nor registration with a third-party service". 
+Shouldn't defaults be sensible? It seems nonsensical to default to the worst option, though they do elaborate that AJAX is the default because it "does not require access to the system nor registration with a third-party service". 
 
 What I don't understand is why they require either of those things when they can just run cron jobs in the container? This is answered by a forum moderator [here](https://help.nextcloud.com/t/clarification-regarding-cron-jobs-setup-config/134450/6) and [here](https://help.nextcloud.com/t/clarification-regarding-cron-jobs-setup-config/134450/10), but I didn't find these arguments very convincing. To start, the main argument against using cron jobs in the main Nextcloud container is that "the philosophy of the docker is each container does exactly one thing"; however, the main Nextcloud container already does multiple things (i.e. "Nextcloud", as a product, is comprised of multiple distinct but integral components) and background jobs appear to be an integral component, therefore they should be part of "Nextcloud". Moreover, a philosophy of containerization far more fundamental than doing "exactly one thing" is in the name: containers should be as isolated (i.e. *contained*) from the host as possible. The official solution to the cron problem is to run the host system's cron, an approach that violates the most fundamental aspect of containers. Meanwhile the alternative is simply to redefine exactly what you mean by "Nextcloud" (i.e. expand its scope to include the sensible default).
 
-Rant aside, there is another option that does not violate the principle of containerization: use more containers! For example, a separate cron container can be added that interfaces with the other Nextcloud containers. This option isn't discussed in the docs, only alluded to in the examples [here](https://github.com/nextcloud/docker/tree/master/.examples/dockerfiles/cron) and [here](https://github.com/nextcloud/docker/blob/3a5086de638a87ee66a2529857fe660d783bca1a/.examples/docker-compose/insecure/mariadb/apache/docker-compose.yml#L35), and mentioned in the forums every once in a while (such as [here](https://help.nextcloud.com/t/clarification-regarding-cron-jobs-setup-config/134450/2)). I should note that I did not try this solution as I experienced issues running the background jobs directly, let alone indirectly, which I will discuss next. 
+Rant aside, there is another option that does not violate the principle of containerization: use more containers! For example, a separate cron container can be added that interfaces with the other Nextcloud containers. This option isn't discussed in the docs, only alluded to in the examples [here](https://github.com/nextcloud/docker/tree/master/.examples/dockerfiles/cron) and [here](https://github.com/nextcloud/docker/blob/3a5086de638a87ee66a2529857fe660d783bca1a/.examples/docker-compose/insecure/mariadb/apache/docker-compose.yml#L35), and mentioned in the forums every once in a while (such as [here](https://help.nextcloud.com/t/clarification-regarding-cron-jobs-setup-config/134450/2)). I should note that I did not try this solution as I experienced issues running the background jobs directly, let alone indirectly (as one would using a cron container). 
 
 I spent a lot of time reading the forums, and not much time making any progress. I couldn't get cron jobs to work. As suggested in a number of posts, I tried invoking the background jobs directly (which should be added to system cron[^6]) using the following:
 
@@ -158,23 +159,19 @@ but found that Nextcloud literally DoS'd itself in the process. I didn't get a s
 
 ![[homelab_cockpit_podman_preview_cpu_usage.png]]
 
-Despite letting Nextcloud do it's thing, I still didn't get any image previews. 
+Despite letting Nextcloud do it's thing for a while, it did not appear to generate any new image previews. Just little grey boxes.
 ### Increase Container Memory Limits
 Those familiar with [Nextcloud's system requirements](https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html) may have noticed how little memory I allocated to each container. I referenced the system requirements, as well as [these recommendations](https://github.com/nextcloud/all-in-one/discussions/1335) in the wiki for the AIO repo, and restarted the containers after providing them with ample memory. In retrospect, this should have been the first thing I tried. That being said, after increasing the memory limits, I encountered issues restarting Nextcloud with my existing data, which I decided not to fix. 
 ### Giving Up?
-At this point, I was quite annoyed with Nextcloud and decided to take a break from trying to fix things, lest I break something else and make things worse. I started looking into alternatives such as [Seafile](https://www.seafile.com/en/home/)... The more I read about Seafile, the more I realized it was better suited to my use case. I honestly don't care about Nextcloud's fancy features, all I want is simple file syncing - this is something Seafile does well, and it does so much faster than Nextcloud. Although I dislike the fact that Seafile stores files in a proprietary format, I recognize that it is a necessary trade-off for it's performance gains. Much to consider. 
-## Update 2
-I gave up on Nextcloud in favour of Seafile. I regret not doing so sooner. In less than an hour, Seafile was running smoothly, quickly generating image previews and loading full images. The setup was simpler than with Nextcloud too. 
-
-My next post will detail how I did so with Podman and Cockpit. Stay tuned!
+At this point, I decided to take a break from trying to fix my Nextcloud setup. Out of curiosity, I looked into alternatives and revisited [Seafile](https://www.seafile.com/en/home/), a much simpler and speedier file syncing service. Seafile stores files in chunks as opposed to whole files, which supposedly makes I/O faster, with the caveat of rendering the stored data unusable on its own. This was originally a turnoff for me, but something I decided I could live with if it meant syncing and image previews were fast and didn't require tons of resources thrown at it. 
 ## Summary
 In this post, I discussed how to setup Nextcloud using MariaDB and Redis as user containers in Cockpit using Podman. 
 
 ---
 
-| Previous   | Next |
-| ---------- | ---- |
-| [[part 3]] | N/A  |
+| Previous   | Next       |
+| ---------- | ---------- |
+| [[part 3]] | [[part 5]] |
 
 [^1]: https://github.com/redis/docker-library-redis/issues/176#issuecomment-723535421
 [^2]: https://github.com/nextcloud/previewgenerator/issues/105

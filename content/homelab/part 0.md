@@ -24,4 +24,4 @@ Homelabs provide the means to host services on your own terms. Sick of invasive 
 
 | Previous | Next       |
 | -------- | ---------- |
-| N/A      | [[part 1]] |
+| null     | [[part 1]] |

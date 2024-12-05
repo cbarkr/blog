@@ -9,3 +9,4 @@ So far:
 2. [[part 2|part 2: entering the cockpit]]
 3. [[part 3|part 3: adguard]]
 4. [[part 4|part 4: nextcloud]]
+5. [[part 5: seafile]]
