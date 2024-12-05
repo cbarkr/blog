@@ -6,7 +6,7 @@ tags:
 date: 2024-12-04
 ---
 ## Preamble
-I gave up on Nextcloud in favour of [Seafile](https://www.seafile.com/en/home/). I regret not doing so sooner. In less than an hour, Seafile was running smoothly, quickly generating image previews and loading full images. The setup was simpler than with Nextcloud too. In this post, I'll demonstrate how to get Seafile up and running in minutes using Podman and Cockpit. 
+I ditched Nextcloud in favour of [Seafile](https://www.seafile.com/en/home/). I regret not doing so sooner. In less than an hour, Seafile was running smoothly, quickly generating image previews and loading full images. The setup was simpler than with Nextcloud too. In this post, I'll demonstrate how to get Seafile up and running in minutes using Podman and Cockpit. 
 
 If you read [[part 4]], this setup process will be *very* familiar.
 ## Setup
@@ -18,7 +18,7 @@ Seafile needs at least 3 containers:
 2. Memcached
 3. Seafile itself
 
-Seafile's `docker-compose.yml` uses specific versions of MariaDB and Memcached, but this file is slightly dated so I upgraded to the latest minor or patched version of each, as shown below:
+Seafile's `docker-compose.yml` (linked above) uses specific versions of MariaDB and Memcached, but this file is slightly dated so I upgraded to the latest minor or patched version of each, as shown below:
 
 ```bash
 podman pull docker.io/library/mariadb:10.6
@@ -73,7 +73,7 @@ The pod can be created in Cockpit like so:
 2. A memory limit of 256 MB is applied to the container
 3. The restart policy is set to "Always" so the container always restarts, should it stop unexpectedly
 ### Step 6: Create the Seafile container
-I learned to RTFM this time around, and found the system requirements for the [community version](https://seafile.readthedocs.io/en/latest/installation/system-requirements/) and [professional version](https://manual.seafile.com/11.0/docker/pro-edition/deploy_seafile_pro_with_docker/#requirements), which define the minimum amount of memory to be 2GB. So let's go with that.
+I learned to [RTFM](https://en.wikipedia.org/wiki/RTFM) this time around, and found the system requirements for the [community version](https://seafile.readthedocs.io/en/latest/installation/system-requirements/) and [professional version](https://manual.seafile.com/11.0/docker/pro-edition/deploy_seafile_pro_with_docker/#requirements), which define the minimum amount of memory to be 2GB. So let's go with that.
 
 ![[seafile_container1.png]]
 ![[seafile_container2.png]]
@@ -92,7 +92,7 @@ Navigate to `<hostname>:<port>` (where `hostname` is your IP or hostname, and `p
 
 ![[seafile_login.png]]
 ### Step 8: System Admin
-After signing in, navigate to the system admin page by clicking on the avatar in the top right corner and then "System Admin" from the dropdown. From here, select the "Settings" tab. Or just go there directly via `<hostname>:<port>/sys/web-settings`. It should look like this:
+After signing in, navigate to the system admin page by clicking on the avatar in the top right corner and then "System Admin" from the drop-down. From here, select the "Settings" tab. Or just go there directly via `<hostname>:<port>/sys/web-settings`. It should look something like this:
 
 ![[seafile_settings.png]]
 
