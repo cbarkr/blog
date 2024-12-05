@@ -37,13 +37,13 @@ Then I plugged it in, booted it up, and double checked that everything worked. H
 2. No authentication of any kind was required to access these files
 3. I would be formatting the drives without touching any of the files (to hopefully give them some peace of mind)
 
-Let this be a reminder to use all to **always** wipe drives before selling them. Or better yet, take them out and smash them with a hammer until they're nothing but shards and dust of metal and plastic. 
+Let this be a reminder to use all to **always** wipe drives before selling them. Or better yet, take them out and smash them with a hammer until they're nothing but shards and dust of metal and plastic. Since I wanted to use these drives, I didn't choose the former option, but I did make sure to format everything. 
 
-Since I wanted to use these drives, I didn't choose the former option, but I did make sure to format everything. Then I created a Debian install disk, and began the install. I chose Debian because it's familiar (I use Ubuntu as my daily driver), but also because it's simple, stable, and secure. I installed KDE Plasma as the desktop environment, and oh is it pretty. Here's the obligatory neofetch screenshot. 
+Next I had to decide what to put on the bare metal. While I could have gone the route of Proxmox, I preferred the idea of using a vanilla Linux distro for the sake of learning. I was split between Debian and Fedora, but ultimately chose Debian for its stability and familiarity (as I formerly used Ubuntu as a daily driver). I also installed a desktop environment (KDE) since I figured it might be nice sometimes. Obligatory `neofetch` + `htop`:
 
 ![[rice.png]]
 
-Now that everything is set up, all that's left is to actually start tinkering!
+For a GUI, however, I planned to primarily use Cockpit. This will be the focus of the next installation of this series. 
 
 ---
 

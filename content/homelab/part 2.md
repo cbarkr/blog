@@ -40,7 +40,7 @@ The most popular container engine is Docker. I've used Docker on and off for the
 
 Although Docker popularized containers, it isn't the only option on the market. [Podman](https://podman.io/), for example, is a daemonless container engine that runs rootless containers. This is what I'll be using for running services on my homelab.
 #### Administration
-In searching for administrative tools that would make my life easier, I discovered [Cockpit](https://cockpit-project.org/). It checks all the boxes for me: it's FOSS, lightweight, extendable, comprehensive, and easy to use. Most notably, Cockpit offers Podman integration: this makes it easy to spin up Podman containers directly from the Cockpit dashboard. 
+In searching for administrative tools that would make my life easier, I discovered [Cockpit](https://cockpit-project.org/). It checks all the boxes for me: it's FOSS, lightweight, extendable, comprehensive, and easy to use. Extensibility is key; Cockpit provides a number of [applications](https://cockpit-project.org/applications) to integrate management tools for various things, such as storage, networking, VMs, Podman containers, etc. One of the most helpful for me is the Podman app, making it easy to spin up pods and containers directly from the Cockpit GUI. 
 ## Cockpit
 ### Installation
 Since I'm using Debian, I followed the installation instructions [here](https://cockpit-project.org/running.html#debian). At the time of writing, the installation is as follows:
