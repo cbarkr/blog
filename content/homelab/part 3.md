@@ -2,6 +2,7 @@
 title: "part 3: adguard"
 tags:
   - blog
+  - homelab
 date: 2024-08-13
 ---
 ## Background

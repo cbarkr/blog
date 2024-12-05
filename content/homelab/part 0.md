@@ -2,6 +2,7 @@
 title: "part 0: prologue"
 tags:
   - blog
+  - homelab
 date: 2024-08-11
 ---
 ## What is a "homelab"? 

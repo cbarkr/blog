@@ -2,6 +2,7 @@
 title: "part 2: entering the cockpit"
 tags:
   - blog
+  - homelab
 date: 2024-08-12
 ---
 ## Pre-flight Check

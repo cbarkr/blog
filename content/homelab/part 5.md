@@ -2,6 +2,7 @@
 title: "part 5: seafile"
 tags:
   - blog
+  - homelab
 date: 2024-12-04
 ---
 ## Preamble

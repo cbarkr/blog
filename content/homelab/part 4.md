@@ -2,6 +2,7 @@
 title: "part 4: nextcloud"
 tags:
   - blog
+  - homelab
 date: 2024-09-19
 ---
 ## Preamble

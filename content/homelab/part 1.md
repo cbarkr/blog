@@ -2,6 +2,7 @@
 title: "part 1: humble beginnings"
 tags:
   - blog
+  - homelab
 date: 2024-08-11
 ---
 ## Original plan
