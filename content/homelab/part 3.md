@@ -63,17 +63,17 @@ These volumes will be created in `/home/$USER/.local/share/containers/storage/vo
 > If you skip this step, make sure to set the port mappings and volume mounts on the container in the "Integrations" tab (see step 4)
 
 From the "Podman containers" tab in Cockpit, I created a new pod named "services". Here, I defined the relevant port mappings and volumes for AdGuard (using the volume mounts created in the previous step):
-![[homelab_cockpit_podman_pod.png]]
+![[adguard_pod1.png]]
 > [!info]
 > See [this](https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#create-and-run-the-container) for more details about port mappings
 
-![[homelab_cockpit_podman_adguard_ports.png]]
+![[adguard_pod2.png]]
 > [!info]
 > The volumes are mounted like so:
 > 1. `/home/$USER/.local/share/containers/storage/volumes/adguard-work`  -> `/opt/adguardhome/work`
 > 2. `/home/$USER/.local/share/containers/storage/volumes/adguard-conf`  -> `/opt/adguardhome/conf`
 
-![[homelab_cockpit_podman_adguard_volumes.png]]
+![[adguard_pod3.png]]
 ### Step 3 (Optional): Pull a specific AdGuard version
 In my testing, `cockpit-podman` refused to fetch a specific image tag in the "Create container" UI, so I first had to download the image directly. There are two ways of doing so:
 1. Under the "Images" section, select "Download new image" and specify the desired tag on the "Search for an image" popup
@@ -86,7 +86,7 @@ podman pull docker.io/adguard/adguardhome:<tag>
 Once the image is pulled, it will show up in Cockpit.
 ### Step 4: Create the AdGuard container
 Then, I created a new container in the "services" pod:
-![[homelab_cockpit_podman_adguard_container.png]]
+![[adguard_container.png]]
 > [!note] Note
 > In the above screenshot, I completed the optional steps 0.b and 3. If you did not complete step 0.b, the "Restart Policy" option will not be available. If you did not complete step 3, just search for the image in the "Create container" UI to pull the latest version.
 
@@ -95,11 +95,11 @@ If you completed step 2, then no further configuration is necessary; the contain
 If not, define the port mappings and volume mounts listed step 2 in the "Integration" tab here.
 ### Step 5: Run the AdGuard container
 Click "Create and run", and the container should spin up. The AdGuard UI will be made available at http://127.0.0.1:3000 and looks a little something like this:
-![[homelab_adguard_dashboard.png]]
+![[adguard_dashboard.png]]
 ### Step 6: Configuring AdGuard
 The first thing I changed was the upstream DNS provider(s); consulting [AdGuard's knowledge base](https://adguard-dns.io/kb/general/dns-providers/), I replaced the default with a few providers, such as Mullvad and Cloudflare. I also set some backup providers, just in case. 
 
-![[homelab_adguard_dns.png]]
+![[adguard_dns.png]]
 For now, I'll be using the default filtering list, so no changes necessary there just yet.
 ### Step 7: Using AdGuard network-wide
 In order to get the benefits of network-wide ad/tracker-blocking, AdGuard must be configured as a DNS server on a router. The AdGuard UI has a "Setup Guide" has a straightforward explanation as to how this is achieved. 

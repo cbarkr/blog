@@ -30,13 +30,13 @@ podman pull docker.io/library/mariadb:<tag>
 podman pull docker.io/library/redis:<tag>
 ```
 #### Using Cockpit GUI
-![[homalab_cockpit_podman_add_image.png]]
+![[cockpit_podman_add_image.png]]
 ##### 1. Nextcloud
-![[homelab_cockpit_podman_nextcloud_image.png]]
+![[nextcloud_image.png]]
 ##### 2. MariaDB
-![[homelab_cockpit_podman_mariadb_image.png]]
+![[mariadb_image.png]]
 ##### 3. Redis
-![[homelab_cockpit_podman_redis_image.png]]
+![[redis_image.png]]
 ### Step 2: Create the necessary volumes
 The `nextcloud` container provides 5 directories that can be mounted as volumes:
 - `/var/www/html`: **Main folder, needed for updating**
@@ -59,7 +59,7 @@ Cockpit doesn't reference volume names directly, and instead requires the locati
 ### Step 3: Create a pod
 Since the Nextcloud, MariaDB, and Redis containers must communicate with one another, it's best to group them in a pod. This will look something like:
 
-![[homelab_cockpit_podman_nextcloud_pod.png]]
+![[nextcloud_pod.png]]
 #### Breakdown
 1. The pod is named `nextcloud`
 2. Port mappings for the containers are specified ahead of time. In this case, port `8081` on the host is mapped to `80` in the container
@@ -69,8 +69,8 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 > [!note]
 > The following containers should be created in the order given
 ### Step 4: Create the MariaDB container
-![[homelab_cockpit_podman_mariadb_container.png]]
-![[homelab_cockpit_podman_mariadb_container2.png]]
+![[media/homelab/nextcloud/mariadb_container.png]]
+![[media/homelab/nextcloud/mariadb_container2.png]]
 #### Breakdown
 1. The container is named `nextcloud-db`
 2. A memory limit of 256 MB is applied to the container
@@ -85,7 +85,7 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 > [!note]
 > Remember `MYSQL_USER`, `MYSQL_DATABASE`, and `MYSQL_PASSWORD`, they will be used in step 6
 ### Step 5: Create the Redis container
-![[homelab_cockpit_podman_redis_container.png]]
+![[redis_container.png]]
 #### Breakdown
 1. The container is named `nextcloud-redis`
 2. In the command field, the parameter `--requirepass` is used to set a default password. The password itself can be wrapped in double quotes (i.e. `--requirepass "mysupersecretredispassword"`) if needed[^1]
@@ -95,8 +95,8 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 > [!note] 
 > Remember your Redis password, it will be used in step 6
 ### Step 6: Create the Nextcloud container
-![[media/homelab_cockpit_podman_nextcloud_container.png]]
-![[homelab_cockpit_podman_nextcloud_container2.png]]
+![[nextcloud_container.png]]
+![[nextcloud_container2.png]]
 #### Breakdown
 1. The container is named `nextcloud-main`
 2. A memory limit of 128 MB is applied to the container. 
@@ -115,18 +115,18 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 ### Step 7: Open the Nextcloud UI
 For me, this is running on port `8081`, so navigating to `<hostname>:8081` brings up the Nextcloud login page. If you didn't set the `NEXTCLOUD_ADMIN_*` environment variables, you will be asked to create a new admin account now. I forgot to take a screenshot of this part so just trust me. If everything is configured correctly, after login you should be redirected to the dashboard which, for me, looks like:
 
-![[homelab_nextcloud_dashboard.png]]
+![[nextcloud_dashboard.png]]
 
 Navigating to the "Files" page will reveal a bunch of guides and sample files, which I deleted immediately without reading. 
 
 > [!note]
 > If you didn't configure Redis and try deleting the default files, you'll notice that two files are locked: `Readme.md` and `Templates credits.md`
 
-![[homelab_nextcloud_homepage.png]]
+![[nextcloud_homepage.png]]
 ### Step 8: Using Nextcloud
 The first thing I added was a small collection of silly tech memes that I had kicking around:
 
-![[homelab_nextcloud_memes.png]]
+![[media/homelab/nextcloud/memes.png]]
 
 The next thing I did was employ [Google Takeout](https://takeout.google.com/) to export my entire Google Drive as one big `.tgz` (which I know how to extract thanks to `IMG.3881.jpeg` shown above!). For nearly 8 years, I've stored most of [my photography](https://www.cbarkr.com/photos) on Google Drive, so this archive is quite large. Fortunately, it's *mostly* organized (by years > months > events), so uploading everything to Nextcloud won't be too painful.
 ## Update
@@ -157,7 +157,7 @@ podman exec -u www-data nextcloud-main php /var/www/html/cron.php
 
 but found that Nextcloud literally DoS'd itself in the process. I didn't get a screenshot of that particular instance, but what follows is one I took shortly beforehand, in which CPU usage skyrockets while (presumably) trying to generate image previews:
 
-![[homelab_cockpit_podman_preview_cpu_usage.png]]
+![[nextcloud_preview_cpu_usage.png]]
 
 Despite letting Nextcloud do it's thing for a while, it did not appear to generate any new image previews. Just little grey boxes.
 ### Increase Container Memory Limits

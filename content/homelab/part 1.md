@@ -11,23 +11,23 @@ Without good reason, I was recently browsing VarageSale (a local buy/sell platfo
 
 This machine was listed with the factory specs: "an Intel Core i5 processor, 8GB of RAM, and a 256GB solid-state drive". The seller didn't mention which i5 offering was installed, so I asked. A few hours later, I received the following messages:
 
-![[homelab_cpu.png]]
+![[cpu.png]]
 
 I expected them to just turn it on and check using the GUI, but I guess this works too. With this information, I now figured I was getting a machine with the below spec sheet:
 
-![[Pasted image 20240722120033.png]]
+![[specs.png]]
 
 This is quite sufficient for my needs, and for $80, it seemed like a decent deal, so I bought it.
 
 Seeing as it's a used machine and the original owner had already broken the seal of the thermal paste, I decided to disassemble everything, clean it out, reapply some thermal paste, and reassemble. Upon opening the case, I was greeted by this:
 
-![[homelab_ssd.png]]
+![[ssd.png]]
 
 That's not the 256GB SSD I was promised! But I'm not complaining either! I was planning on putting a 2TB HDD in anyways, so this was a nice surprise. 
 
 Underneath the drive tray lies the original M2 SSD and RAM slots. After removing the tray, and getting a better look at the RAM, I found that the RAM had been upgraded as well! Instead of the factory 8GB, it has 16GB (2x8GB). Score!
 
-![[homelab_ram.png]]
+![[ram.png]]
 
 After blowing out a metric fuckton of dust, I used a microfibre cloth and some rubbing alcohol to clean off the thermal paste from the CPU and cooler, reapplied using the trusty 5-dot method, and stuck everything back together. I also affixed the SSD to the drive bay using some extra bolts I had laying around since it was loosely flopping around there previously. 
 
@@ -40,7 +40,7 @@ Let this be a reminder to use all to **always** wipe drives before selling them.
 
 Since I wanted to use these drives, I didn't choose the former option, but I did make sure to format everything. Then I created a Debian install disk, and began the install. I chose Debian because it's familiar (I use Ubuntu as my daily driver), but also because it's simple, stable, and secure. I installed KDE Plasma as the desktop environment, and oh is it pretty. Here's the obligatory neofetch screenshot. 
 
-![[homelab_rice.png]]
+![[rice.png]]
 
 Now that everything is set up, all that's left is to actually start tinkering!
 

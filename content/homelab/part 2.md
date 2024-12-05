@@ -67,10 +67,10 @@ apt install cockpit-storaged cockpit-networkmanager cockpit-podman
 
 Cockpit will start on demand when a browser accesses `localhost:9090` (or whichever port it is configured to use). This should produce the following login page:
 
-![[homelab_cockpit_login.png]]
+![[cockpit_login.png]]
 Cockpit uses the system's normal user login. After logging in, the user is greeted with the dashboard:
 
-![[homelab_cockpit_dashboard.png]]
+![[cockpit_dashboard.png]]
 With that, the server should be ready to do some serving!
 
 ---

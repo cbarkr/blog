@@ -44,7 +44,7 @@ Since all three container communicate with each other, they must be in the same 
 
 The pod can be created in Cockpit like so:
 
-![[Pasted image 20241204161110.png]]
+![[seafile_pod.png]]
 #### Breakdown
 1. The pod is named `seafile`
 2. Ports `4443` and `8081` on the host are mapped to `443` and `80` in the container, respectively
@@ -52,8 +52,8 @@ The pod can be created in Cockpit like so:
 > [!note]
 > The following containers should be created in the order given
 ### Step 4: Create the MariaDB container
-![[Pasted image 20241204154918.png]]
-![[Pasted image 20241204155309.png]]
+![[mariadb_container1.png]]
+![[media/homelab/seafile/mariadb_container2.png]]
 #### Breakdown
 1. The container is named `seafile-db`
 2. A memory limit of 512 MB is applied to the container
@@ -66,7 +66,7 @@ The pod can be created in Cockpit like so:
 > [!note]
 > Remember `MYSQL_ROOT_PASSWORD`, it will be used in step 6
 ### Step 5: Create the Memcached container
-![[Pasted image 20241204162838.png]]
+![[memcached_container.png]]
 #### Breakdown
 1. The container is named `seafile-cache`
 2. A memory limit of 256 MB is applied to the container
@@ -74,8 +74,8 @@ The pod can be created in Cockpit like so:
 ### Step 6: Create the Seafile container
 I learned to RTFM this time around, and found the system requirements for the [community version](https://seafile.readthedocs.io/en/latest/installation/system-requirements/) and [professional version](https://manual.seafile.com/11.0/docker/pro-edition/deploy_seafile_pro_with_docker/#requirements), which define the minimum amount of memory to be 2GB. So let's go with that.
 
-![[Pasted image 20241204155523.png]]
-![[Pasted image 20241204155914.png]]
+![[seafile_container1.png]]
+![[seafile_container2.png]]
 #### Breakdown
 1. The container is named `seafile-main`
 2. A memory limit of 2 GB is applied to the container
@@ -89,17 +89,17 @@ I learned to RTFM this time around, and found the system requirements for the [c
 ### Step 7: Open the Seafile UI
 Navigate to `<hostname>:<port>` (where `hostname` is your IP or hostname, and `port` is the port bound to `80` in `seafile-main`) to open Seafile. Use the admin credentials from step 6 to login. 
 
-![[Pasted image 20241204160047.png]]
+![[seafile_login.png]]
 ### Step 8: System Admin
 After signing in, navigate to the system admin page by clicking on the avatar in the top right corner and then "System Admin" from the dropdown. From here, select the "Settings" tab. Or just go there directly via `<hostname>:<port>/sys/web-settings`. It should look like this:
 
-![[Pasted image 20241204163921.png]]
+![[seafile_settings.png]]
 
 `SERVICE_URL` and `FILE_SERVER_ROOT` should be updated to wherever Seafile is located. For example, `SERVICE_URL` = `http://<hostname>:<port>` and `FILE_SERVER_ROOT` = `http://<hostname>:<port>/seafhttp`. 
 ### Step 9: Using Seafile
 As before, I uploaded my silly little images as a test:
 
-![[Pasted image 20241204171424.png]]
+![[media/homelab/seafile/memes.png]]
 
 Then, I uploaded my entire Google Takeout archive once again. The difference in upload and preview rendering speed between Seafile and Nextcloud is staggering.
 ## Summary
