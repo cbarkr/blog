@@ -5,17 +5,26 @@ tags:
 date: 2024-08-23
 ---
 ## Etymology
+
+### Onion Routing
+At the heart of Tor is onion routing. To achieve privacy, messages are encrypted in multiple layers, much like those of an onion. When this onionized message traverses the network, each intermediary router peels off one layer at a time then forwards the result to the next router, until the final router extracts the core (the original message) which it transfers to the destination.
 ### Tor
-Tor (note the capitalization) was *originally* an abbreviation for *The Onion Routing*[^history] (**not** *The Onion Rout**er***). After the original project's conception, similar projects sprouted up, so the original was named *The* Onion Routing to cement its place[^history].
-### Onion
-Like layers of an onion, onion routing networks encrypt messages in multiple layers. When this onionized message passes through the network, each intermediary router peels off one layer that only they can peel, before passing it off to the next router to do the same with the next layer. 
+Before Tor became known as such, it was a nameless implementation of onion routing. Similar projects started sprouting up, so the original was named ***The** Onion Routing* to separate it from the rest[^history]. Despite Tor's name stemming from an abbreviation, it is capitalized as *Tor* (**not** TOR).
+## My (Totally Real And True) Conspiracy Theory
+> [!note] 
+> Skip this section if you want to learn something
+
+I think (it would be really funny if) Tor and onion routing as a whole were inspired by *Shrek*. Here's why:
+1. Shrek, as a character, is a recluse, seeking privacy in the comfort of his swamp; however, he is oft disturbed by a deluge of visiting villagers and inscrutable squatters. Parallels between his character and that of those who seek privacy online are obvious. 
+2. Shrek famously stated: "Ogres are like onions. [...] We both have layers" [^shrekquote]. It is here that privacy and onions become associated, potentially sparking the idea of onion routing in the minds of its creators. 
+3. The timelines add up: the *Shrek* picture book (1990) predates onion routing (1995) [^history] by five years, while the movie (2001) premiered one year before the deployment of Tor (2002) [^history]. 
 ## Terminology
 - *Circuit*: A path through the Tor network
 - *Relay*: A node in a circuit
 	- *Entry*: The first relay in a circuit
-	- *Guard*: A small set of entry relays used by a client for a certain amount of time (unless using a bridge)
+		- *Guard*: A small set of trusted entry relays used by a client for a fixed period of time (unless using a bridge)
+		- *Bridge*: A relay that is not publicly listed (and can thus act as an entry without being identified as such)
 	- *Exit*: The last relay in a circuit 
-- *Bridge*: A relay that is not publicly available (and can thus act as an entry without being identified as such)
 - *Relay Cell*: The encrypted message at a specific relay
 	- *Create Cell*: A cell for creating a circuit, contains the first half of a Diffie-Hellman handshake
 	- *Extend Cell*: A cell for extending a circuit; similar to a *create cell* but also contains the address of the relay to extend to
@@ -26,36 +35,48 @@ Like layers of an onion, onion routing networks encrypt messages in multiple lay
 ### Constructing A Circuit
 Suppose Alice wants to create a circuit. First, she obtains the onion keys (public decryption keys held by every relay) and addresses of relays that will form the circuit. For $n$ relays, let $\set{{k_{relay_1}, k_{relay_2}, \dots, k_{relay_n}}}$ be the keys for each relay. 
 
-Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$), encrypted using the first relay's onion key, as the payload. Alice sends the cell to the first relay. The relay decrypts the payload, and responds with its half of the key ($g^Y$) and a hash of the shared key ($H(g^{XY})$). When Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
+Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$), encrypted using the first relay's onion key, as the payload. Alice sends the cell to the first relay. The relay decrypts the payload, and responds with its half of the key ($g^Y$) and a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. When Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
 
 To extend the circuit, Alice creates a *relay extend cell* using the same circuit ID, but with a new handshake part ($g^{X_2}$), encrypted with the second relay's onion key. Alice sends the new cell to the first relay. Relay 1, seeing the cell is an *extend* cell, copies the payload directly into a *relay create cell*, but replaces the circuit ID with a new one ($c_2$) before sending the cell to relay 2. Relay 2 responds to relay 1 with its half of the handshake ($g^{Y_2}$) and a hash of the negotiated key ($H(g^{X_2Y_2})$). Relay 1 then copies the payload into a new cell with the original circuit ID, and sends it to Alice. Now Alice has negotiated a shared key $k_2 = g^{X_2Y_2}$ with relay 2.
 
-This process then repeats for all other relays to be added to the circuit. Circuits typically consist of three relays, while many onion services use six relays[^spec].
+This process then repeats for all other relays to be added to the circuit. Circuits typically consist of three relays, while many onion services use six [^spec].
 #### Summary
-##### First Relay
 
-1. Alice -> Relay 1: $(c_1, E_{k_{relay_1}}(g^X))$
-2. Relay 1 -> Alice: $(c_1, g^Y, H(g^{XY}))$
-##### Second Relay
-
-1. Alice -> Relay 1: $(c_1, E_{k_{relay_2}(g^{X_2})})$
-2. Relay 1 -> Relay 2: $(c_2, E_{k_{relay_2}(g^{X_2})})$
-3. Relay 2 -> Relay 1: $(c_2, g^{Y_2}, H(g^{X_2Y_2})$
-4. Relay 1 -> Alice: $(c_1, g^{Y_2}, H(g^{X_2Y_2})$
-##### $n$th Relay
-1. Alice -> Relay 1: $(c_1, E_{k_{relay_n}(g^{X_n})})$
-2. $\dots$
-3. Relay $(n-1)$ -> Relay $n$: $(c_n, E_{k_{relay_n}(g^{X_n})})$
-4. Relay $n$ -> Relay $(n-1)$: $(c_n, g^{Y_n}, H(g^{X_nY_n})$
-5. $\dots$
-6. Relay 1 -> Alice: $(c_1, g^{Y_n}, H(g^{X_nY_n})$
+| Step Number | Adding Relay 1                                           | Adding Relay 2                                                    | ... | Adding Relay n                                                                            |
+| ----------- | -------------------------------------------------------- | ----------------------------------------------------------------- | --- | ----------------------------------------------------------------------------------------- |
+| 1           | Alice -> $relay_1$:<br><br>$(c_1, E_{k_{relay_1}}(g^X))$ | Alice -> $relay_1$:<br><br>$(c_1, E_{k_{relay_2}(g^{X_2})})$      | ... | Alice -> $relay_1$: <br><br>$(c_1, E_{k_{relay_n}(g^{X_n})})$                             |
+| 2           | $relay_1$ -> Alice: <br><br>$(c_1, g^Y, H(g^{XY}))$      | $relay_1$ -> $relay_2$: <br><br>$(c_2, E_{k_{relay_2}(g^{X_2})})$ | ... | $relay_1$ -> $relay_2$: <br><br>$(c_2, E_{k_{relay_2}(g^{X_2})})$                         |
+| 3           |                                                          | $relay_2$ -> $relay_1$: <br><br>$(c_2, g^{Y_2}, H(g^{X_2Y_2})$    | ... | $relay_2$ -> $relay_3$: <br><br>$(c_3, E_{k_{relay_3}(g^{X_3})})$                         |
+| 4           |                                                          | $relay_1$ -> Alice: <br><br>$(c_1, g^{Y_2}, H(g^{X_2Y_2})$        | ... | $relay_3$ -> $relay_4$: <br><br>$(c_4, E_{k_{relay_4}(g^{X_4})})$                         |
+| ...         |                                                          |                                                                   | ... | ...                                                                                       |
+| n-1         |                                                          |                                                                   |     | $relay_{(n-2)}$ -> $relay_{(n-1)}$: <br><br>$(c_{n-1}, E_{k_{relay_{n-1}}(g^{X_{n-1}})})$ |
+| n           |                                                          |                                                                   |     | $relay_{(n-1)}$ -> $relay_n$: <br><br>$(c_n, E_{k_{relay_n}(g^{X_n})})$                   |
+| n+1         |                                                          |                                                                   |     | $relay_n$ -> $relay_{(n-1)}$: <br><br>$(c_n, g^{Y_n}, H(g^{X_nY_n})$                      |
+| ...         |                                                          |                                                                   |     | ...                                                                                       |
+| 2n          |                                                          |                                                                   |     | $relay_1$ -> Alice: <br><br>$(c_1, g^{Y_n}, H(g^{X_nY_n})$                                |
 ### Using A Circuit
-Suppose Alice now has a complete circuit, and thus the keys $\set{k_1, k_2, \dots, k_n}$ with all $n$ relays. To send a message $M$ through the circuit, she creates a relay cell $C = E_{k_1, k_2, \dots, k_n}(M) = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ and sends it to the entry. The entry peels the first layer like $C_1 = D_{k_1}(C) = D_{k_1}(E_{k_1, k_2, \dots, k_n}(M)) = D_{k_1}(E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))) = E_{k_2}(\dots(E_{k_n}(M))) = E_{k_2, \dots, k_n}(M)$, sets $C_1$'s origin to itself, then sends $C_1$ to relay 2. Relays $2, \dots, n-1$ repeat the same process. Relay $n$, the exit, finally peels $C_n = D_{k_n}(E_{k_n}(M)) = M$, and sends $M$ to the destination.
+Suppose Alice now has a complete circuit, and thus the keys $\set{k_1, k_2, \dots, k_n}$ with all $n$ relays. To send a message $M$ through the circuit, she creates a relay cell, $C$, using a public-key encryption function $E(\cdot)$, like so:
+
+> $C = E_{k_1, k_2, \dots, k_n}(M) = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ 
+
+and sends it to the entry. The entry peels the first layer, using the corresponding decryption function $D(\cdot)$, illustrated as follows:
+
+> $C_1 = D_{k_1}(C)$
+> $C_1 = D_{k_1}(E_{k_1, k_2, \dots, k_n}(M))$
+> $C_1 = \cancel{D_{k_1}}(\cancel{E_{k_1}}(E_{k_2}(\dots(E_{k_n}(M)))))$
+> $C_1 = E_{k_2}(\dots(E_{k_n}(M)))$
+> $C_1 = E_{k_2, \dots, k_n}(M)$
+
+The entry then sets $C_1$'s origin to itself, then sends $C_1$ to relay 2. Relays $2, \dots, n-1$ repeat the same process. Relay $n$, the exit, finally peels $C_n = D_{k_n}(E_{k_n}(M)) = M$, and sends $M$ to the destination.
 
 > [!note] Note
 > Almost all traffic these days is TLS-encrypted[^httpsadoption], so the exit does not actually see $M$ itself, but instead, $E_{k_{TLS}}(M)$. The only information the exit knows is the message's destination, which is necessary for forwarding the message.
 
 Throughout this process, relay $i$ only knows of relays $i-1$ and $i+1$, hence only the entry knows the sender and only the exit knows the receiver.
+### Summary
+The process of constructing and using a two-hop circuit is visualized in [^spec] as follows:
+
+![[sequence_diagram.png]]
 ## Attacks
 De-anonymization is an obvious attack on an anonymization network. 
 
@@ -110,6 +131,7 @@ Give standardized answers for everything (implemented in Tor Browser). For examp
 Disable canvassing (implemented in Tor Browser)
 
 [^history]: https://www.torproject.org/about/history/
+[^shrekquote]: https://www.quotes.net/mquote/85881
 [^spec]: https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.html#subsec:circuits
 [^httpsadoption]: https://radar.cloudflare.com/adoption-and-usage#http-vs-https
 [^knn]: https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/wang_tao
