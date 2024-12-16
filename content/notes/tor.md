@@ -15,9 +15,9 @@ Before Tor became known as such, it was a nameless implementation of onion routi
 > Skip this section if you want to learn something
 
 I think (it would be really funny if) Tor and onion routing as a whole were inspired by *Shrek*. Here's why:
-1. Shrek, as a character, is a recluse, seeking privacy in the comfort of his swamp; however, he is oft disturbed by a deluge of visiting villagers and inscrutable squatters. Parallels between his character and that of those who seek privacy online are obvious. 
-2. Shrek famously stated: "Ogres are like onions. [...] We both have layers" [^shrekquote]. It is here that privacy and onions become associated, potentially sparking the idea of onion routing in the minds of its creators. 
-3. The timelines add up: the *Shrek* picture book (1990) predates onion routing (1995) [^history] by five years, while the movie (2001) premiered one year before the deployment of Tor (2002) [^history]. 
+1. Shrek, as a character, is a recluse who seeks privacy in the comfort of his swamp; however, he is oft disturbed by a deluge of visiting villagers and inscrutable squatters. Parallels between his character and that of those who seek privacy online are obvious. 
+2. Shrek famously stated: "Ogres are like onions. [...] We both have layers" [^shrekquote]. It is here that privacy and onions form an association, potentially sparking the idea of onion routing in the minds of its creators. 
+3. The timelines add up: *Shrek* the picture book (1990) predates onion routing (1995) [^history] by five years, while *Shrek* the movie (2001) premiered one year before the deployment of Tor (2002) [^history]. 
 ## Terminology
 - *Circuit*: A path through the Tor network
 - *Relay*: A node in a circuit
@@ -33,13 +33,41 @@ I think (it would be really funny if) Tor and onion routing as a whole were insp
 ## Background
 > See [^spec] for more details
 ### Constructing A Circuit
-Suppose Alice wants to create a circuit. First, she obtains the onion keys (public decryption keys held by every relay) and addresses of relays that will form the circuit. For $n$ relays, let $\set{{k_{relay_1}, k_{relay_2}, \dots, k_{relay_n}}}$ be the keys for each relay. 
+For the sake of this example, I will use a simplified model of the cell structure defined in [^spec]:
 
-Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$), encrypted using the first relay's onion key, as the payload. Alice sends the cell to the first relay. The relay decrypts the payload, and responds with its half of the key ($g^Y$) and a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. When Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
+> `| Circuit ID | Relay ID | Command | Data |`
 
-To extend the circuit, Alice creates a *relay extend cell* using the same circuit ID, but with a new handshake part ($g^{X_2}$), encrypted with the second relay's onion key. Alice sends the new cell to the first relay. Relay 1, seeing the cell is an *extend* cell, copies the payload directly into a *relay create cell*, but replaces the circuit ID with a new one ($c_2$) before sending the cell to relay 2. Relay 2 responds to relay 1 with its half of the handshake ($g^{Y_2}$) and a hash of the negotiated key ($H(g^{X_2Y_2})$). Relay 1 then copies the payload into a new cell with the original circuit ID, and sends it to Alice. Now Alice has negotiated a shared key $k_2 = g^{X_2Y_2}$ with relay 2.
+Suppose Alice wants to create a circuit. First, she obtains the onion keys and addresses of relays that will form the circuit. For $n$ relays, let $\set{{k_{relay_1}, k_{relay_2}, \dots, k_{relay_n}}}$ be the keys for each relay. 
 
-This process then repeats for all other relays to be added to the circuit. Circuits typically consist of three relays, while many onion services use six [^spec].
+Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$) encrypted using the first relay's onion key using a public key encryption function $E(\cdot)$ as the payload (i.e. $E_{k_{relay_1}}(g^X)$). This cell is as follows:
+
+> | $c_1$ | Create | $relay_1$ | $E_{k_{relay_1}}(g^X)$ |
+
+Alice sends the cell to the first relay. The relay decrypts the payload using the corresponding decryption function $D(\cdot)$, and responds with its half of the key ($g^Y$), as well as a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. This cell is constructed like so:
+
+> | $c_1$ | Create | $g^Y$, $H(g^{XY})$ |
+
+Once Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
+
+To extend the circuit, Alice creates a *relay extend cell* using the same circuit ID, but with a new handshake part ($g^{X_2}$), encrypted with the second relay's onion key. 
+
+> | $c_1$ | Extend | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
+
+Alice sends the new cell to the first relay. Relay 1, seeing the cell is an *extend* cell, copies the payload directly into a *relay create cell*, but replaces the circuit ID with a new one ($c_2$) before sending the cell to relay 2: 
+
+> | $c_2$ | Create | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
+
+Relay 2 responds to relay 1 with its half of the handshake ($g^{Y_2}$) and a hash of the negotiated key ($H(g^{X_2Y_2})$): 
+
+> | $c_2$ | Create | $relay_1$ | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
+
+Relay 1 then copies the payload into a new cell with the original circuit ID, and sends it to Alice:
+
+> | $c_1$ | Extend | $relay_2$ | $E_{k_{relay_1}}(g^X)$) |
+
+Now Alice has negotiated a shared key $k_2 = g^{X_2Y_2}$ with relay 2 such that relay 1 cannot discover the key. 
+
+This process then repeats for all other relays to be added to the circuit. Circuits typically consist of at least three relays, while many onion services use six [^spec].
 #### Summary
 
 | Step Number | Adding Relay 1                                           | Adding Relay 2                                                    | ... | Adding Relay n                                                                            |
@@ -55,11 +83,12 @@ This process then repeats for all other relays to be added to the circuit. Circu
 | ...         |                                                          |                                                                   |     | ...                                                                                       |
 | 2n          |                                                          |                                                                   |     | $relay_1$ -> Alice: <br><br>$(c_1, g^{Y_n}, H(g^{X_nY_n})$                                |
 ### Using A Circuit
-Suppose Alice now has a complete circuit, and thus the keys $\set{k_1, k_2, \dots, k_n}$ with all $n$ relays. To send a message $M$ through the circuit, she creates a relay cell, $C$, using a public-key encryption function $E(\cdot)$, like so:
+Suppose Alice now has a complete circuit, and thus the keys $\set{k_1, k_2, \dots, k_n}$ with all $n$ relays. To send a message $M$ through the circuit, she creates a relay cell, $C$, like so:
 
-> $C = E_{k_1, k_2, \dots, k_n}(M) = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ 
+> $C = E_{k_1, k_2, \dots, k_n}(M)$
+> $C = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ 
 
-and sends it to the entry. The entry peels the first layer, using the corresponding decryption function $D(\cdot)$, illustrated as follows:
+and sends it to the entry. The entry peels the first layer, illustrated as follows:
 
 > $C_1 = D_{k_1}(C)$
 > $C_1 = D_{k_1}(E_{k_1, k_2, \dots, k_n}(M))$
