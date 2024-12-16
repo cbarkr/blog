@@ -41,29 +41,29 @@ Suppose Alice wants to create a circuit. First, she obtains the onion keys and a
 
 Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$) encrypted using the first relay's onion key using a public key encryption function $E(\cdot)$ as the payload (i.e. $E_{k_{relay_1}}(g^X)$). This cell is as follows:
 
-> | $c_1$ | Create | $relay_1$ | $E_{k_{relay_1}}(g^X)$ |
+> | $c_1$ | $create$ | $relay_1$ | $E_{k_{relay_1}}(g^X)$ |
 
 Alice sends the cell to the first relay. The relay decrypts the payload using the corresponding decryption function $D(\cdot)$, and responds with its half of the key ($g^Y$), as well as a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. This cell is constructed like so:
 
-> | $c_1$ | Create | $g^Y$, $H(g^{XY})$ |
+> | $c_1$ | $create$ | $alice$ | $g^Y$, $H(g^{XY})$ |
 
 Once Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
 
 To extend the circuit, Alice creates a *relay extend cell* using the same circuit ID, but with a new handshake part ($g^{X_2}$), encrypted with the second relay's onion key. 
 
-> | $c_1$ | Extend | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
+> | $c_1$ | $extend$ | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
 
 Alice sends the new cell to the first relay. Relay 1, seeing the cell is an *extend* cell, copies the payload directly into a *relay create cell*, but replaces the circuit ID with a new one ($c_2$) before sending the cell to relay 2: 
 
-> | $c_2$ | Create | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
+> | $c_2$ | $create$ | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
 
 Relay 2 responds to relay 1 with its half of the handshake ($g^{Y_2}$) and a hash of the negotiated key ($H(g^{X_2Y_2})$): 
 
-> | $c_2$ | Create | $relay_1$ | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
+> | $c_2$ | $create$ | $relay_1$ | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
 
 Relay 1 then copies the payload into a new cell with the original circuit ID, and sends it to Alice:
 
-> | $c_1$ | Extend | $relay_2$ | $E_{k_{relay_1}}(g^X)$) |
+> | $c_1$ | $extend$ | $alice$ | $E_{k_{relay_1}}(g^X)$) |
 
 Now Alice has negotiated a shared key $k_2 = g^{X_2Y_2}$ with relay 2 such that relay 1 cannot discover the key. 
 
@@ -85,16 +85,11 @@ This process then repeats for all other relays to be added to the circuit. Circu
 ### Using A Circuit
 Suppose Alice now has a complete circuit, and thus the keys $\set{k_1, k_2, \dots, k_n}$ with all $n$ relays. To send a message $M$ through the circuit, she creates a relay cell, $C$, like so:
 
-> $C = E_{k_1, k_2, \dots, k_n}(M)$
-> $C = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ 
+> $C = E_{k_1, k_2, \dots, k_n}(M) = E_{k_1}(E_{k_2}(\dots(E_{k_n}(M))))$ 
 
 and sends it to the entry. The entry peels the first layer, illustrated as follows:
 
-> $C_1 = D_{k_1}(C)$
-> $C_1 = D_{k_1}(E_{k_1, k_2, \dots, k_n}(M))$
-> $C_1 = \cancel{D_{k_1}}(\cancel{E_{k_1}}(E_{k_2}(\dots(E_{k_n}(M)))))$
-> $C_1 = E_{k_2}(\dots(E_{k_n}(M)))$
-> $C_1 = E_{k_2, \dots, k_n}(M)$
+> $C_1 = D_{k_1}(C) = D_{k_1}(E_{k_1, k_2, \dots, k_n}(M)) = \cancel{D_{k_1}}(\cancel{E_{k_1}}(E_{k_2}(\dots(E_{k_n}(M))))) = E_{k_2}(\dots(E_{k_n}(M))) = E_{k_2, \dots, k_n}(M)$
 
 The entry then sets $C_1$'s origin to itself, then sends $C_1$ to relay 2. Relays $2, \dots, n-1$ repeat the same process. Relay $n$, the exit, finally peels $C_n = D_{k_n}(E_{k_n}(M)) = M$, and sends $M$ to the destination.
 
