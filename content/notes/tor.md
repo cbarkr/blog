@@ -35,35 +35,35 @@ I think (it would be really funny if) Tor and onion routing as a whole were insp
 ### Constructing A Circuit
 For the sake of this example, I will use a simplified model of the cell structure defined in [^spec]:
 
-> `| Circuit ID | Relay ID | Command | Data |`
+> | $Circuit ID$ | $Relay ID$ | $Command$ | $Data$ |
 
 Suppose Alice wants to create a circuit. First, she obtains the onion keys and addresses of relays that will form the circuit. For $n$ relays, let $\set{{k_{relay_1}, k_{relay_2}, \dots, k_{relay_n}}}$ be the keys for each relay. 
 
 Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$) encrypted using the first relay's onion key using a public key encryption function $E(\cdot)$ as the payload (i.e. $E_{k_{relay_1}}(g^X)$). This cell is as follows:
 
-> | $c_1$ | $create$ | $relay_1$ | $E_{k_{relay_1}}(g^X)$ |
+> | $c_1$ | $relay_1$ | $create$ | $E_{k_{relay_1}}(g^X)$ |
 
 Alice sends the cell to the first relay. The relay decrypts the payload using the corresponding decryption function $D(\cdot)$, and responds with its half of the key ($g^Y$), as well as a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. This cell is constructed like so:
 
-> | $c_1$ | $create$ | $alice$ | $g^Y$, $H(g^{XY})$ |
+> | $c_1$ | $alice$ | $create$ | $g^Y$, $H(g^{XY})$ |
 
 Once Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
 
 To extend the circuit, Alice creates a *relay extend cell* using the same circuit ID, but with a new handshake part ($g^{X_2}$), encrypted with the second relay's onion key. 
 
-> | $c_1$ | $extend$ | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
+> | $c_1$ | $relay_2$ | $extend$  | $E_{k_{relay_2}}(g^{X_2})$ |
 
 Alice sends the new cell to the first relay. Relay 1, seeing the cell is an *extend* cell, copies the payload directly into a *relay create cell*, but replaces the circuit ID with a new one ($c_2$) before sending the cell to relay 2: 
 
-> | $c_2$ | $create$ | $relay_2$ | $E_{k_{relay_2}}(g^{X_2})$ |
+> | $c_2$ | $relay_2$ | $create$ | $E_{k_{relay_2}}(g^{X_2})$ |
 
 Relay 2 responds to relay 1 with its half of the handshake ($g^{Y_2}$) and a hash of the negotiated key ($H(g^{X_2Y_2})$): 
 
-> | $c_2$ | $create$ | $relay_1$ | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
+> | $c_2$ | $relay_1$ | $create$ | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
 
 Relay 1 then copies the payload into a new cell with the original circuit ID, and sends it to Alice:
 
-> | $c_1$ | $extend$ | $alice$ | $E_{k_{relay_1}}(g^X)$) |
+> | $c_1$ | $alice$ | $extend$ | $E_{k_{relay_1}}(g^X)$) |
 
 Now Alice has negotiated a shared key $k_2 = g^{X_2Y_2}$ with relay 2 such that relay 1 cannot discover the key. 
 
