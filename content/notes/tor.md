@@ -31,43 +31,46 @@ I think (it would be really funny if) Tor and onion routing as a whole were insp
 - *Onion Key*: A public decryption key held by every relay
 - *Onion Sites/Services*: Sites/services only available via the Tor network
 ## Background
-> See [^spec] for more details
+### A Note On Notation
+For the sake of this example, I will use a simplified model of the cell structure defined in [^oldspec]:
+
+> | `Circuit ID` | `Command` | `Body` |
+
+For clarity, commands will be referred to by their identifiers [^commandspec] rather than their true values.
 ### Constructing A Circuit
-For the sake of this example, I will use a simplified model of the cell structure defined in [^spec]:
+Suppose Alice wants to create a circuit. 
 
-> | $Circuit ID$ | $Relay ID$ | $Command$ | $Data$ |
+First, she chooses an exit node, followed by a chain of relays that constitute a path [^circuitspec] such that no path constraints are violated [^constraints]. By doing so, she will have obtained the onion keys and addresses of each relay on the path. For $n$ relays, let $\set{{k_{relay_1}, k_{relay_2}, \dots, k_{relay_n}}}$ be the keys for each relay. 
 
-Suppose Alice wants to create a circuit. First, she obtains the onion keys and addresses of relays that will form the circuit. For $n$ relays, let $\set{{k_{relay_1}, k_{relay_2}, \dots, k_{relay_n}}}$ be the keys for each relay. 
+Second, Alice establishes a TLS connection with the entry. Then she creates a *relay create cell* with a unique circuit ID ($c_1$) created according to [^circuitIDspec] and as the payload, the first half of a Diffie-Hellman handshake ($g^X$) encrypted using a public key encryption function $E(\cdot)$ with the first relay's onion key (i.e. $E_{k_{relay_1}}(g^X)$). This cell is as follows:
 
-Then Alice creates a *relay create cell* with a unique circuit ID ($c_1$), containing the first half of a Diffie-Hellman handshake ($g^X$) encrypted using the first relay's onion key using a public key encryption function $E(\cdot)$ as the payload (i.e. $E_{k_{relay_1}}(g^X)$). This cell is as follows:
+> | $c_1$ | `CREATE` | $E_{k_{relay_1}}(g^X)$ |
 
-> | $c_1$ | $relay_1$ | $create$ | $E_{k_{relay_1}}(g^X)$ |
+Alice sends the cell to the first relay over the TLS channel. The relay decrypts the payload using the corresponding decryption function $D(\cdot)$, and responds with its half of the key ($g^Y$), as well as a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. This cell is constructed like so:
 
-Alice sends the cell to the first relay. The relay decrypts the payload using the corresponding decryption function $D(\cdot)$, and responds with its half of the key ($g^Y$), as well as a hash of the shared key ($H(g^{XY})$) where $H(\cdot)$ is a cryptographic hash function. This cell is constructed like so:
-
-> | $c_1$ | $alice$ | $create$ | $g^Y$, $H(g^{XY})$ |
+> | $c_1$ | `CREATED` | $g^Y$, $H(g^{XY})$ |
 
 Once Alice receives the response, both parties will have established the shared key $k_1 = g^{XY}$. Henceforth, the circuit ID and shared key is used for all communications between Alice and relay 1. 
 
 To extend the circuit, Alice creates a *relay extend cell* using the same circuit ID, but with a new handshake part ($g^{X_2}$), encrypted with the second relay's onion key. 
 
-> | $c_1$ | $relay_2$ | $extend$  | $E_{k_{relay_2}}(g^{X_2})$ |
+> | $c_1$ | `EXTEND`  | $E_{k_{relay_2}}(g^{X_2})$ |
 
 Alice sends the new cell to the first relay. Relay 1, seeing the cell is an *extend* cell, copies the payload directly into a *relay create cell*, but replaces the circuit ID with a new one ($c_2$) before sending the cell to relay 2: 
 
-> | $c_2$ | $relay_2$ | $create$ | $E_{k_{relay_2}}(g^{X_2})$ |
+> | $c_2$ | `CREATE` | $E_{k_{relay_2}}(g^{X_2})$ |
 
 Relay 2 responds to relay 1 with its half of the handshake ($g^{Y_2}$) and a hash of the negotiated key ($H(g^{X_2Y_2})$): 
 
-> | $c_2$ | $relay_1$ | $create$ | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
+> | $c_2$ | `CREATED` | $g^{Y_2}$, $H(g^{X_2Y_2})$ |
 
 Relay 1 then copies the payload into a new cell with the original circuit ID, and sends it to Alice:
 
-> | $c_1$ | $alice$ | $extend$ | $E_{k_{relay_1}}(g^X)$) |
+> | $c_1$ | `EXTENDED` | $E_{k_{relay_1}}(g^X)$) |
 
 Now Alice has negotiated a shared key $k_2 = g^{X_2Y_2}$ with relay 2 such that relay 1 cannot discover the key. 
 
-This process then repeats for all other relays to be added to the circuit. Circuits typically consist of at least three relays, while many onion services use six [^spec].
+This process then repeats for all other relays to be added to the circuit. Circuits typically consist of at least three relays, while many onion services use six [^oldspec].
 #### Summary
 
 | Step Number | Adding Relay 1                                           | Adding Relay 2                                                    | ... | Adding Relay n                                                                            |
@@ -98,7 +101,7 @@ The entry then sets $C_1$'s origin to itself, then sends $C_1$ to relay 2. Relay
 
 Throughout this process, relay $i$ only knows of relays $i-1$ and $i+1$, hence only the entry knows the sender and only the exit knows the receiver.
 ### Summary
-The process of constructing and using a two-hop circuit is visualized in [^spec] as follows:
+The process of constructing and using a two-hop circuit is visualized in [^oldspec] as follows:
 
 ![[sequence_diagram.png]]
 ## Attacks
@@ -112,19 +115,19 @@ Since the relays themselves will not know which circuits they are a part of, an 
 ### Correlating Traffic
 Once an attacker has confirmed their control over a circuit, they must correlate traffic entering the entry relay and exiting the exit relay. This can be achieved via timing attacks or traffic analysis.
 ### 2. Website Fingerprinting
-> A set of methods to uniquely identify destination websites based on metadata and/or patterns in communication traffic. Packet sequences, lengths, order, timing information, and other seemingly innocuous features can uniquely identify a site
+> A set of methods to uniquely identify destination websites based on metadata and/or patterns in communication traffic observed between the client and entry relay. Packet sequences, lengths, order, timing information, and other seemingly innocuous features can uniquely identify a site.
 #### Examples
 - kNN[^knn] (k-nearest neighbours): Leverages features extracted from packet sequences to distinguish web pages
 - CUMUL[^cumul] (CUMULative representation): Support vector machine (SVM) using cumulated packet size to represent load behaviour
 - kFP[^kfp] (k-nearest neighbours Finger Printing): Random forests and kNN trained on fingerprints of clearnet traffic between specific web pages in order to classify encrypted traffic
 - DF[^df] (Deep Fingerprint): A high-precision deep Convolutional Neural Network (CNN) classifier
 ### 3. Browser Fingerprinting
-> A method to uniquely identify a user based on their browser and device setup; ex. OS, graphics card, screen dimensions, language, order of fonts installed, HTTP headers, time zone, browser plugins can identify users with 99% accuracy in some cases[^fingerprintaccuracy]
+> A method to uniquely identify a user based on their browser and device setup; ex. OS, graphics card, screen dimensions, language, order of fonts installed, HTTP headers, time zone, browser plugins can identify users with 99% accuracy in some cases[^fingerprintaccuracy].
 
 > [!note] Note
 > Even if the client makes small changes (installing new fonts, moving time zone, etc.), they are still highly identifiable
 ### 4. Canvas Fingerprinting
-> A method to uniquely identify a user by asking them (their browser, that is) to draw an image on a canvas (hidden in the DOM), then retrieves that image
+> A method to uniquely identify a user by asking them (their browser, that is) to draw an image on a canvas (hidden in the DOM), then retrieves that image.
 
 > [!note] Note
 > This is **VERY** unique across different computers (anti-aliasing, how they draw colours, etc.)
@@ -156,14 +159,17 @@ Disable canvassing (implemented in Tor Browser)
 
 [^history]: https://www.torproject.org/about/history/
 [^shrekquote]: https://www.quotes.net/mquote/85881
-[^spec]: https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.html#subsec:circuits
+[^oldspec]: https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.html#subsec:circuits
+[^commandspec]: https://spec.torproject.org/tor-spec/cell-packet-format.html#command
+[^circuitspec]: https://spec.torproject.org/tor-spec/creating-circuits.html
+[^circuitIDspec]: https://spec.torproject.org/tor-spec/create-created-cells.html#choosing-circid
 [^httpsadoption]: https://radar.cloudflare.com/adoption-and-usage#http-vs-https
 [^knn]: https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/wang_tao
 [^cumul]: https://doi.org/10.14722/ndss.2016.23477
 [^kfp]: https://doi.org/10.48550/arXiv.1509.00789
 [^df]: https://doi.org/10.48550/arXiv.1801.02265
 [^fingerprintaccuracy]: https://arstechnica.com/information-technology/2017/02/now-sites-can-fingerprint-you-online-even-when-you-use-multiple-browsers/
-[^constraints]: https://spec.torproject.org/path-spec/path-selection-constraints.html#universal-constraints
+[^constraints]: https://spec.torproject.org/path-spec/path-selection-constraints.html
 [^ad]: https://www.cs.utexas.edu/~shmat/shmat_esorics06.pdf
 [^wtfpad]: https://arxiv.org/abs/1512.00524
 [^front]: https://dl.acm.org/doi/pdf/10.5555/3489212.3489253
