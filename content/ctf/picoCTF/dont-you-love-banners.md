@@ -6,7 +6,7 @@ tags:
 date: 2024-12-17
 ---
 # Problem
-![[description.png]]
+![[media/ctf/picoCTF/dont-you-love-banners/description.png]]
 # Solution
 Per the problem description, there are two servers to investigate: one which leaks information and another which runs some application. The former sounds like a good place to start.
 ## Step 1: Leaky server
