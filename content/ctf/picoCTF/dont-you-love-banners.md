@@ -19,7 +19,7 @@ Connect to the target server using `nc tethys.picoctf.net <port>` (`51354` in my
 2. `What is the top cyber security conference in the world?`
 3. `the first hacker ever was known for phreaking(making free phone calls), who was it?`
 
-Answers to these questions are case and space insensitive, appearing as follows:
+Answers to the latter two questions are mostly case and space insensitive. Some examples are as follows:
 1. `My_Passw@rd_@1234` (the password from step 1)
 2. `DEF CON`, `Def Con`, `def con`, etc. (I've been watching many DEF CON talks recently so this was fresh on my mind!)
 3. `JOHN DRAPER`, `John Draper`, `john draper`, etc. (for this one I had to read some history of phreaking)
