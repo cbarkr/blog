@@ -18,15 +18,17 @@ This points us in the direction of a use after free (UAF) vulnerability. The int
 
 ![[mitre_uaf.png]]
 
-To check if a UAF is in play here, let's print the heap,
+Before exploiting the vulnerability, let's first demonstrate it. We first print the heap:
 
 ![[heap_init.png]]
 
-Now if we free `x` and print the heap again, we see that, although `x` itself does not exist, the memory location pointed to by `x->flag` is still occupied by the string `bico`!
+Then we free `x` and print `x->flag`. Notice that printing `x->flag` produces the same result as before. Why is that?
 
 ![[uaf.png]]
 
-So we have confirmed that `x->flag` is used after `x` is freed. If we can allocate memory at `x->flag`, we win. Let's now take a look at `chall.c` to see how we can do this.
+This is because `free` does not remove `x`'s data from the heap, but rather, marks that chunk of memory as available to re-allocate. `x->flag`, when used after `x` is freed, still references the same address and thus retrieves the same value as before. 
+
+The task is then very simple: allocate our own object that changes the value accessed by `x->flag`. Let's now take a look at `chall.c` to see how we can do this.
 ## `chall.c`
 Two of the most important portions of the source code are highlighted below. 
 ### `object`
@@ -44,19 +46,15 @@ typedef struct {
 object *x;  
 ```
 
-`object`'s members will be stored in contiguous memory addresses, resembling a memory layout like this:
+`object`'s members will be stored in contiguous memory addresses, so overflowing one will leak into the next. 
 
-`| char a[10] | char b[10] | char c[10] | char flag[5] |`
-
-Once we `free(x)`, we can simply allocate another (nearly) identical object containing the desired flag in place of the original. Then `x->flag` will point to the new flag.
-
-The payload thus contains 30 characters of junk data to pad past `a`, `b`, and `c`; for example:
+Once `x` is freed, `x->flag` can be changed into any four letter string (remember the null terminator! or don't) by simply allocating 30 characters of junk data to bypass `a`, `b`, and `c`, followed by the new value:
 
 ```
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<win>
 ```
 ### `check_win`
-Second, `check_win` leaks the win condition, indicating that the `<win>` value in our payload must be `pico`. 
+Second, `check_win` leaks the `<win>` condition.
 
 ```c  
 void check_win() {  
