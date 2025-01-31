@@ -37,10 +37,10 @@ First (and most notably), `x` is an instance of a `struct` named `object`.
 ```c
 // Create struct  
 typedef struct {  
- char a[10];  
- char b[10];  
- char c[10];  
- char flag[5];
+	char a[10];  
+	char b[10];  
+	char c[10];  
+	char flag[5];
 } object;  
 
 object *x;  
@@ -58,10 +58,11 @@ Second, `check_win` leaks the `<win>` condition.
 
 ```c  
 void check_win() {  
- if(!strcmp(x->flag, "pico")) {
-   printf("YOU WIN!!11!!\n");  
-
-   // ...
+	if(!strcmp(x->flag, "pico")) {
+		printf("YOU WIN!!11!!\n");  
+	   // ...
+	}
+	// ...
 }
 ```
 
@@ -72,7 +73,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAApico
 ```
 ## Win
 ![[win.png]]
-
-The flag is `picoCTF{now_thats_free_real_estate_f8fb9f96}`.
+## Flag
+`picoCTF{now_thats_free_real_estate_f8fb9f96}`
 
 ![[free_real_estate.png]]

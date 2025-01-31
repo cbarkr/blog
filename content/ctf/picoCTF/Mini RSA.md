@@ -1,5 +1,5 @@
 ---
-title: "picoCTF 2021: Mini RSa"
+title: "picoCTF 2021: Mini RSA"
 tags:
   - blog
   - ctf

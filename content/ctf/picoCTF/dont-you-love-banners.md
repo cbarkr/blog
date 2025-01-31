@@ -41,37 +41,37 @@ import pty
 incorrect_ans_reply = "Lol, good try, try again and good luck\n"  
   
 if __name__ == "__main__":  
-   try:  
-     with open("/home/player/banner", "r") as f:  
-       print(f.read())  
-   except:  
-     print("*********************************************")  
-     print("***************DEFAULT BANNER****************")  
-     print("*Please supply banner in /home/player/banner*")  
-     print("*********************************************")  
-  
+	try:  
+		with open("/home/player/banner", "r") as f:  
+			print(f.read())  
+	except:  
+		print("*********************************************")  
+		print("***************DEFAULT BANNER****************")  
+		print("*Please supply banner in /home/player/banner*")  
+		print("*********************************************")  
+
 try:  
-   request = input("what is the password? \n").upper()  
-   while request:  
-       if request == 'MY_PASSW@RD_@1234':  
-           text = input("What is the top cyber security conference in the world?\n").upper()  
-           if text == 'DEFCON' or text == 'DEF CON':  
-               output = input(  
-                   "the first hacker ever was known for phreaking(making free phone calls), who was it?\n").upper()  
-               if output == 'JOHN DRAPER' or output == 'JOHN THOMAS DRAPER' or output == 'JOHN' or output== 'DRAPER':  
-                   scmd = 'su - player'  
-                   pty.spawn(scmd.split(' '))  
-  
-               else:  
-                   print(incorrect_ans_reply)  
-           else:  
-               print(incorrect_ans_reply)  
-       else:  
-           print(incorrect_ans_reply)  
-           break  
-  
+	request = input("what is the password? \n").upper()  
+	while request:  
+		if request == 'MY_PASSW@RD_@1234':  
+			text = input("What is the top cyber security conference in the world?\n").upper()  
+			if text == 'DEFCON' or text == 'DEF CON':  
+				output = input(  
+					"the first hacker ever was known for phreaking(making free phone calls), who was it?\n").upper()  
+				if output == 'JOHN DRAPER' or output == 'JOHN THOMAS DRAPER' or output == 'JOHN' or output== 'DRAPER':  
+					scmd = 'su - player'  
+					pty.spawn(scmd.split(' '))  
+
+				else:  
+					print(incorrect_ans_reply)  
+			else:  
+				print(incorrect_ans_reply)  
+		else:  
+			print(incorrect_ans_reply)  
+			break  
+
 except:  
-   KeyboardInterrupt
+	KeyboardInterrupt
 ```
 ### `flag.txt`
 `flag.txt`, on the other hand, is what we are after. However, we are just a lowly `player` who can do nothing with the flag. Thus our task is to become `root`, the owner of `flag.txt`.
@@ -110,7 +110,9 @@ All that remains now is to retrieve the flag.
 ## Step 4: Find the flag in the `/root` dir
 ![[flag.png]]
 
-And there we have it! The flag is `picoCTF{b4nn3r_gr4bb1n9_su((3sfu11y_a0e119d4}`.
+And there we have it! 
+## Flag
+`picoCTF{b4nn3r_gr4bb1n9_su((3sfu11y_a0e119d4}`
 
 [^tldp]: https://tldp.org/LDP/lame/LAME/linux-admin-made-easy/shadow-file-formats.html
 [^linuxize]: https://linuxize.com/post/etc-shadow-file/
