@@ -19,7 +19,7 @@ This is true for the most part, with the caveat of simple padding schemes (e.g. 
 from gmpy2 import iroot  
   
   
-with open("miniRSA2021ciphertext", "r") as f:  
+with open("ciphertext", "r") as f:  
 	n, e, space, c = f.readlines()  
 	n = int(n[3:])  
 	e = int(e[3:])

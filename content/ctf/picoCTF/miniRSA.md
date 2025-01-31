@@ -21,7 +21,7 @@ Computing such a value requires high-precision arithmetic since $c$ is a massive
 from gmpy2 import iroot  
   
   
-with open("miniRSA2019ciphertext", "r") as f:  
+with open("ciphertext", "r") as f:  
 	space1, n, e, space2, c = f.readlines()  
 	n = int(n[3:])  
 	e = int(e[3:])  
