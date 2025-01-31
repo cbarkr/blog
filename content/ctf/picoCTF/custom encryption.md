@@ -88,8 +88,8 @@ Given these files, we (can) learn that
 1. `text_key` (used in `dynamic_xor_encrypt`) is "trudeau"
 2. `shared_key` (used in `encrypt`) can be leaked from `test`
 3. The only sources of randomness, `a` and `b` in `test`, are provided in `enc_flag`
-4. The encryption algorithm can be summarized as $C = (P \oplus key_{text} \times (key_{shared} \times 311))$
-5. The decryption algorithm is therefore $P = (C \div (key_{shared} \times 311) \oplus key_{text})$
+4. The encryption algorithm can be summarized as $c = (m \oplus key_{text} \times (key_{shared} \times 311))$
+5. The decryption algorithm is therefore $m = (c \div (key_{shared} \times 311) \oplus key_{text})$
 ## `custom_decryption.py`
 Based on the breakdown above, I adapted the provided encryption script to perform the decryption. As the parameters and ciphertext are static, I hardcoded them. The resulting script is provided in full below.
 
