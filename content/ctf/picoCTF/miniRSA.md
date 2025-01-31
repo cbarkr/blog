@@ -15,7 +15,7 @@ Here we have some ciphertext encrypted using (presumably) textbook RSA. It is im
 
 Textbook RSA is defined as follows: $c = RSA_{n, e}(m) \equiv m^e \pmod{n}$ where $n$ is the modulus, $e$ is the public key, and $m$ is the message. If $m^e \lt n$, then $c = m^e$ (i.e. the modulus doesn't work its magic) and $m$ can be recovered by computing the $e$th root of $c$ since $c^{\frac{1}{e}} =(m^e)^{\frac{1}{e}} = m$.
 
-Computing such a value requires high-precision arithmetic since $c$ is a massive integer. The Python module `gmpy2` is great for such circumstances, providing the `iroot` for computing the $n$th root of an integer without sacrificing precision. 
+Computing such a value requires high-precision arithmetic since $c$ is a massive integer. The Python module `gmpy2` is great for such circumstances, providing the `iroot` function for computing the $n$th root of an integer without truncation or rounding. 
 ## Script
 ```python
 from gmpy2 import iroot  

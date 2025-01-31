@@ -13,7 +13,7 @@ In my [[miniRSA|writeup]] for the 2019 edition of this question, I explained the
 ![[miniRSA#Background]]
 
 But this plaintext has been padded - didn't I say the attack only applies to unpadded RSA? 
-This is true for the most part, with the caveat of simple padding schemes (e.g. for $m$ slightly wider than $n^{\frac{1}{e}})$[^so]. Under such a padding scheme, we may enumerate different amounts of padding until we find the correct amount. 
+This is true for the most part, with the caveat of simple padding schemes (e.g. for $m$ slightly wider than $n^{\frac{1}{e}})[^so]$. Under such a padding scheme, we may enumerate different amounts of padding until we find the correct amount. 
 ## Script
 ```python
 from gmpy2 import iroot  
