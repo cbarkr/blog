@@ -3,6 +3,7 @@ title: "picoCTF 2021: Mini RSA"
 tags:
   - blog
   - ctf
+  - cryptography
 date: 2025-01-28
 ---
 # Problem

@@ -3,6 +3,7 @@ title: "picoCTF 2019: miniRSA"
 tags:
   - blog
   - ctf
+  - cryptography
 date: 2025-01-28
 ---
 # Problem
