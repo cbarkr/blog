@@ -17,8 +17,16 @@ APKs are basically just `zip` files under the hood, and can thus be unpacked as 
 ## Step 2: Find The Flag
 This is where the `Forensics` tag comes into play, testing one's `find`-ing and `grep`-ing abilities. I first tried searching by content (i.e. `picoCTF`) using `egrep . -r -e picoCTF`, but this yielded no results. A search for `txt` files using `find . -name *.txt` yielded a single result: `res/color/flag.txt` - this seems promising!
 ## Step 3: Convert The Flag
-`res/color/flag.txt` contains a hex string which seems a likely candidate for the flag. To confirm (and since we need the flag in ASCII), a conversion is in order. Either toss the string in CyberChef or open up a Python terminal like so:
+`res/color/flag.txt` contains a hex string which seems a likely candidate for the flag: 
+
+```
+7069636f4354467b6178386d433052553676655f4e5838356c346178386d436c5f37303364643965667d
+```
+
+To confirm (and since we need the flag in ASCII), a conversion is in order. Either toss the string into CyberChef or open up a Python terminal or choose whichever weapon you prefer. I prefer Python whenever possible so:
 
 ![[hex2ascii.png]]
 ## Flag
 `picoCTF{ax8mC0RU6ve_NX85l4ax8mCl_703dd9ef}`
+## Extra
+![[mob.jpg]]
