@@ -9,7 +9,7 @@ date: 2025-02-03
 ## Problem
 ![[description0.png]]
 ## Solution
-Given the APK, I first unpacked it and did some naive searching (as in [[Mob psycho]]) with no luck. I guess I should see what the app does first. After booting up an emulator, I installed the APK and launched the app. It asks but one simple question: "were else can output go?", the answer to which is "Logcat". 
+Given the APK, I first unpacked it and did some naive searching (as in [[Mob psycho]]) with no luck. I guess I should see what the app does first. After booting up an emulator, I installed the APK and launched the app. It asks but one simple question - "where else can output go?" - the answer to which is "Logcat". 
 
 ![[flag0.png]]
 
@@ -22,7 +22,7 @@ After inputting the answer and clicking the button, the flag is printed to Logca
 ## Problem
 ![[media/ctf/picoCTF/droids/description1.png]]
 ## Solution
-For this challenge, I thought I'd try out Android Studio's "Profile or debug APK" functionality. It turns out the APK was built with debugging enabled so all debug symbols were preserved. 
+For this challenge, I thought I'd try out Android Studio's "Profile or debug APK" functionality. It turns out the APK was built with debugging enabled so all debug symbols were preserved (the same is not true for the remaining APKs). 
 
 Taking a look at the strings, I noticed the following entry:
 
@@ -38,7 +38,7 @@ That looks interesting! Let's try it:
 ## Problem
 ![[media/ctf/picoCTF/droids/description2.png]]
 ## Solution 
-Given the APK `two.apk`, I first decoded it using `apktool d two.apk`, which produced a `two` directory. After poking around a bit, I found `FlagstaffHill.smali` located in `two/smali/com/hellocmu/picoctf` which seemed promising. Within it is a `getFlag` function that builds a string, presumably the password. I'll spare you the eyesore of the Smali code, and instead show you the equivalent Java code (from [decompiler.com](https://www.decompiler.com/) for convenience and formatted by hand for readability): 
+Given the APK `two.apk`, I first decoded it using `apktool d two.apk`, which produced a `two` directory. After poking around a bit, I found `FlagstaffHill.smali` located in `two/smali/com/hellocmu/picoctf` which seemed promising. Within it is a `getFlag` method that builds a string, presumably the password. I'll spare you the eyesore of the Smali code, and instead show you the equivalent Java code (from [decompiler.com](https://www.decompiler.com/) for convenience and formatted by hand for readability): 
 
 ```java
 public static String getFlag(String input, Context ctx) {
@@ -149,7 +149,7 @@ Line 19 in `getFlag` is of note:
 invoke-static {p0}, Lcom/hellocmu/picoctf/FlagstaffHill;->nope(Ljava/lang/String;)Ljava/lang/String;
 ```
 
-In this line, the `nope` method is invoked with the value in `p0` as a parameter, and its result is stored in register `v0`. By replacing `nope` with `yep`, `yep` will be invoked instead, thereby running the `cilantro` native, thus returning the flag. 
+In this line, the `nope` method is invoked with the value in `p0` as a parameter, and its result is stored in register `v0`. By replacing `nope` with `yep`, `yep` will be invoked instead, thereby running the `cilantro` native code, thus returning the flag. 
 
 ```smali
 invoke-static {p0}, Lcom/hellocmu/picoctf/FlagstaffHill;->yep(Ljava/lang/String;)Ljava/lang/String;

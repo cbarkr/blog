@@ -7,7 +7,7 @@ date: 2024-12-22
 ---
 # Picker 1
 ## Problem
-![[description1.png]]
+![[media/ctf/picoCTF/picker/description1.png]]
 ## Solution
 To get a sense of the task at hand, let's take a look at the source code.
 ### `picker-I.py`
@@ -57,7 +57,7 @@ print("".join([chr(int(o, 16)) for o in output.split()]))
 `picoCTF{4_d14m0nd_1n_7h3_r0ugh_6e04440d}`
 # Picker 2
 ## Problem
-![[description2.png]]
+![[media/ctf/picoCTF/picker/description2.png]]
 ## Solution
 In this problem, we are presented with a program nearly identical to the previous, with the exception of a filter which prevents us from simply entering "win". Yet we can still rely on a similar approach as last time. 
 ### `picker-II.py`
@@ -113,7 +113,7 @@ print(open('flag.txt', 'r').read().strip())
 `picoCTF{f1l73r5_f41l_c0d3_r3f4c70r_m1gh7_5ucc33d_95d44590}`
 # Picker 3
 ## Problem
-![[description3.png]]
+![[media/ctf/picoCTF/picker/description3.png]]
 ## Solution
 If you can't tell by now, there is a theme central to all of the Picker problems: trusting user-input that shouldn't be trusted. While this next problem is a bit longer, it's good to keep this theme in mind. 
 ### `picker-III.py`
@@ -331,7 +331,7 @@ print("".join([chr(int(o, 16)) for o in output.split()]))
 `picoCTF{7h15_15_wh47_w3_g37_w17h_u53r5_1n_ch4rg3_a186f9ac}`
 # Picker 4
 ## Problem
-![[description4.png]]
+![[media/ctf/picoCTF/picker/description4.png]]
 ## Solution
 Picker IV is the final entry in the series, and differs from its predecessors in language: it is written in C. While that in and of itself might be intimidating, the task itself is very simple, as we will see.
 ### `picker-IV.c`
