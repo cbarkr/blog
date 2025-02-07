@@ -1,0 +1,14 @@
+0. install apk on emulator using adb install zero.apk, answer the question on screen (answer is "logcat")
+1. decompile using `apktool d -r one.apk`, `navigate to one/smali/com/hellocmu/picoctf/FlagstaffHill.smali`, notice there's a `getFlag` function that uses the string var `password`. Put apk into android studio for debugging, check out string table, find password.
+2. decompile using the same method, navigate to same file, find that there's a series of concatenation operations that builds the string "dismass.ogg.weatherwax.aching.nitt.garlick"
+3. decompile using same method, change getFlag function to call `yep` instead of `nope`, rebuild, sign, install, and put in any bad input
+4. decompile again, notice that native lib not called like before -> we have to call it. a native function `cardamom` is defined -> this is what we need to call. steal the calling logic from three.apk:
+
+```smali
+invoke-static {p0}, Lcom/hellocmu/picoctf/FlagstaffHill;->cardamom(Ljava/lang/String;)Ljava/lang/String;
+move-result-object v5
+```
+
+and reverse engineer the string building stuff to get the string "alphabetsoup". rebuild and sign.
+
+
