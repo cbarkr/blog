@@ -56,7 +56,7 @@ However, the flag can be decrypted in parts, given this is ECB-mode AES.
 ## Background
 Electronic CodeBook (ECB) mode AES encrypts messages $m$ in blocks $m_i$ using a function $f$ keyed on key $k$ (herein notated as $f_k$). Each ciphertext block $c_i$ is thus computed like: $c_i = f_k(m_i)$. After all blocks have been encrypted, all $c_i$'s are concatenated to construct the resulting ciphertext $c$.
 
-![[Drawing 2025-02-09 20.02.29.excalidraw]]
+![[ecb_diagram.png]]
 ## Back to the show
 So now that we know how ECB mode works, we know that we can simply decrypt each block the join the resulting plaintext. Let's do that!
 ### Block 1
