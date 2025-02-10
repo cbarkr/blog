@@ -49,7 +49,7 @@ with open("chall.txt", "rb") as f:
 
 flag = "" 
 
-for idx, i in enumerate(c):  
+for i in c:  
 	binstring = bin(ord(i))[2:]  
 	
 	for j in range(len(binstring)):  
