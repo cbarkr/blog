@@ -48,7 +48,7 @@ For a message $m$, public exponent $e$, and modulus $n$, the ciphertext $c$ of $
 
 Given two ciphertexts $c_1, c_2$ such that $c_1 = m^{e_1} \mod{n}$ and $c_2 = m^{e_2} \mod{n}$ (i.e. same $m$, same $n$, different $e$), $m$ can be recovered from public information (i.e. $c_1, c_2, e_1, e_2, n$) if $gcd(e_1, e_2) = 1$ and $gcd(c_2, n) = 1$.
 
-If $gcd(e_1, e_2) = 1$, there exist integers $x$ and $y$ such that $e_1 \times x + e_2 \times y = 1$. To find $x$ and $y$, use the Extended Euclidean algorithm. That is,
+If $gcd(e_1, e_2) = 1$, there exist integers $x$ and $y$ such that $e_1 \times x + e_2 \times y = 1$ by [Bézout's identity](https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity). To find $x$ and $y$, use the [Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm). That is,
 - Solve for $x$: Ignore $y$ and invert $e_1$ under $\mod{e_2}$
 	1. Let $y = 1$
 	2. Then $e_1 \times x + e_2 \times y = e_1 \times x + e_2 = 1$
