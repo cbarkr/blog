@@ -3,7 +3,7 @@ title: "picoCTF 2024: packer"
 tags:
   - blog
   - ctf
-date: 2026-02-11
+date: 2025-02-11
 ---
 # Problem
 ![[media/ctf/picoCTF/packer/description.png]]
