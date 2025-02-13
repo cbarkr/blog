@@ -1,7 +1,6 @@
 ---
 title: "LA CTF 2025: big e"
 tags:
-  - blog
   - ctf
   - cryptography
 date: 2025-02-09

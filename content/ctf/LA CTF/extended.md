@@ -1,7 +1,6 @@
 ---
 title: "LA CTF 2025: extended"
 tags:
-  - blog
   - ctf
 date: 2025-02-09
 ---

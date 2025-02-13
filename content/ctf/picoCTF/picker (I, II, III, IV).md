@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: picker (I, II, III, IV)"
 tags:
-  - blog
   - ctf
 date: 2024-12-22
 ---

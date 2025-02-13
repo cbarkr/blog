@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: custom encryption"
 tags:
-  - blog
   - ctf
   - cryptography
 date: 2025-01-09

@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2019: john_pollard"
 tags:
-  - blog
   - ctf
   - cryptography
 date: 2025-02-01

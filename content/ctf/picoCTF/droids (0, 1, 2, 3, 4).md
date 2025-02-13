@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2019: droids (0, 1, 2, 3, 4)"
 tags:
-  - blog
   - ctf
 date: 2025-02-03
 ---

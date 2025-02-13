@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: heap 3"
 tags:
-  - blog
   - ctf
 date: 2024-12-20
 ---

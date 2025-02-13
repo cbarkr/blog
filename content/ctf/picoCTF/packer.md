@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: packer"
 tags:
-  - blog
   - ctf
 date: 2025-02-11
 ---

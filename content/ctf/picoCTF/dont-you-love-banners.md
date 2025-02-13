@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: dont-you-love-banners"
 tags:
-  - blog
   - ctf
 date: 2024-12-17
 ---

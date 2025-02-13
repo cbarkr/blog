@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: FactCheck"
 tags:
-  - blog
   - ctf
 date: 2025-02-12
 ---

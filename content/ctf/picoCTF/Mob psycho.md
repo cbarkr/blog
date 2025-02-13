@@ -1,7 +1,6 @@
 ---
 title: "picoCTF 2024: Mob psycho"
 tags:
-  - blog
   - ctf
 date: 2025-02-03
 ---
