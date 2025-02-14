@@ -107,7 +107,7 @@ Now we can login as `root`!
 
 All that remains now is to retrieve the flag.
 ## Step 4: Find the flag in the `/root` dir
-![[flag.png]]
+![[media/ctf/picoCTF/dont-you-love-banners/flag.png]]
 
 And there we have it! 
 ## Flag
