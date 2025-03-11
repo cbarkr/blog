@@ -111,9 +111,9 @@ De-anonymization is an obvious attack on an anonymization network.
 Per the construction above, key recovery means breaking Diffie-Hellman (and thus the discrete log problem), and meaningful inter-relay man-in-the-middle attacks require breaking secure cryptosystems; both of which are infeasible. Hence, most de-anonymization techniques focus on weaker links: the traffic before the entry and after the exit, or human error.
 ### 1. Traffic Correlation
 > If an attacker controls a circuit (i.e. controls both entry and exit on the same circuit), they can see both the source and destination of the message. 
-### Circuit Confirmation Attack
+#### Circuit Confirmation Attack
 Since the relays themselves will not know which circuits they are a part of, an attacker will first have to confirm that both the entry and exit node under their control are part of the same circuit. One way for them to do this is by perturbing packets at the entry in some predictable way, then observing the same pattern at the exit node. 
-### Correlating Traffic
+#### Correlating Traffic
 Once an attacker has confirmed their control over a circuit, they must correlate traffic entering the entry relay and exiting the exit relay. This can be achieved via timing attacks or traffic analysis.
 ### 2. Website Fingerprinting
 > A set of methods to uniquely identify destination websites based on metadata and/or patterns in communication traffic observed between the client and entry relay. Packet sequences, lengths, order, timing information, and other seemingly innocuous features can uniquely identify a site.
