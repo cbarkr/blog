@@ -62,7 +62,7 @@ if goal in repr(user_message):
    print(flag)
 ```
 ## Background
-ChaCha20-Poly1305 is an authenticated encryption algorithm[^rfc] which combines the ChaCha20 stream cipher with the Poly1305 [MAC](https://en.wikipedia.org/wiki/Message_authentication_code). The security for ChaCha20-Poly1305 relies on choosing a unique nonce for every message encrypted[^wiki], but note that in the above code, *both messages are encrypted using the same key and nonce*. And according to the RFC[^rfc4]:
+ChaCha20-Poly1305 is an authenticated encryption algorithm which combines the ChaCha20 stream cipher with the Poly1305 [MAC](https://en.wikipedia.org/wiki/Message_authentication_code). The security for ChaCha20-Poly1305 relies on choosing a unique nonce for every message encrypted[^wiki], but note that in the above code, *both messages are encrypted using the same key and nonce*. And according to the RFC[^rfc4]:
 
 ```
 If a nonce is repeated, then both the one-time Poly1305 key and the keystream are identical between the messages. This reveals the XOR of the plaintexts, because the XOR of the plaintexts is equal to the XOR of the ciphertexts.
