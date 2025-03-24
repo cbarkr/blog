@@ -15,17 +15,17 @@ The first thing I did was search the Internet for "stepic" as I had never heard/
 
 I tried some basic tools on this file: `strings`, `xxd`, `binwalk`, and `exiftool`. I found nothing. I consulted a few sites that list different image forensics tools [^1][^2][^3], and tried the following: 
 
-- `zsteg`: Stack level too deep error
+- `zsteg`: Crashes
 - `pngcheck`: Returns "OK"
-- `stegoveritas`: DOSed my machine lol
+- `stegoveritas`: Crashes
 - `openstego`: Crashes
 - `stegseek`: Crashes
 - `stegpy`: Outputs `ERROR! No encoded info found!`
-- `stegsolve`: Nothing
+- `stegsolve`: Finds nothing
 - `convert`: Crashes
 - `scalpel` Crashes
-- `foremost`: Finds nothing  
-- `xortool`: Found nothing  
+- `foremost`: Finds nothing
+- `xortool`: Finds nothing
 
 I wasted hours trying different things. I still didn't know what "stepic" even meant. I eventually tried searching on Google, and came across a really old pip package named [`stepic`](https://pypi.org/project/stepic/) with the description "Python image steganography". Are you fr?
 

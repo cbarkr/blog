@@ -2,6 +2,7 @@
 title: "picoCTF 2025: EVEN RSA CAN BE BROKEN???"
 tags:
   - ctf
+  - cryptography
 date: 2025-03-17
 ---
 # Problem

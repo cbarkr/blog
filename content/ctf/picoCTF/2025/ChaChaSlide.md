@@ -2,6 +2,7 @@
 title: "picoCTF 2025: ChaChaSlide"
 tags:
   - ctf
+  - cryptography
 date: 2025-03-17
 ---
 # Problem
@@ -75,7 +76,7 @@ But in order to do so, we'll have to first take a look at the algorithm itself[^
 
 Since the key $K$ and nonce $N$ are reused, the one-time key $(r,s)$ produced by `Poly1305_Key_Gen` and the keystream $ks$ produced by `ChaCha20` will be identical between ciphertexts. 
 
-$C = M \oplus ks$, so if we have $C_1, C_2$ both encrypted by the same $ks$, then $C_1 \oplus C_2 = (M_1 \oplus ks) \oplus (M_2 \oplus ks) = M_1 \oplus M_2$. But since, in this case, we know both $M_1$ and $M_2$, we can recover $ks$ (e.g. by computing $ks = M_1 \oplus C_1$) and subsequently forge a new $C_3 = M_3 \oplus ks$.
+$C = M \oplus ks$, so if we have $C_1, C_2$ both encrypted by the same $ks$, then $C_1 \oplus C_2 = (M_1 \oplus ks) \oplus (M_2 \oplus ks) = M_1 \oplus M_2$. But since, in this case, we know both $M_1$ and $M_2$, we can recover $ks$ (e.g. by computing $ks = M_1 \oplus C_1$) and subsequently encrypt a new message $M_3$ as $C_3 = M_3 \oplus ks$.
 
 As for the authentication tag $T$, there is no associated data (AD) here, so the input to Poly1305 is simply:
 
@@ -85,7 +86,7 @@ As for the authentication tag $T$, there is no associated data (AD) here, so the
 
 From the pairs $(T_1, C_1), (T_2, C_2)$ the one-time key $(r,s)$ can be recovered by finding the roots of the polynomial[^rfc2.5].
 
-With both $ks$ and $(r,s)$ in hand, a new $M_3$ can be used to produce a valid $T_3$ and $C_3$ by running Poly1305 on `C | pad(C) | len(C)` with $(r,s)$ and computing $M_3 \oplus ks$, respectively. 
+Thus, nonce and key reuse may allow an attacker to discover both $ks$ and $(r,s)$. From which, the attacker can encrypt a new message $M_3$ as $C_3 = M_3 \oplus ks$ and forge a tag $T_3$ by running Poly1305 on `C3 | pad(C3) | len(C3)` with $(r,s)$.
 ## Script
 In researching this problem, I came across the repository [AEAD-Nonce-Reuse-Attacks](https://github.com/tl2cents/AEAD-Nonce-Reuse-Atta) by [tl2cents](https://github.com/tl2cents) which implements this kind of message forgery already. I used [`chacha_poly1305_forgery.py`](https://github.com/tl2cents/AEAD-Nonce-Reuse-Attacks/blob/main/chacha-poly1305/chacha_poly1305_forgery.py) in my solution, so full credit goes to the original author!
 

@@ -2,6 +2,7 @@
 title: "picoCTF 2025: hashcrack"
 tags:
   - ctf
+  - cryptography
 date: 2025-03-17
 ---
 # Problem
