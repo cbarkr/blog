@@ -8,7 +8,7 @@ date: 2025-03-17
 
 [picoCTF 2025](https://www.picoctf.org/competitions/2025-spring.html) just wrapped up and I thought I'd make a writeup to document my experience. While I've been practising on picoCTF for a few months, this was my first time participating in a live event. I'd say it went pretty well! 
 # Recap
-I joined up with a friend of mine (who, fun fact, was the one who got me into CTFs a few months ago) to form the team "[New Team (1)](https://play.picoctf.org/teams/15596)". Together, we solved 30/41 challenges (after they removed one we had already completed) totalling to 4610/8510 points. 
+I joined up with a friend of mine (who, fun fact, was the one who got me into CTFs a few months ago) to form the team "[New Team (1)](https://play.picoctf.org/teams/15596)". Together, we solved 30/41 challenges (excluding one which was removed after we completed it) totalling to 4610/8510 points. 
 
 ![[team_progress1.png]]
 ![[team_progress2.png]]
@@ -56,9 +56,7 @@ Our team placed 402/10460 globally (in the top 4%). Given there were only two of
 # Reflection
 So what did I learn from this? 
 
-For one, I suck at binary exploitation. [[PIE TIME]] wasn't bad at all, neither was [[PIE TIME 2]] (though for some reason I didn't solve this during the competition period??? still not sure why that was), but I was unable to solve any other challenge in the category. I still have much to learn, so this is a skill I hope to develop for future events. 
+For one, I still have much to learn! Despite completing nearly every cybersecurity course offered to undergrads at SFU, practising CTFs, and working in a relevant field, I still find myself struggling with certain categories (such as binary exploitation). For instance, [[PIE TIME]] and [[PIE TIME 2]] were simple enough (though I didn't solve #2 during the competition period for some reason?? I'm not sure why), however I was unable to solve any other binary exploitation challenges. I like to learn, so this isn't a problem - it just takes time (but finding time is always the hardest part, isn't it?). I'd like to be as well-rounded as possible, ideally not constrained to specializing in a specific category, so I intend to focus on those challenges I struggle with most.
 
-For two, I still have much to learn! Despite completing nearly every cybersecurity course offered to undergrads at SFU, practising CTFs, and working in a relevant field, I still find myself struggling with certain categories (such as binary exploitation). I like to learn, so this isn't a problem - it just takes time (and finding time is always the hardest part, isn't it?). I'd like to be as well-rounded as possible, ideally not constrained to specializing in a specific category, so I intend on focusing on those challenges I struggle with most to fwhat I currently lack. 
-
-Lastly, teamwork makes the dream work. My teammate was able to solve a number of the challenges that made absolutely zero sense to me. Having a rubber ducky, second opinion, helping hand, etc. not only makes up for one's shortcomings, but also enhances their strengths. In future events, I'd like to join a strong team to learn from them and vice versa.
+For two, teamwork makes the dream work. My teammate was able to solve a number of the challenges that made absolutely zero sense to me. Having a rubber ducky, second opinion, helping hand, etc. not only makes up for one's shortcomings, but also enhances their strengths. In future events, I'd like to join a strong team to learn from them and vice versa.
 
