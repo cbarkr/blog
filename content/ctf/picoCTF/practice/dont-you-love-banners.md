@@ -29,7 +29,7 @@ After successfully answering all three questions, a shell is dropped for an unpr
 ## Step 3: Abuse the machine
 The problem description states the flag is in the `/root` directory, so let's take a quick look at what's in there:
 
-![[ls_root.png]]
+![[media/ctf/picoCTF/dont-you-love-banners/ls_root.png]]
 ### `script.py`
 `script.py` simply contains the script behind the endpoint, readable by all, but is useless at this point as we have already bypassed it to get a shell. It is nonetheless included below for the curious.
 

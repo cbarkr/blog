@@ -4,7 +4,7 @@ tags:
   - ctf
 date: 2025-02-09
 ---
-![[logo.png]]
+![[media/ctf/LA CTF/2025 Writeup/logo.png]]
 I recently participated in [LA CTF](https://lac.tf/) as a member of [defpwn](https://ctftime.org/team/316048), the CTF team for SFU's newly-formed cybersecurity club. This was the club's first event together and most of our team's first time encountering a CTF, hence we were all n00bs. Regardless, I think it was a good experience for everyone involved. 
 
 ![[event_details.png]]
