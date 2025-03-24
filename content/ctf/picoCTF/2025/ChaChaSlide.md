@@ -64,9 +64,8 @@ if goal in repr(user_message):
 ## Background
 ChaCha20-Poly1305 is an authenticated encryption algorithm which combines the ChaCha20 stream cipher with the Poly1305 [MAC](https://en.wikipedia.org/wiki/Message_authentication_code). The security for ChaCha20-Poly1305 relies on choosing a unique nonce for every message encrypted[^wiki], but note that in the above code, *both messages are encrypted using the same key and nonce*. And according to the RFC[^rfc4]:
 
-```
-If a nonce is repeated, then both the one-time Poly1305 key and the keystream are identical between the messages. This reveals the XOR of the plaintexts, because the XOR of the plaintexts is equal to the XOR of the ciphertexts.
-```
+> [!quote]
+> If a nonce is repeated, then both the one-time Poly1305 key and the keystream are identical between the messages. This reveals the XOR of the plaintexts, because the XOR of the plaintexts is equal to the XOR of the ciphertexts.
 
 Not only can the XOR of the plaintexts be revealed, but an attacker can also forge new messages using the same nonce[^se]. This is what we want to achieve. 
 
@@ -76,7 +75,7 @@ But in order to do so, we'll have to first take a look at the algorithm itself[^
 
 Since the key $K$ and nonce $N$ are reused, the one-time key $(r,s)$ produced by `Poly1305_Key_Gen` and the keystream $ks$ produced by `ChaCha20` will be identical between ciphertexts. 
 
-$C = M \oplus ks$, so if we have $C_1, C_2$ both encrypted by the same $ks$, then $C_1 \oplus C_2 = (M_1 \oplus ks) \oplus (M_2 \oplus ks) = M_1 \oplus M_2$. But since, in this case, we know both $M_1$ and $M_2$), we can recover $ks$ (e.g. by computing $ks = M_1 \oplus C_1$) and subsequently forge a new $C_3 = M_3 \oplus ks$.
+$C = M \oplus ks$, so if we have $C_1, C_2$ both encrypted by the same $ks$, then $C_1 \oplus C_2 = (M_1 \oplus ks) \oplus (M_2 \oplus ks) = M_1 \oplus M_2$. But since, in this case, we know both $M_1$ and $M_2$, we can recover $ks$ (e.g. by computing $ks = M_1 \oplus C_1$) and subsequently forge a new $C_3 = M_3 \oplus ks$.
 
 As for the authentication tag $T$, there is no associated data (AD) here, so the input to Poly1305 is simply:
 

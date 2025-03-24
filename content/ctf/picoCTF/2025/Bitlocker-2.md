@@ -33,7 +33,7 @@ To read files this way:
 1. Find the offset: `vol.py -f memdump.mem --profile=Win10x64_19041 filescan | grep -E -i -w <filename>` 
 2. Dump the data at that offset:`vol.py -f memdump.mem --profile=Win10x64_19041 dumpfiles <offset> -D ./dumps`
 
-Neither file was cached, thus this failed, but I include it as it might be useful in other situations. 
+Neither file was cached, hence this failed, but I include it as it might be useful in other situations. 
 
 At this point, I focused on Bitlocker plugins for Volatility 2. The REMnux VM comes pre-installed with *a* Bitlocker plugin, but despite extracting a few keys, none of them did the trick. I then tried [this](https://github.com/breppo/Volatility-BitLocker) plugin, which did! This plugin also has an option to outputs the key as a FVEK for `dislocker`. I ran it like so:
 

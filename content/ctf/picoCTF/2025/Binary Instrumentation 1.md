@@ -13,7 +13,7 @@ For this challenge, I started by setting up a new Windows VM. Windows thinks the
 
 Running the binary in the VM, we see that it prints some text then sleeps indefinitely, after which point it supposedly prints the flag. 
 
-I've recently gained some experience using Frida for Android instrumentation, so it was pretty simple to set up a script that hooks the `Sleep` call and terminates it immediately. Here's the script I used to do that:
+I've recently gained some experience using Frida for Android instrumentation, so it was pretty simple to set up a script that hooks the `Sleep` call and terminates it immediately. Here's the script I wrote for this:
 
 ```js
 var k32 = Module.findExportByName("kernel32.dll", "Sleep")  
@@ -26,7 +26,7 @@ if (k32) {
 }
 ```
 
-If we run the program with our Frida script, the flag should now be printed. Let's use `frida -f bininst1.exe -l hook.js` to do just that:
+To run the program as instrumented with our Frida script, we must use `frida -f bininst1.exe -l hook.js`:
 
 ![[frida.png]]
 

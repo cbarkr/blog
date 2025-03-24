@@ -13,7 +13,7 @@ Running `upx -d suspicious.exe -osusicious_unpacked.exe` outputs the unpacked bi
 
 ![[sus.png]]
 
-Rather than relying on this alone, it might be useful to look at [which Windows API calls are frequently used by malware](https://sensei-infosec.netlify.app/forensics/windows/api-calls/2020/04/29/win-api-calls-1.html). I constructed my rules based on this and the strings I found in each binary:
+(among others). While this might make for a rather unique signature, I decided a more complete ruleset ought to rely on other strings, including [which Windows API calls are frequently used by malware](https://sensei-infosec.netlify.app/forensics/windows/api-calls/2020/04/29/win-api-calls-1.html). 
 
 ```yara
 rule packed_YaraRules0x100 {  

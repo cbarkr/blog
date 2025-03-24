@@ -50,13 +50,12 @@ I contributed 25 solutions (3835 points) to our total with the following:
 > [!note] 
 > Simple challenges don't get writeups :P
 
-Our team placed 402/10460 globally (in the top 4%). Given there were only two of us on the team and its a busy time of year with school, I'm happy with the result!
+Our team placed 402/10460 globally (in the top 4%). Given there were only two of us and we were both busy with prior commitments (school, work, etc.), I'm happy with the result!
 
 ![[team_rank.png]]
 # Reflection
 So what did I learn from this? 
 
-For one, I still have much to learn! Despite completing nearly every cybersecurity course offered to undergrads at SFU, practising CTFs, and working in a relevant field, I still find myself struggling with certain categories (such as binary exploitation). For instance, [[PIE TIME]] and [[PIE TIME 2]] were simple enough (though I didn't solve #2 during the competition period for some reason?? I'm not sure why), however I was unable to solve any other binary exploitation challenges. I like to learn, so this isn't a problem - it just takes time (but finding time is always the hardest part, isn't it?). I'd like to be as well-rounded as possible, ideally not constrained to specializing in a specific category, so I intend to focus on those challenges I struggle with most.
+For one, that I still have much to learn! Despite completing nearly every cybersecurity course offered to undergrads at SFU, independent studying, practising CTFs, and working in a relevant field, I still find myself struggling with certain categories (such as binary exploitation). For instance, [[PIE TIME]] and [[PIE TIME 2]] were simple enough (though I didn't solve #2 during the competition period for some reason?? I'm not sure why. Anyways...), however I was unable to solve any other binary exploitation challenges. I like to learn, so this isn't a problem - it just takes time (and finding time is always the hardest part, isn't it?). I'd like to be as well-rounded as possible, ideally not constrained to specializing in a specific category, so I intend to focus on those challenges with which I struggle most.
 
-For two, teamwork makes the dream work. My teammate was able to solve a number of the challenges that made absolutely zero sense to me. Having a rubber ducky, second opinion, helping hand, etc. not only makes up for one's shortcomings, but also enhances their strengths. In future events, I'd like to join a strong team to learn from them and vice versa.
-
+For two, teamwork makes the dream work. My teammate was able to solve a number of challenges that baffled me. Having a rubber ducky, second opinion, helping hand, etc. not only makes up for one's shortcomings, but also enhances their strengths. In some cases, only by *discussing* potential solutions was I able to find the correct one. For future events, I'd like to learn from others and vice versa.
