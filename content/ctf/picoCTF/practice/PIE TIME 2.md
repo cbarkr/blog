@@ -33,7 +33,7 @@ So our input is written to `buffer` then printed in a bare `printf`. If our inpu
 
 Suppose we input the pointer format string, `%p`, what happens? Well, `%p` will be stored in `buffer`, then `printf(buffer)` will be evaluated as `printf("%p")` which prints the address of `buffer`. And if we input `%p %p`, `printf("%p %p")` will print the address of `buffer`, *followed by the address of the next item on the stack*. So if we keep adding `%p`, we can keep printing items on the stack. However, since there are canaries, we are limited to 64 characters. This isn't a problem considering we only need 5 (well, 6 if you consider the null-terminator).
 
-Let's throw `vuln` into GDB. When asked for my name, I'll give as many `%p`'s as I can: 
+Let's throw `vuln` into GDB. When asked for my name, I'll give a bunch of `%p`'s (25 to be exact): 
 
 ```
 %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p
@@ -43,11 +43,13 @@ This segfaults, but it doesn't really matter for now:
 
 ![[fuzzing_stack.png]]
 
-What we're really after is the stack register, `rsp`. Entering `x/25gx $rsp` will display the addresses of 25 items on the stack:
+What we're really after is the stack register, `rsp`. Entering `x/25gx $rsp` will display the first 25 items on the stack:
 
 ![[rsp.png]]
 
-`main` has to be in here somewhere, so I incrementally checked each value using `x/gx <address>`. Eventually, we find that the 25th item is main:
+Notice that many of the entries are some variation of `25` and `70`? These are our `%p`'s! In ASCII, `%` has the hex value `25`, while `p` has the hex value `70`. 
+
+What we're really after, however, is `main`. It has to be in here somewhere, so I incrementally checked each value using `x/gx <address>`. Eventually, we find that the 25th item is main:
 
 ![[main_address.png]]
 
