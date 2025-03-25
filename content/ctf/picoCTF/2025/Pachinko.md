@@ -190,5 +190,3 @@ Disassembly of section .data:
 ```
 
 The `program`, `nand_checker.bin`, seems to be computing a checksum to see if the input state matches some expected state. How this works, I'm not sure, honestly. 
-## Flag
-`picoCTF{p4ch1nk0_f146_0n3_e947b9d7}`

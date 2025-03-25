@@ -30,5 +30,3 @@ Updating our previous payload, we're left with the following:
 ```  
 
 This bypasses the blacklist and gets us the flag once more!
-## Flag
-`picoCTF{sst1_f1lt3r_byp4ss_7c3c6e7f}`

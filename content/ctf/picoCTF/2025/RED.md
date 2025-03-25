@@ -22,5 +22,3 @@ Putting together the capitalized letters spells "CHECK LSB". Least significant b
 ![[zsteg.png]]
 
 Decoding this yields the flag.
-## Flag
-`picoCTF{r3d_1s_th3_ult1m4t3_cur3_f0r_54dn355_}`

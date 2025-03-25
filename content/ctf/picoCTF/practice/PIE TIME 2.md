@@ -77,5 +77,3 @@ flag = p.recvline()
 print(flag.strip().decode("utf-8"))  
 p.close()
 ```
-## Flag
-`picoCTF{p13_5h0u1dn'7_134k_4f15e15f}`

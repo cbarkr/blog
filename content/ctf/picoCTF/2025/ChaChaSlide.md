@@ -132,8 +132,6 @@ for i in res:
   
        print(c3.hex() + t3.hex() + n1.hex())
 ```
-## Flag
-`picoCTF{7urn_17_84ck_n0w_de83e62c}`
 
 [^wiki]: https://en.wikipedia.org/wiki/ChaCha20-Poly1305#Security
 [^wikidiagram]: https://en.wikipedia.org/wiki/ChaCha20-Poly1305#/media/File:ChaCha20-Poly1305_Encryption.svg

@@ -56,7 +56,5 @@ if __name__ == "__main__":
        res = "picoCTF" + "{" + f"{q}" + "," + f"{p}" + "}"  
        print(res2)
 ```
-## Flag
-`picoCTF{73176001,67867967}`
 
 [^so]: https://stackoverflow.com/a/4079137

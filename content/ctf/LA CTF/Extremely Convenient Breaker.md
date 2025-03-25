@@ -66,5 +66,3 @@ To retrieve the first block, I altered the last value (i.e. `f` -> `e`) then dec
 The same goes for the second block, but the other way around.
 
 ![[oracle4.png]]
-## Flag
-`lactf{seems_it_was_extremely_convenient_to_get_the_flag_too_heh}`

@@ -56,8 +56,6 @@ sudo mount -t ntfs-3g /mnt/dislocker/dislocker-file /mnt/decrypted
 ```
 
 Just as before, when we `ls /mnt/decrypted`, we  find `flag.txt`.
-## Flag
-`picoCTF{B1tl0ck3r_dr1v3_d3crypt3d_9029ae5b}`
 
 [^dumpcache]: https://github.com/volatilityfoundation/volatility/issues/704
 [^ntfs-3g]: https://askubuntu.com/a/501035

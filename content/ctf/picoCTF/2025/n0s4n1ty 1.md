@@ -63,5 +63,3 @@ If we run `sudo ls /root`, we see a `flag.txt`:
 Then `sudo cat /root/flag.txt`:
 
 ![[webshell_cat_flag.png]]
-## Flag
-`picoCTF{wh47_c4n_u_d0_wPHP_5f3c22c0}`

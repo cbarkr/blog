@@ -64,5 +64,3 @@ se' />" ascii
                all of ($sec*)  
 }
 ```
-## Flag
-`picoCTF{yara_rul35_r0ckzzz_fd0e89c7}`

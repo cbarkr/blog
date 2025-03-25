@@ -88,5 +88,3 @@ def main():
 if __name__ == "__main__":  
        main()
 ```
-## Flag
-`picoCTF{tw0_1$_pr!m33486c703}`

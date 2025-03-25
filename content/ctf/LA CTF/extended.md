@@ -60,5 +60,3 @@ for i in c:
 
 print(flag)
 ```
-## Flag
-`lactf{Funnily_Enough_This_Looks_Different_On_Mac_And_Windows}`

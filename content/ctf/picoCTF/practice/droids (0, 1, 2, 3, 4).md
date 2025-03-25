@@ -15,8 +15,6 @@ Given the APK, I first unpacked it and did some naive searching (as in [[Mob psy
 After inputting the answer and clicking the button, the flag is printed to Logcat.
 
 ![[droid0log.png]]
-### Flag
-`picoCTF{a.moose.once.bit.my.sister}`
 # droids1
 ## Problem
 ![[media/ctf/picoCTF/droids/description1.png]]
@@ -31,8 +29,6 @@ Taking a look at the strings, I noticed the following entry:
 That looks interesting! Let's try it: 
 
 ![[flag1.png]]
-### Flag
-`picoCTF{pining.for.the.fjords}`
 # droids2
 ## Problem
 ![[media/ctf/picoCTF/droids/description2.png]]
@@ -95,8 +91,6 @@ public class TwoSol {
 Running `java TwoSol.java` outputs `dismass.ogg.weatherwax.aching.nitt.garlick`, which, if input into the app, gets the flag!
 
 ![[flag2.png]]
-### Flag
-`picoCTF{what.is.your.favourite.colour}`
 # droids3
 ## Problem
 ![[media/ctf/picoCTF/droids/description3.png]]
@@ -173,8 +167,6 @@ true three/dist/three.apk
 Installing the modified app on the emulator, any input will be accepted and print the flag.
 
 ![[flag3.png]]
-### Flag
-`picoCTF{tis.but.a.scratch}`
 # droids4
 ## Problem
 ![[media/ctf/picoCTF/droids/description4.png]]
@@ -319,5 +311,3 @@ public class FourSol {
 This outputs `alphabetsoup`. Checking with our new APK, we see:
 
 ![[flag4.png]]
-### Flag
-`picoCTF{not.particularly.silly}`

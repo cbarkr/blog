@@ -332,8 +332,6 @@ result = [a ^ b for a,b in zip(input_list, key_list)]
 result_text = ''.join(map(chr, result))  
 print(result_text)
 ```
-## Flag
-`picoCTF{N0t_sO_coNfus1ng_sn@ke_30a13a97}`
 
 [^os]: https://opensource.com/article/18/4/introduction-python-bytecode
 [^so]: https://stackoverflow.com/a/19560286

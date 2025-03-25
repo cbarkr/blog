@@ -143,5 +143,3 @@ Plugging these into `chall.py` (running locally), we find:
 Bingo! And on the deployed RSAaaS:
 
 ![[media/ctf/LA CTF/RSAaaS/flag.png]]
-## Flag
-`lactf{actually_though_whens_the_last_time_someone_checked_for_that}`

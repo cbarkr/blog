@@ -25,7 +25,5 @@ This is where the `Forensics` tag comes into play, testing one's `find`-ing and 
 To confirm (and since we need the flag in ASCII), a conversion is in order. Either toss the string into CyberChef or open up a Python terminal or choose whichever weapon you prefer. I prefer Python whenever possible so:
 
 ![[hex2ascii.png]]
-## Flag
-`picoCTF{ax8mC0RU6ve_NX85l4ax8mCl_703dd9ef}`
 ## Extra
 ![[mob.jpg]]

@@ -30,5 +30,3 @@ The following payload outputs the flag at `/flag.txt`:
 ```python
 open(chr(47) + "flag" + "." + "txt").read()
 ```
-## Flag
-`picoCTF{D0nt_Use_Unsecure_f@nctions68288869}`

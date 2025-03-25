@@ -45,5 +45,3 @@ hashcat -m 1400 -a 0 ciphertext3 /usr/share/wordlists/rockyou.txt
 ```
 
 And similarly, we find `916e8c4f79b25028c9e467f1eb8eee6d6bbdff965f9928310ad30a8d88697745:qwerty098`. After submitting `qwerty098`, we are given the flag.
-## Flag
-`picoCTF{UseStr0nG_h@shEs_&PaSswDs!_70ffa57c}`

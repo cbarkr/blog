@@ -34,7 +34,5 @@ for i in range(4096):
 		print(padded.to_bytes(256, "big").decode("utf-8").strip("\x00").strip())
 		break
 ```
-## Flag
-`picoCTF{e_sh0u1d_b3_lArg3r_60ef2420}`
 
 [^so]: https://crypto.stackexchange.com/questions/6770/cracking-an-rsa-with-no-padding-and-very-small-e/6771#6771

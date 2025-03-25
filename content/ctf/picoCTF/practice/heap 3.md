@@ -72,7 +72,3 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAApico
 ```
 ## Win
 ![[win.png]]
-## Flag
-`picoCTF{now_thats_free_real_estate_f8fb9f96}`
-
-![[free_real_estate.png]]

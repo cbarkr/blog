@@ -18,15 +18,7 @@ After loading the log file in Event Viewer, I searched for the *eventID*s associ
 Filtering the event logs on each of these eventIDs, we find each part of the flag.
 ## 1. Install (eventID = 1033)
 ![[part1.png]]
-
-`cGljb0NURntFdjNudF92aTN3djNyXw==` -> `picoCTF{Ev3nt_vi3wv3r_`
 ## 2. Registry Change (eventID = 4657)
 ![[part2.png]]
-
-`MXNfYV9wcjN0dHlfdXMzZnVsXw==` -> `1s_a_pr3tty_us3ful_`
 ## 3. Shutdown (eventID = 1077)
 ![[part3.png]]
-
-`dDAwbF84MWJhM2ZlOX0=` -> `t00l_81ba3fe9}`
-## Flag
-`picoCTF{Ev3nt_vi3wv3r_1s_a_pr3tty_us3ful_t00l_81ba3fe9}`

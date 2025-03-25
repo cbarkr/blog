@@ -20,5 +20,3 @@ Opening Binary Ninja once again, this time with `out-unpacked`, I returned to th
 The full string is: `Password correct, please see flag: 7069636f4354467b5539585f556e5034636b314e365f42316e34526933535f33373161613966667d`.
 
 Converting the hex to ASCII yields the flag.
-## Flag
-`picoCTF{U9X_UnP4ck1N6_B1n4Ri3S_371aa9ff}`

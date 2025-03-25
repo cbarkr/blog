@@ -183,5 +183,3 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-## Flag
-`picoCTF{block_3SRhViRbT1qcX_XUjM0r49cH_qCzmJZzBK_60647fbb}`

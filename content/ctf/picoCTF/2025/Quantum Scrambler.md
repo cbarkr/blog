@@ -97,5 +97,3 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-## Flag
-`picoCTF{python_is_weirdfa7b4a1e}`

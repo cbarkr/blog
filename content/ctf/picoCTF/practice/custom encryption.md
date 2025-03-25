@@ -188,5 +188,3 @@ if __name__ == "__main__":
     # 4. Output the flag
     print(plaintext)
 ```
-## Flag
-`picoCTF{custom_d2cr0pt6d_751a22dc}`

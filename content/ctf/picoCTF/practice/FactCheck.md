@@ -35,5 +35,3 @@ Then ran the debugger and inspected the register values at this point:
 ![[register_hint.png]]
 
 The "hint" is less of a hint, more of a giveaway!
-## Flag
-`picoCTF{wELF_d0N3_mate_93a9cb95}`

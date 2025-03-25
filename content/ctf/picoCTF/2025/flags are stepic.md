@@ -32,8 +32,6 @@ I wasted hours trying different things. I still didn't know what "stepic" even m
 Running `stepic -d -i upz.png` spits out the flag. 
 
 I suppose this is the nature of forensics - scarcely glamorous, often tedious - yet, I can't help but feel this problem was a bit cheap.
-## Flag
-`picoCTF{fl4g_h45_fl4g51d83cb1}`
 
 [^1]: https://lydia-england.github.io/ncl-tools/tools/forensics-tools.html#Forensics  
 [^2]: https://0xrick.github.io/lists/stego/  

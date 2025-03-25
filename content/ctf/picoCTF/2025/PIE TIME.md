@@ -93,7 +93,5 @@ flag = p.recvline()
 print(flag.strip().decode("utf-8"))  
 p.close()
 ```
-## Flag
-`picoCTF{b4s1c_p051t10n_1nd3p3nd3nc3_93dd5fcb}`
 
 [^wiki]: https://en.m.wikipedia.org/wiki/Position-independent_code

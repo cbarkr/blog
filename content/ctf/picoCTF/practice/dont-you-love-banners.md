@@ -110,8 +110,6 @@ All that remains now is to retrieve the flag.
 ![[media/ctf/picoCTF/dont-you-love-banners/flag.png]]
 
 And there we have it! 
-## Flag
-`picoCTF{b4nn3r_gr4bb1n9_su((3sfu11y_a0e119d4}`
 
 [^tldp]: https://tldp.org/LDP/lame/LAME/linux-admin-made-easy/shadow-file-formats.html
 [^linuxize]: https://linuxize.com/post/etc-shadow-file/

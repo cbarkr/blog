@@ -34,5 +34,3 @@ sudo mount -o loop /mnt/dislocker/dislocker-file /mnt/decrypted/
 > The lack of space between `-u` and the password is not a typo!
 
 At this point, the disk is mounted, and we can `ls /mnt/decrypted` to  find `flag.txt`.
-## Flag
-`picoCTF{us3_b3tt3r_p4ssw0rd5_pl5!_3242adb1}`

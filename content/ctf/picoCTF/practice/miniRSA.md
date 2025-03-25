@@ -32,5 +32,3 @@ m, is_exact = iroot(c, e)
 if is_exact and pow(m, e, n) == c:  
 	print(m.to_bytes(256, "big").decode("utf-8").strip("\x00").strip())
 ```
-## Flag
-`picoCTF{n33d_a_lArg3r_e_606ce004}`

@@ -31,5 +31,3 @@ To run the program as instrumented with our Frida script, we must use `frida -f 
 ![[frida.png]]
 
 Now we have the flag in base64, which we simply decode to get the plaintext flag.
-## Flag
-`picoCTF{w4ke_m3_up_w1th_fr1da_f27acc38}`

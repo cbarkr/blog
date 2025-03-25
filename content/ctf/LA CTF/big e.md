@@ -87,5 +87,3 @@ if (gcd(e_1, e_2) == 1 and gcd(ct_2, n) == 1):
 	
 	print(m_str)
 ```
-## Flag
-`lactf{b1g_3_but_sm4ll_d!!!_part2_since_i_trolled}`
