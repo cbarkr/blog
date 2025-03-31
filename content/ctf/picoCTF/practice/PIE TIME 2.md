@@ -31,7 +31,7 @@ void call_functions() {
 
 So our input is written to `buffer` then printed in a bare `printf`. If our input contains a format string, it will be evaluated by `printf`. This is a format string vulnerability! 
 
-Suppose we input the pointer format string, `%p`, what happens? Well, `%p` will be stored in `buffer`, then `printf(buffer)` will be evaluated as `printf("%p")` which prints the address of `buffer`. And if we input `%p %p`, `printf("%p %p")` will print the address of `buffer`, *followed by the address of the next item on the stack*. So if we keep adding `%p`, we can keep printing items on the stack. However, since there are canaries, we are limited to 64 characters. This isn't a problem considering we only need 5 (well, 6 if you consider the null-terminator).
+Suppose we input the pointer format string, `%p`, what happens? Well, `%p` will be stored in `buffer`, then `printf(buffer)` will be evaluated as `printf("%p")` which prints the address of `buffer`. And if we input `%p %p`, `printf("%p %p")` will print the address of `buffer`, *followed by the address of the next item on the stack*. So if we keep adding `%p`, we can keep printing items on the stack.
 
 Let's throw `vuln` into GDB. When asked for my name, I'll give a bunch of `%p`'s (25 to be exact): 
 
