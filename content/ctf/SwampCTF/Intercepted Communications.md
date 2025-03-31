@@ -47,7 +47,7 @@ with open("Captured_comms/M1/decrypted.txt", "r") as f:
 print(c.to_bytes(len(str(c)), "big").strip(b"\x00"))
 ```
 
-Since the encryption scheme is hinted-at being a one-time pad, we expect that $C = M \oplus K$, where $C$ is the ciphertext, $M$ is the message, and $K$ is the key. If there truly is a two-time pad among these message-ciphertext pairs, then there exists some $K_{ttp}$ such that $C_i = M_i \oplus K_{ttp}$ and $C_j = M_j \oplus K_{ttp}$, which means that given either ($C_i, M_i$) or ($C_j, M_j$), we can get $K_{ttp}$ by computing $K_{ttp} = C_k \oplus M_k$ where $k \in \set{i,j}$.
+Since the encryption scheme is hinted-at being a one-time pad, we expect that $C = M \oplus K$, where $C$ is the ciphertext, $M$ is the message, and $K$ is the key. If there truly is a two-time pad among these message-ciphertext pairs, then there exists some $K_{ttp}$ such that $C_i = M_i \oplus K_{ttp}$ and $C_j = M_j \oplus K_{ttp}$, which means that given either ($C_i, M_i$) or ($C_j, M_j$), we can get $K_{ttp}$ by computing $K_{ttp} = C_k \oplus M_k$ where $k \in \set{i,j}$, and therefore $M_{\lnot k} = C_{\lnot k} \oplus K_{ttp}$.
 
 To achieve this, I computed the keys of each given message-ciphertext pair, then decrypted the `Important_Message_Captured` using each of these keys to see if a coherent message can be uncovered. I wrote the following script to do so:
 
