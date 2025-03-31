@@ -9,7 +9,7 @@ date: 2025-03-30
 # Solution
 Taking a look at the PCAP, there appear to be a TON of SMB2 packets. Knowing nothing about SMB2 or NTLM, I just clicked around until I noticed the "NTLM Secure Service Provider" field. Based on the context and some quick reading, it became apparent that this is the protocol with which we are concerned. 
 
-Reviewing Wireshark's [SMB2](https://wiki.wireshark.org/SMB2) docs, I found the [SessionSetup](https://wiki.wireshark.org/SMB2/SessionSetup) command with opcode `0x01` which is used to authenticate a user. But since the attacker is bruteforcing a login, there will be many SessionSetup commands issued. To filter on *successful* logins, the `NT_Status` field must have value `0x00000000`. All together, the Wireshark filter for this is `smb2 and smb2.cmd == 0x01 and smb2.nt_status == 0`. Applying this filter yields only a single result:
+Reviewing Wireshark's [SMB2](https://wiki.wireshark.org/SMB2) docs, I found the [SessionSetup](https://wiki.wireshark.org/SMB2/SessionSetup) command with opcode `0x01` which is used to authenticate a user. But since the attacker is bruteforcing a login, there will be many SessionSetup commands issued. To filter on *successful* logins, the `NT_Status` field must have value `0x00000000` per the [docs](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55). All together, the Wireshark filter for this is `smb2 and smb2.cmd == 0x01 and smb2.nt_status == 0`. Applying this filter yields only a single result:
 
 ![[media/ctf/SwampCTF/Preferential Treatment/pcap.png]]
 

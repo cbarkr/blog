@@ -15,7 +15,7 @@ Copy-pasting the hex into [Cyberchef](https://cyberchef.org/) for readability, I
 
 ![[decoded.png]]
 
-Decoding `cpassword` from base64 didn't yield any readable text, so I did some quick research. I discovered this [post](https://pentestlab.blog/tag/cpassword/), which informs me this XML is associated with Group Policy Preferences and that `cpassword` is encrypted using AES. This might have been a problem, had it not been for the fact that Microsoft has [published the key](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be?redirectedfrom=MSDN). 
+Decoding `cpassword` from base64 didn't yield any readable text, so I did some quick research. I discovered this [post](https://pentestlab.blog/tag/cpassword/), which informs me this XML is associated with Group Policy Preferences and that `cpassword` is encrypted using AES. This might have been a problem, had it not been for the fact that Microsoft has [published the key](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be). 
 
 With this information, we can now decrypt the `cpassword`! I wrote the following script to do so:
 
@@ -23,7 +23,7 @@ With this information, we can now decrypt the `cpassword`! I wrote the following
 import base64
 from Crypto.Cipher import AES
 
-# REF: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be?redirectedfrom=MSDN
+# REF: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be
 key_hex = "4e9906e8fcb66cc9faf49310620ffee8f496e806cc057990209b09a433b66c1b"
 key_bytes = bytes.fromhex(key_hex)
 

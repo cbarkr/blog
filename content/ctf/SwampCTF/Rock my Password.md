@@ -17,7 +17,7 @@ That's right! We cannot *undo* the hashing, but we can recompute it. The authors
 2. The password is in RockYou and is 10 characters long
 3. The entire flag is hashed, not just the password
 
-I started by putting the hashed password into a file named `enc_flag`. I then wrote a Python script which filters the RockYou wordlist by length (i.e. leaving only passwords of length 10), and repeatedly recomputes the hash in the same fashion that the author describes until the given tag is found. This script is as follows:
+I started by putting the hashed password into a file named `enc_flag`. I then wrote a Python script which filters the RockYou wordlist by length (i.e. leaving only passwords of length 10), then computes the hash as described until the given tag is found. This script is as follows:
 
 ```python
 from hashlib import md5, sha256, sha512  

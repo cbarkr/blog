@@ -6,7 +6,7 @@ date: 2025-03-30
 ---
 ![[media/ctf/SwampCTF/2025 Writeup/logo.png]]
 
-Members of [defpwn](https://ctf.swampctf.com/teams/6) met once again to participate in [Swamp CTF](https://ctf.swampctf.com/), a CTF competition held by the [University of Florida's Student Information Security Team](https://ufsit.club/). Lasting only 48 hours, the 36 challenges not only tested our ability but our agility too. 
+Members of [defpwn](https://ctf.swampctf.com/teams/6) met once again to participate in [Swamp CTF](https://ctf.swampctf.com/), a CTF competition held by the [University of Florida's Student Information Security Team](https://ufsit.club/). Lasting only 48 hours, the 36 challenges not only tested our ability, but also our agility. 
 
 ![[runtime.png]]
 
