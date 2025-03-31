@@ -7,13 +7,13 @@ date: 2025-03-30
 # Problem
 ![[media/ctf/SwampCTF/MuddyWater/description.png]]
 # Solution
-Taking a look at the PCAP, there appear to be a TON of SMB2 packets. Knowing nothing about SMB2 or NTLM, I just clicked around until I noticed the "NTLM Secure Service Provider" field. Based on the context and some quick reading, it became apparent that this is the protocol with which we are concerned. 
+Taking a look at the PCAP, there appear to be many SMB2 packets. Knowing nothing about SMB2 or NTLM, I clicked around until I noticed the "NTLM Secure Service Provider" field.
 
-Reviewing Wireshark's [SMB2](https://wiki.wireshark.org/SMB2) docs, I found the [SessionSetup](https://wiki.wireshark.org/SMB2/SessionSetup) command with opcode `0x01` which is used to authenticate a user. But since the attacker is bruteforcing a login, there will be many SessionSetup commands issued. To filter on *successful* logins, the `NT_Status` field must have value `0x00000000` per the [docs](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55). All together, the Wireshark filter for this is `smb2 and smb2.cmd == 0x01 and smb2.nt_status == 0`. Applying this filter yields only a single result:
+To find the username and subsequently the password, we must first identify the successful login. Reviewing Wireshark's [SMB2](https://wiki.wireshark.org/SMB2) docs, I found that users are authenticated using the [SessionSetup](https://wiki.wireshark.org/SMB2/SessionSetup) command (opcode `0x01`). As the attacker is bruteforcing a login, the PCAP will be flooded with these, so we must identify a *successful* attempt of the command. The [`NT_Status`](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) field with value `0x00000000` indicates successful operations. Thus, to find the successful login, we combine the two conditions to create the following Wireshark filter: `smb2.cmd == 0x01 and smb2.nt_status == 0`. Applying the filter yields only a single result:
 
-![[media/ctf/SwampCTF/Preferential Treatment/pcap.png]]
+![[media/ctf/SwampCTF/MuddyWater/pcap.png]]
 
-Inspecting the packet, we see that the username is `hackbackzip`. We need more information, however, so we can follow the TCP stream to uncover the whole process:
+To uncover the whole story, let's follow the TCP stream:
 
 ![[stream.png]]
 
