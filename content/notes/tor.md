@@ -1,5 +1,5 @@
 ---
-title: tor
+title: Tor
 tags:
   - notes
   - cryptography
