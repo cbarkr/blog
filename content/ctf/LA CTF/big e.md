@@ -43,27 +43,9 @@ print("n = ", n)
 
 Notice that `pt` (i.e. the flag) is encrypted twice, each time with a different public exponent (i.e. big `e`), but both times using the *same modulus* (i.e. `n`). Those big `e`'s won't do much to defend against a *common modulus attack*!
 ## Background
-For a message $m$, public exponent $e$, and modulus $n$, the ciphertext $c$ of $m$ using RSA is $c = m^{e} \mod{n}$.
+The common modulus attack works like so:
 
-Given two ciphertexts $c_1, c_2$ such that $c_1 = m^{e_1} \mod{n}$ and $c_2 = m^{e_2} \mod{n}$ (i.e. same $m$, same $n$, different $e$), $m$ can be recovered from public information (i.e. $c_1, c_2, e_1, e_2, n$) if $gcd(e_1, e_2) = 1$ and $gcd(c_2, n) = 1$.
-
-If $gcd(e_1, e_2) = 1$, there exist integers $x$ and $y$ such that $e_1 \times x + e_2 \times y = 1$ by [Bézout's identity](https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity). To find $x$ and $y$, use the [Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm). That is,
-- Solve for $x$: Ignore $y$ and invert $e_1$ under $\mod{e_2}$
-	1. Let $y = 1$
-	2. Then $e_1 \times x + e_2 \times y = e_1 \times x + e_2 = 1$
-	3. $x = e_1^{-1} \mod{e_2}$ since $gcd(e_1, e_2) = 1$ (i.e. $e_1$ is invertible under $e_2$)
-- Solve for $y$: Since $e_1$, $e_2$, and $x$ are known, reorder
-	1. $e_1 \times x + e_2 \times y = 1$
-	2. $e_2 \times y = 1-e_1 \times x$
-	3. $y = \frac{1-e_1 \times x}{e_2}$
-
-With $x$ and $y$, $m$ is recovered like so:
-
-> $c_1^{x} \times c_2^{y} \mod{n} = (m^{e_1})^{x} \times (m^{e_2})^{y} = m^{e_1x} \times m^{e_2y} \mod{n} = m^{e_1x + e_2y} \mod{n} = m^1 \mod{n} = m \mod{n}$
-
-But $y$ will be negative (since $e_1 \times x \gt 1$), in which case we need $c_2^{-1} \mod{n}$. $c_2$ is invertible if $gcd(c_2, n) = 1$, hence the second condition.
-
-To recover $m$, therefore, we must now compute $c_1^{x} \times (c_2^{-1})^{y} \mod{n}$.
+![[rsa#4. Common Modulus]]
 ## Script
 ```python
 ct_1 = 7003427993343973209633604223157797389179484683813683779456722118278438552981580821629201099609635249903171901413187274301782131604125932440261436398792561279923201353644665062240232628983398769617870021735462687213315384230009597811708620803976743966567909514341685037497925118142192131350408768935124431331080433697691313467918865993755818981120044023483948250730200785386337033076398494691789842346973681951019033860698847693411061368646250415931744527789768875833220281187219666909459057523372182679170829387933194504283746668835390769531217602348382915358689492117524129757929202594190396696326156951763154356777  

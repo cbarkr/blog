@@ -10,7 +10,7 @@ date: 2025-04-21
 > Integers $a$ and $b$ are said to be coprime if $gcd(a, b) = 1$
 ## Fermat’s Little Theorem
 > Suppose $p$ is prime and $a$ is any integer
-> Then $a^p \equiv a \pmod{p}$
+> Then $a^p \equiv a \pmod{p}$
 ## Euler's Totient Function
 > Let $\varphi(n)$ equal the number of positive integers less than n that are coprime to n
 > Suppose $n = pq$ for some primes $p$ and $q$
@@ -63,7 +63,7 @@ Second, given $x$ and $y$, she recovers $m$ like so:
 
 However, as $y$ will be negative (given $e_1x \gt 1$ and $y$'s numerator computes $1-e_1x$), it will have to be applied to $c_2$'s inverse, $c_2^{-1}$.
 
-Thus, to recover $m$, Eve computes $c_1^x \cdot (c_2^{-1})^y \mod{n}$.
+Thus, to recover $m$, Eve computes $c_1^x \cdot (c_2^{-1})^y \mod{n}$ using public information.
 ## 5. Chosen Ciphertext Attack
 Let $Enc(m)$ denote $c = m^e \pmod{n}$ for illustrative purposes. 
 

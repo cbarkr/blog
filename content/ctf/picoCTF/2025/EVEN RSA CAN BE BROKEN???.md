@@ -45,7 +45,9 @@ if __name__ == "__main__":
    exit()
 ```
 
-Nothing particularly stands out here, except perhaps this custom `get_primes` function. If we compare $n$ across multiple requests, we learn that they share a factor! Factoring $n = pq$ given $n$ is hard, but if $n_1$ and $n_2$ share a factor, then factoring $n_1$ and $n_2$ is easy since $\gcd(n_1, n_2) = p_1$ and $q_1 = \lfloor\frac{n_1}{p_1}\rfloor$ (likewise for $p_2, q_2$). With $p$ and $q$, we can compute $d$, and therefore decrypt the flag.
+Nothing particularly stands out here, except perhaps this custom `get_primes` function. If we compare $n$ across multiple requests, we learn that they share a factor! The attack works like so:
+
+![[rsa#2. Non-Coprime Moduli]]
 ## Script
 ```python
 from pwn import *  
