@@ -11,9 +11,9 @@ date: 2025-01-28
 Here we have some ciphertext encrypted using (presumably) textbook RSA. It is implied that a low public exponent *e* was used, which we can exploit to recover the flag. The solution is quite simple, but I'll first provide some background that will help makes sense of it. 
 ## Background
 > [!note]
-> The following only applies to unpadded (i.e. textbook) RSA
+> See [[rsa]] for a primer
 
-Textbook RSA is defined as follows: $c = RSA_{n, e}(m) \equiv m^e \pmod{n}$ where $n$ is the modulus, $e$ is the public key, and $m$ is the message. If $m^e \lt n$, then $c = m^e$ (i.e. the modulus doesn't work its magic) and $m$ can be recovered by computing the $e$th root of $c$ since $c^{\frac{1}{e}} =(m^e)^{\frac{1}{e}} = m$.
+![[rsa#1. Low Public Exponent]]
 
 Computing such a value requires high-precision arithmetic since $c$ is a massive integer. The Python module `gmpy2` is great for such circumstances, providing the `iroot` function for computing the $n$th root of an integer without truncation or rounding. 
 ## Script
