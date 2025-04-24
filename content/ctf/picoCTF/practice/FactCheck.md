@@ -14,7 +14,7 @@ As I said in [[packer]]:
 
 I threw this binary into Binary Ninja, took a look at the strings, and found the first part of the flag:
 
-![[strings.png]]
+![[media/ctf/picoCTF/FactCheck/strings.png]]
 
 I naively assumed the next string, `95a3cedb6`, would be the next part of the flag, so I tried to submit `picoCTF{wELF_d0N3_mate_95a3cedb6}`. \*loud buzzer noise\*
 
