@@ -1,5 +1,5 @@
 ---
-title: "picoCTF 2025: hash-only-1"
+title: "picoCTF 2025: hash-only-2"
 tags:
   - ctf
 date: 2025-04-24
