@@ -108,8 +108,8 @@ In this post, I discussed how to setup Seafile using MariaDB and Memcached as us
 
 ---
 
-| Previous   | Next |
-| ---------- | ---- |
-| [[part 4]] | null |
+| Previous   | Next       |
+| ---------- | ---------- |
+| [[part 4]] | [[part 6]] |
 
 [^1]: https://dev.mysql.com/doc/refman/8.4/en/docker-mysql-more-topics.html

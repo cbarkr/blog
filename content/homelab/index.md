@@ -13,3 +13,4 @@ So far:
 3. [[part 3|part 3: adguard]]
 4. [[part 4|part 4: nextcloud]]
 5. [[part 5|part 5: seafile]]
+6. [[part 6|part 6: caddy]]
