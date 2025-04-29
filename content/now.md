@@ -1,5 +1,6 @@
 ---
 title: now
+enableTags: false
 date: 2025-04-28
 ---
 I watched as the wind swept away the petals from the cherry blossom tree in the backyard. Such a delicate disaster.
