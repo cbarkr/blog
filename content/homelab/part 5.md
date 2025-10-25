@@ -5,6 +5,8 @@ tags:
   - homelab
 date: 2024-12-04
 ---
+> [!note] Update (Oct 24, 2025)
+> Due to some issues with versions `11.0.13` and above, I've since pinned my `seafile-mc` image at tag `11.0.12`
 ## Preamble
 I ditched Nextcloud in favour of [Seafile](https://www.seafile.com/en/home/). I regret not doing so sooner. In less than an hour, Seafile was running smoothly, quickly generating image previews and loading full images. The setup was simpler than with Nextcloud too. In this post, I'll demonstrate how to get Seafile up and running in minutes using Podman and Cockpit. 
 
