@@ -1,5 +1,5 @@
 ---
-title: "picoMini: Input Injection 2"
+title: "picoMini: Input Injection 1"
 tags:
   - ctf
 date: 2025-10-24
