@@ -26,7 +26,7 @@ rule packed_YaraRules0x100 {
                $str2 = "LoadLibrary" ascii  
                $str3 = "VirtualProtect" ascii  
        condition:
-		       // REF: https://dmfrsecurity.com/2021/12/30/100-days-of-yara-day-11-upx/  
+	       // REF: https://dmfrsecurity.com/2021/12/30/100-days-of-yara-day-11-upx/  
                uint16(0) == 0x5A4D and  
                any of ($upx*) and  
                all of ($str*)  
@@ -55,8 +55,7 @@ rule unpacked_YaraRules0x100 {
                $api11 = "DebugActiveProcess" ascii  
                $api12 = "Sleep" ascii  
   
-               $sec1 = "<requestedExecutionLevel level='asInvoker' uiAccess='fal  
-se' />" ascii  
+               $sec1 = "<requestedExecutionLevel level='asInvoker' uiAccess='false' />" ascii  
        condition:  
                any of ($str*) and  
                any of ($in*) and    
