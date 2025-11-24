@@ -36,7 +36,9 @@ which yields the following output:
 
 ![[cert_details.png]]
 
-Something of note is the size of the modulus; it's tiny! Hence it's factors ($p$ and $q$) are even smaller and therefore easily recoverable. By working backwards from the square root of the modulus[^so], the first prime that evenly divides it will be one of $p$ or $q$, with which we can obtain the other missing value. 
+Something of note is the size of the modulus; it's tiny! Hence it's factors ($p$ and $q$) are even smaller and therefore easily recoverable (see [[rsa#2. Small Modulo|rsa]]).
+
+By working backwards from the square root of the modulus[^so], the first prime that evenly divides it will be one of $p$ or $q$, with which we can obtain the other missing value. 
 ## Script
 ```python
 from gmpy2 import iroot  

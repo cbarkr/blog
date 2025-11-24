@@ -38,15 +38,19 @@ Suppose two parties, Alice and Bob, wish to communicate securely. Bob wants to s
 	1. By the difficulty of integer factorization, Alice is the only one who knows $\varphi(n)$ and is therefore the only one who can compute $d$
 2. She then computes $m = c^d \pmod{n}$ to recover Bob's message
 # Attacks on Textbook RSA
-## 1. Low Public Exponent
+## 1. Small Public Exponent
 For small $e$, the plaintext is trivially recovered by computing the $e$th root of $c$ like as $c^{\frac{1}{e}} = (m^e)^{\frac{1}{e}} = m$.
-## 2. Non-Coprime Moduli
+## 2. Small Modulo
+If $n$ is small, $p$ and $q$ may computed relatively quickly using an algorithm such as [Pollard's rho algorithm](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm).
+## 3. Precomputed Modulo
+If $pq = n$ is precomputed and stored in a database such as [FactorDB](https://factordb.com/), $p$ and $q$ (and therefore $d$) may be recovered from $n$ by simply querying such a database.
+## 4. Non-Coprime Moduli
 If the same message $m$ is encrypted twice as $c_1 = m^e \pmod{n_1}$ and $c_2 = m^e \pmod{n_2}$ where $gcd(n_1, n_2) \neq 1$, then either $n_1$ or $n_2$ can be factored easily by computing $p = gcd(n_1, n_2)$ and $q = \lfloor \frac{n_1}{p} \rfloor$. $m$ can be recovered by recomputing $d$ given $p$ and $q$.
-## 3. Håstad's Broadcast
+## 5. Håstad's Broadcast
 If the same message $m$ is encrypted using the same $e$ but a different modulus $n_i \in \set{n_1, \dots, n_k}$, $e$ ciphertexts are needed to recover $m$.
 
 Suppose an eavesdropper Eve intercepts $\set{c_1, \dots, c_e}$ where each $c_i \equiv m^e \pmod{n_i}$. By the [Chinese Remainder Thereom](https://en.wikipedia.org/wiki/Chinese_remainder_theorem) (CRT), Eve may compute $c \equiv c_i \pmod{n_i}$, followed by $c \equiv m^e \pmod{n_1 \dots n_k}$. However, since $m \lt n_i \forall i$, then $c = m^e$. $m$ can thus be recovered in the same manner as the low public exponent attack.
-## 4. Common Modulus
+## 6. Common Modulus
 If the same message $m$ is encrypted using a different $e$ but the same modulus $n$, only 2 ciphertexts are needed to recover $m$ if (1) $gcd(e_1, e_2) = 1$, and (2) $gcd(c_2, n) = 1$.
 
 Suppose an eavesdropper Eve intercepts $c_1, c_2$ where $c_1 = m^{e_1} \pmod{n}$ and $c_2 = m^{e_2} \pmod{n}$, and knows each $(n, e_1)$ and $(n, e_2)$ since they are public information.
@@ -68,7 +72,7 @@ Second, given $x$ and $y$, she recovers $m$ like so:
 However, as $y$ will be negative (given $e_1x \gt 1$ and $y$'s numerator computes $1-e_1x$), it will have to be applied to $c_2$'s inverse, $c_2^{-1}$.
 
 Thus, to recover $m$, Eve computes $c_1^x \cdot (c_2^{-1})^y \mod{n}$ using public information.
-## 5. Chosen Ciphertext Attack
+## 7. Chosen Ciphertext Attack
 Let $Enc(m)$ denote $c = m^e \pmod{n}$ for illustrative purposes. 
 
 RSA is partially-homomorphic: for two messages $m_1$ and $m_2$,

@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
 Nothing particularly stands out here, except perhaps this custom `get_primes` function. If we compare $n$ across multiple requests, we learn that they share a factor! The attack works like so:
 
-![[rsa#2. Non-Coprime Moduli]]
+![[rsa#4. Non-Coprime Moduli]]
 ## Script
 ```python
 from pwn import *  

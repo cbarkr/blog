@@ -13,7 +13,7 @@ Here we have some ciphertext encrypted using (presumably) textbook RSA. It is im
 > [!note]
 > See [[rsa]] for a primer
 
-![[rsa#1. Low Public Exponent]]
+![[rsa#1. Small Public Exponent]]
 
 Computing such a value requires high-precision arithmetic since $c$ is a massive integer. The Python module `gmpy2` is great for such circumstances, providing the `iroot` function for computing the $n$th root of an integer without truncation or rounding. 
 ## Script
