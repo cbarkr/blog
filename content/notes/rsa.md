@@ -10,13 +10,17 @@ date: 2025-04-21
 > Integers $a$ and $b$ are said to be coprime if $gcd(a, b) = 1$
 ## Fermat’s Little Theorem
 > Suppose $p$ is prime and $a$ is any integer
+> 
 > Then $a^p \equiv a \pmod{p}$
 ## Euler's Totient Function
 > Let $\varphi(n)$ equal the number of positive integers less than n that are coprime to n
+> 
 > Suppose $n = pq$ for some primes $p$ and $q$
+> 
 > Then $\varphi(n) = \varphi(pq) = (p-1)(q-1)$
 ## Euler’s Theorem
 > Suppose $a$ and $n$ are coprime positive integers
+> 
 > Then $a^{\varphi(n)} \equiv 1 \pmod{n}$
 # Textbook Definition
 Suppose two parties, Alice and Bob, wish to communicate securely. Bob wants to send an encrypted message to Alice without exchanging a shared private key.
@@ -26,10 +30,10 @@ Suppose two parties, Alice and Bob, wish to communicate securely. Bob wants to s
 3. She compute the *modulus* $n = pq$
 4. She then computes Euler's totient function, $\varphi(n) = (p-1)(q-1)$
 5. With public exponent $e$ such that $gcd(e, \varphi(n)) = 1$, Alice publishes the pair $(n, e)$
-## 3. Encryption
+## 2. Encryption
 1. Bob encrypts message $m$ into ciphertext $c$ like so: $c = m^e \pmod{n}$
 2. Bob sends $c$ to Alice
-## 4. Decryption
+## 3. Decryption
 1. Alice computes the private key, $d$, as $d = e^{-1} \pmod{\varphi(n)}$
 	1. By the difficulty of integer factorization, Alice is the only one who knows $\varphi(n)$ and is therefore the only one who can compute $d$
 2. She then computes $m = c^d \pmod{n}$ to recover Bob's message
