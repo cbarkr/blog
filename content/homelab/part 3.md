@@ -59,7 +59,7 @@ These volumes will be created in `/home/$USER/.local/share/containers/storage/vo
 
 > [!note] Note
 > Note this location, it will be relevant for the next step
-#### Step 2: (Optional) Create a pod
+### Step 2: (Optional) Create a pod
 > [!info] Info
 > If you skip this step, make sure to set the port mappings and volume mounts on the container in the "Integrations" tab (see step 4)
 
