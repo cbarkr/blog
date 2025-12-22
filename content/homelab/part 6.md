@@ -65,6 +65,6 @@ Configuring local domains with HTTPS is extremely simple using AdGuard and Caddy
 
 ---
 
-| Previous   | Next |
-| ---------- | ---- |
-| [[part 5]] | null |
+| Previous   | Next       |
+| ---------- | ---------- |
+| [[part 5]] | [[part 7]] |
