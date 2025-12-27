@@ -25,7 +25,7 @@ Seafile's `docker-compose.yml` (linked above) uses specific versions of MariaDB 
 ```bash
 podman pull docker.io/library/mariadb:10.6
 podman pull docker.io/library/memcached:1.6.32
-podman pull docker.io/seafileltd/seafile:11.0-latest
+podman pull docker.io/seafileltd/seafile-mc:11.0-latest
 ```
 
 To pull the images via Cockpit's UI, follow the same steps given in [[part 4]].
