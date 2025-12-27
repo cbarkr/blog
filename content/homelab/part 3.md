@@ -107,11 +107,23 @@ In order to get the benefits of network-wide ad/tracker-blocking, AdGuard must b
 
 > [!note] Note
 > Since AdGuard is running as a container, the guide will use the *container's IP address*, **not** the host's. Using the container's IP address is useless since it is *contained* on the host machine. So instead, I used the IP address of the host running the AdGuard container.
-## Update
+## Update 1
 Since originally writing this, I've made a few changes that are worth mentioning:
 1. The `services` pod is no more. Instead, AdGuard runs as a standalone container
 2. `adguardhome` now binds to port `8080` on the host rather than `80`
 3. Superfluous port bindings were removed, leaving only `53:53`, `53:53/udp`, and `8080:80`
+
+## Update 2
+The best solution I found for the "Unprivileged users vs privileged ports" problem is to expose the DNS port (`53`) on an unprivileged port (e.g. `5300`) and simply configure some `iptables` rules to forward requests from the privileged port to the unprivileged port. To do so, simply:
+
+```bash
+sudo iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 5300
+sudo iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 5300
+```
+
+> [!note]
+> For these rules to be persisted after reboot, the `iptables-persistent` package must be installed.
+
 ## Summary
 In this post, I discussed how to setup AdGuard Home as a user container in Cockpit using Podman. The process isn't perfect, but it can be improved using a reverse proxy (which I will hopefully demonstrate at a later date!). 
 
