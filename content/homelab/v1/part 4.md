@@ -70,8 +70,8 @@ Since the Nextcloud, MariaDB, and Redis containers must communicate with one ano
 > [!note]
 > The following containers should be created in the order given
 ### Step 4: Create the MariaDB container
-![[media/homelab/nextcloud/mariadb_container.png]]
-![[media/homelab/nextcloud/mariadb_container2.png]]
+![[mariadb_container.png]]
+![[media/homelab/v1/nextcloud/mariadb_container2.png]]
 #### Breakdown
 1. The container is named `nextcloud-db`
 2. A memory limit of 256 MB is applied to the container
@@ -127,7 +127,7 @@ Navigating to the "Files" page will reveal a bunch of guides and sample files, w
 ### Step 8: Using Nextcloud
 The first thing I added was a small collection of silly tech memes that I had kicking around:
 
-![[media/homelab/nextcloud/memes.png]]
+![[media/homelab/v1/nextcloud/memes.png]]
 
 The next thing I did was employ [Google Takeout](https://takeout.google.com/) to export my entire Google Drive as one big `.tgz` (which I know how to extract thanks to `IMG.3881.jpeg` shown above!). For nearly 8 years, I've stored most of [my photography](https://www.cbarkr.com/photos) on Google Drive, so this archive is quite large. Fortunately, it's *mostly* organized (by years > months > events), so uploading everything to Nextcloud won't be too painful.
 ## Update

@@ -46,9 +46,9 @@ In this post, I gave a brief update into the state of the homelab (now minilab),
 
 ---
 
-| Previous                    | Next |
-| --------------------------- | ---- |
-| [[homelab/v2/index\|index]] | null |
+| Previous                    | Next                          |
+| --------------------------- | ----------------------------- |
+| [[homelab/v2/index\|index]] | [[homelab/v2/part 2\|part 2]] |
 
 [^eket1]: https://www.reddit.com/r/minilab/comments/1kwq0kf/ikea_eket_club_10_tinyrack_build/
 [^eket2]: https://www.reddit.com/r/homelab/comments/17r76c2/introducing_the_ikea_10_rack/

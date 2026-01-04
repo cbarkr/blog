@@ -49,4 +49,4 @@ For a GUI, however, I planned to primarily use Cockpit. This will be the focus o
 
 | Previous                    | Next       |
 | --------------------------- | ---------- |
-| [[homelab/v1/index\|index]] | [[part 2]] |
+| [[homelab/v1/index\|index]] | [[homelab/v1/part 2]] |

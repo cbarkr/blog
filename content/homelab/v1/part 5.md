@@ -56,7 +56,7 @@ The pod can be created in Cockpit like so:
 > The following containers should be created in the order given
 ### Step 4: Create the MariaDB container
 ![[mariadb_container1.png]]
-![[media/homelab/seafile/mariadb_container2.png]]
+![[media/homelab/v1/seafile/mariadb_container2.png]]
 #### Breakdown
 1. The container is named `seafile-db`
 2. A memory limit of 512 MB is applied to the container
@@ -102,7 +102,7 @@ After signing in, navigate to the system admin page by clicking on the avatar in
 ### Step 9: Using Seafile
 As before, I uploaded my silly little images as a test:
 
-![[media/homelab/seafile/memes.png]]
+![[media/homelab/v1/seafile/memes.png]]
 
 Then, I uploaded my entire Google Takeout archive once again. The difference in upload and preview rendering speed between Seafile and Nextcloud is staggering.
 ## Summary
