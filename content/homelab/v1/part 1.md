@@ -47,6 +47,6 @@ For a GUI, however, I planned to primarily use Cockpit. This will be the focus o
 
 ---
 
-| Previous | Next       |
-| -------- | ---------- |
-| null     | [[part 2]] |
+| Previous                    | Next       |
+| --------------------------- | ---------- |
+| [[homelab/v1/index\|index]] | [[part 2]] |
