@@ -1,5 +1,5 @@
 ---
-title: "part 1: humble beginnings"
+title: "part 1: hardware"
 tags:
   - blog
   - homelab
@@ -47,6 +47,6 @@ For a GUI, however, I planned to primarily use Cockpit. This will be the focus o
 
 ---
 
-| Previous   | Next       |
-| ---------- | ---------- |
-| [[part 0]] | [[part 2]] |
+| Previous | Next       |
+| -------- | ---------- |
+| null     | [[part 2]] |

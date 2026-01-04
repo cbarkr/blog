@@ -1,5 +1,5 @@
 ---
-title: "part 8: rebuild"
+title: "part 1: hardware"
 tags:
   - blog
   - homelab
@@ -27,19 +27,11 @@ Before moving on to the build itself, I thought it may be helpful to others if I
 - 1x [Seagate 1.5TB USB HDD](https://www.amazon.ca/Seagate-Expansion-Portable-External-2-5inch/dp/B007IREFE0)
 - 3x 6" CAT6 patch cables
 ## How
-This section will be divided into (1) hardware and (2) software to keep things simple.
-### 1. Hardware
 Inspired by a number of previous IKEA EKET rack builds[^eket1][^eket2][^eket3][^eket4], I opted to friction-fit dowels, to which the rack rails would be attached, into the EKET's frame. This method avoids drilling into - and subsequently compromising the structural integrity of - the IKEA cabinet's particleboard construction. 
 
 The interior height and width of the EKET frame is advertised as 12.25"; however, I measured 12.5". Therefore, I cut the dowels to approximately 12.5" and hand-sanded the tops and bottoms of each until they fit snugly into the frame (coerced by a mallet, at least). Aligning the rails to the centre of each dowel, I marked the mounting locations and drilled small pilot holes. As the 10" wide rack shelves must fit into the 12.5" frame supported by two 1" dowels ($12.5 - (10 + 2) =$ 0.5" remaining gap), I balanced 0.25" worth of washers on each hole of each dowel (approximately six washers for each of the six holes for each dowel-rail pair). With the rails carefully placed atop the washers, I hand-threaded wood screws into the pilot holes before drilling with an impact driver. Finally, each dowel could be coerced into the EKET's frame for good. 
 
 With the rails in place, the patch panel and shelves could simply be bolted in, and the computing/network resources situated where required or desired.
-### 2. Software
-In my previous posts, I've demonstrated nearly all Podman deployments using Cockpit's GUI. Truthfully, I don't like doing things this way, but I did so to maintain a low barrier to entry for potential readers with an aversion to the command line. I would much prefer to use Docker [Compose](https://docs.docker.com/reference/compose-file/) as I do for work to simplify deployments and lean toward infrastructure as code. Thus, I followed my heart and rewrote everything as Compose files. This is my blog after all, I'm allowed to do what I want. 
-
-In the process of rewriting everything as Compose files, I decided to finally solve the "unprivileged users vs privileged ports" problem I posed in [[part 3]]. Rather than (hackishly) lowering the port number at which unprivileged ports start, I instead bound the container's privileged port (`53`) to an unprivileged port on the host (`5300`) and set `iptables` rules to map requests from port `53` to `5300`. This achieves the same result without (dangerously) making privileged ports available to unprivileged users. 
-
-All relevant scripts, config, and Compose files now live on the public repository https://github.com/cbarkr/homelab/ which I will endeavour to keep up-to-date with any changes I make in the future!
 ## Result
 > [!note]
 > Cables, etc. omitted for clarity
@@ -51,19 +43,14 @@ All relevant scripts, config, and Compose files now live on the public repositor
 ![[minilab_detail_washer_hack.jpg]]
 
 ![[minilab_detail_optiplex.jpg]]
-## What's Next?
-I'm currently waiting on a 2.5Gb NIC so I can replace my ISP router with a virtualized instance of [pfSense](https://www.pfsense.org/) or [OPNsense](https://opnsense.org/) (haven't decided which yet), install [Snort](https://www.snort.org/) and [Suricata](https://suricata.io/) for IPS and IDS, and configure a [WireGuard](https://www.wireguard.com/) VPN to access my network remotely. 
-
-Eventually, I would like to set up a NAS and upgrade all of my other devices to 2.5Gb networking, but I don't have a convincing use case (yet). 
 ## Summary
 In this post, I gave a brief update into the state of the homelab (now minilab), including its simultaneous shrinkage and cleanup. 
 
 ---
 
-| Previous   | Next |
-| ---------- | ---- |
-| [[part 7]] | null |
-
+| Previous | Next |
+| -------- | ---- |
+| null     | null |
 
 [^eket1]: https://www.reddit.com/r/minilab/comments/1kwq0kf/ikea_eket_club_10_tinyrack_build/
 [^eket2]: https://www.reddit.com/r/homelab/comments/17r76c2/introducing_the_ikea_10_rack/

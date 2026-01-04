@@ -8,7 +8,7 @@ date: 2024-09-19
 ## Preamble
 I don't like Google Drive; something about storing my personal files on an advertising company's servers makes me uncomfortable. Moreover, why should I pay \$14 CAD per month for 2 TB of storage while I already have 5+ TB of drives collecting dust (\$0 per month)?
 
-This is where Nextcloud comes in. Nextcloud is the [[foss|FOSS]] file storage / management system that I mentioned in [[part 0]]; it's something like a self-hosted Google Drive with similar bells and whistles. I don't need or particularly care for the bells and whistles, but since they're available, maybe I'll make some noise. 
+This is where Nextcloud comes in. Nextcloud is one of the [[foss|FOSS]] file storage / management systems I mentioned at [[homelab/index|the beginning]]; it's something like a self-hosted Google Drive with similar bells and whistles. I don't need or particularly care for the bells and whistles, but since they're available, maybe I'll make some noise. 
 ## Setup
 Like [[part 3]], I will be configuring this service as a user container using Podman. I used the [manual version](https://hub.docker.com/_/nextcloud/) of the Nextcloud image (as opposed to the [All-in-One version](https://github.com/nextcloud/all-in-one#nextcloud-all-in-one)) because I don't want anything fancy, just simple file management. Also, I'd rather do it myself, if possible. 
 ### Step 1: Acquire the necessary images
