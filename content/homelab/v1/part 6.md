@@ -5,7 +5,7 @@ tags:
   - homelab
 date: 2025-04-25
 ---
-Long time no see! For the past several months, I've been pre-occupied with school, work, and #ctf. Today, however, I finally address something that I've been meaning to do for a very long time: enable HTTPS and use local domains for my services. To do so, I leverage DNS rewrites using [[part 3|AdGuard]] and auto-HTTPS from [Caddy](https://caddyserver.com/).
+Long time no see! For the past several months, I've been pre-occupied with school, work, and #ctf. Today, however, I finally address something that I've been meaning to do for a very long time: enable HTTPS and use local domains for my services. To do so, I leverage DNS rewrites using [[homelab/v1/part 3|AdGuard]] and auto-HTTPS from [Caddy](https://caddyserver.com/).
 # Preface
 Due to the complexities of networking with rootless containers (at the time of writing), this probably could have been a lot easier had I used Docker instead of Podman. I simply could not get this working (nicely) using a purely containerized setup, so I ended up violating one of my [[homelab/v1/part 2#2. Requirements|requirements]] and installing Caddy on bare metal. It made life a lot simpler and I don't see any consequences from doing so. Sue me.
 # Setup
