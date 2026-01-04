@@ -53,8 +53,8 @@ sudo apt install podman-compose
 ```bash
 sudo apt install iptables-persistent
 ```
-### 4. System Configurations
-#### 4.1. `iptables` Rules
+## 4. System Configurations
+### 4.1. `iptables` Rules
 As described in [[#3.5. `iptables-persistent`]], some configuration is in order to allow our unprivileged services to service privileged ports. AdGuard Home and Caddy are the only relevant services, and they require:
 
 - `53` (UDP and TCP)
