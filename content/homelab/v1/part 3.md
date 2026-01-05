@@ -131,7 +131,7 @@ In this post, I discussed how to setup AdGuard Home as a user container in Cockp
 
 | Previous   | Next       |
 | ---------- | ---------- |
-| [[homelab/v1/part 2]] | [[part 4]] |
+| [[homelab/v1/part 2]] | [[homelab/v1/part 4]] |
 
 
 [^1]: https://github.com/cockpit-project/cockpit-podman/issues/921#issuecomment-1068200897
