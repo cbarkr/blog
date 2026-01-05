@@ -1,5 +1,5 @@
 ---
-title: "part 4: local domains with HTTPS"
+title: "part 4: binding rootless containers to privileged ports; AdGuard Home and Caddy for local domains with HTTPS"
 tags:
   - blog
   - homelab
