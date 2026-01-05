@@ -43,7 +43,7 @@ Now, all that's left is to deploy the services listening on these unprivileged p
 > - `.env`: Environment variables to configure the service
 > - `compose.yml`: The [compose](https://github.com/compose-spec/compose-spec) file which defines each of the microservices which comprise the service
 > - `README.md`: Documentation for the service
-### 2.1. AdGuard Home
+#### 2.1. AdGuard Home
 AdGuard Home acts as my DNS server, and is configured to perform *DNS rewrites* such that any request for a `*.lab` domain will be resolved to my server's IP address. For example, requests for `adguard.com` will be fulfilled by an upstream DNS server, while requests for `adguard.lab` will be fulfilled by AdGuard Home itself and resolve to my server's IP address.
 
 Deploying AdGuard Home is quite simple as it is only a single container requiring two [volumes](https://docs.docker.com/engine/storage/volumes/) and three port bindings. It can be configured as follows.
@@ -76,7 +76,7 @@ services:
 ```bash
 podman compose up -d
 ```
-### 2.2. Caddy
+#### 2.2. Caddy
 Caddy acts as a reverse proxy, and is configured to forward traffic from specific `.lab` domains (redirected here by AdGuard Home) to the corresponding service. For example, traffic bound for `adguard.lab` is forwarded back to the container running AdGuard Home.
 
 Deploying Caddy is almost as simple as deploying AdGuard Home as it, too, is a single container requiring three port bindings; however it also requires a `conf` directory containing a [`Caddyfile`](https://caddyserver.com/docs/caddyfile) as a [bind mount](https://docs.docker.com/engine/storage/bind-mounts/).
@@ -135,13 +135,11 @@ podman compose up -d
 ## Example
 Accessing `https://adguard.lab` (for example) should:
 1. Trigger a DNS request for `adguard.lab`
-2. Result in AdGuard Home rewriting the response such that `adguard.lab`->`<server-ip-address>
+2. Result in AdGuard Home rewriting the response such that `adguard.lab`->`<server-ip-address>`
 3. Redirect the request to `<server-ip-address>:443`
 4. Result in Caddy proxying the request from port `443` to port `8080` on the server (i.e. the port running AdGuard Home's web interface)
-## Wrapping Up
-AdGuard Home should now be running as a DNS server and Caddy as a reverse proxy! Together, they can be used to use custom domains with HTTPS locally. 
 ## Summary
-In this post, I described how to bind rootless containers to privileged ports and configure both AdGuard Home and Caddy in such a fashion. 
+In this post, I described how to bind rootless containers to privileged ports and configure both AdGuard Home and Caddy in such a fashion. Together, they can be used to define custom local domains with HTTPS.
 
 ---
 
