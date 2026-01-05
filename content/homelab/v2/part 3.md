@@ -36,7 +36,7 @@ sudo apt install openssh-server
 sudo apt install fail2ban
 ```
 ### 3.3. Cockpit
-1. Install Cockpit and friends (Podman, storage, and network extensions)
+1. Install [Cockpit](https://cockpit-project.org/) and friends ([Podman](https://podman.io/), storage, and network extensions)
 
 ```bash
 sudo apt install cockpit cockpit-storaged cockpit-networkmanager cockpit-podman
