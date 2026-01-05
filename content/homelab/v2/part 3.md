@@ -42,7 +42,7 @@ sudo apt install fail2ban
 sudo apt install cockpit cockpit-storaged cockpit-networkmanager cockpit-podman
 ```
 ### 3.4. Podman Compose
-1. Install [podman-compose](https://github.com/containers/podman-compose)
+1. Install [Podman Compose](https://github.com/containers/podman-compose)
 
 ```bash
 sudo apt install podman-compose
