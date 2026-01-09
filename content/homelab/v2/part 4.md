@@ -1,5 +1,5 @@
 ---
-title: "part 4: binding rootless containers to privileged ports; AdGuard Home and Caddy for local domains with HTTPS"
+title: "part 4: binding rootless containers to privileged ports; adguard and caddy for local domains with https"
 tags:
   - blog
   - homelab
@@ -13,28 +13,42 @@ What if you want to solve a rootful problem with a rootless solution? What if yo
 
 Caddy (web server) and AdGuard Home (DNS server) bind to [*privileged ports*](https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html), and must therefore either be run as root or the ports must be made unprivileged. The former is an obvious solution, and not what we are interested in here, while the latter is less so; common advice is to run `sudo sysctl net.ipv4.ip_unprivileged_port_start = 53` on the host, however this makes *all* ports $\geq$ `53` unprivileged!
 
-A better solution, which seemingly gets the best of both worlds, is to (1) bind these rootless containers to *unprivileged* ports and (2) configure firewall rules to redirect traffic from the privileged port to the corresponding unprivileged port[^redirect][^redirect2].
+A better solution, which seemingly obtains the best of both worlds, is to (1) configure firewall rules to redirect traffic from the privileged ports to corresponding *unprivileged* ports and (2) bind our rootless containers to these unprivileged ports[^redirect][^redirect2].
 ## Setup
 ### 1. System Configurations
-In the [[homelab/v2/part 3|last post]], we installed `iptables-persistent` to persist `iptables` rules after system restarts. Now, it's time to configure some `iptables` rules.
+In the [[homelab/v2/part 3|last post]], we installed `ufw` to make managing `iptables` rules a little simpler. We can use `ufw` / `iptables` to redirect traffic using network address translation (NAT) - in our case, we want to translate requests from privileged ports (e.g. `53`, `80`, `443`) to unprivileged ports (e.g. `5300`, `8000`, `4443`). 
+#### 1.1. Update Firewall Rules
+As we want to allow HTTP(S) and DNS connections (for Caddy and AdGuard Home, respectively), we need to open those ports:
 
-Suppose we bind Caddy to ports `8000` and `4443`, and AdGuard Home to port `5300`. Then, we require the following `iptables` rules (stored in `/etc/iptables/rules.v4`):
+```bash
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 53
+```
+#### 1.2. Configuring NAT Rules
+Now we define the rules followed to perform the actual routing / translation. Using the privileged -> unprivileged mapping defined earlier, we can add the following `iptables` rules to the end of `/etc/ufw/before.rules`:
 
 ```
 *nat
-:PREROUTING ACCEPT [19329:1473630]
-:INPUT ACCEPT [61154:4345582]
-:OUTPUT ACCEPT [103775:6235567]
-:POSTROUTING ACCEPT [103775:6235567]
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+
 -A PREROUTING -p udp -m udp --dport 53 -j REDIRECT --to-ports 5300
 -A PREROUTING -p tcp -m tcp --dport 53 -j REDIRECT --to-ports 5300
 -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
 -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 4443
 -A PREROUTING -p udp -m udp --dport 443 -j REDIRECT --to-ports 4443
+
 COMMIT
 ```
 
 These rules instruct the firewall to redirect UDP or TCP DNS requests from `53` -> `5300`, TCP HTTP requests from `80` -> `8000`, and UDP or TCP HTTPS requests from `443` -> `4443`. 
+#### 1.3. Reload
+For the preceding changes to come into effect, `ufw` must be reloaded like so:
+
+```bash
+sudo ufw reload
+```
 
 Now, all that's left is to deploy the services listening on these unprivileged ports. 
 ### 2. User Services
