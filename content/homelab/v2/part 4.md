@@ -25,6 +25,17 @@ sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 53
 ```
+
+Due to the way Caddy and AdGuard are configured (as you'll see in a moment), the unprivileged ports must be opened up as well:
+
+```bash
+sudo ufw allow 4443
+sudo ufw allow 5300
+sudo ufw allow 8000
+sudo ufw allow 8080
+sudo ufw allow 8081
+sudo ufw allow 8082
+```
 #### 1.2. Configuring NAT Rules
 Now we define the rules followed to perform the actual routing / translation. Using the privileged -> unprivileged mapping defined earlier, we can add the following `iptables` rules to the end of `/etc/ufw/before.rules`:
 
