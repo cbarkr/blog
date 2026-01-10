@@ -9,7 +9,7 @@ This post serves as an informal playbook to deploy a new machine in my homelab.
 ## 1. OS
 1. Download a Debian [live install](https://www.debian.org/CD/live/) image (as I remember the traditional installer being a pain last time) on another machine
 2. Create a live disk (e.g. using Ubuntu's *Startup Disk Creator*)
-3. Inserted the live disk into the new machine and followed the installation prompts
+3. Insert the live disk into the new machine and follow the installation prompts
 ## 2. System Services
 ## 2.1 CUPS
 1. Remove CUPS (as I sure as hell don't want or need to connect this machine to a printer)
