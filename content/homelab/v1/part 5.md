@@ -10,7 +10,7 @@ date: 2024-12-04
 ## Preamble
 I ditched Nextcloud in favour of [Seafile](https://www.seafile.com/en/home/). I regret not doing so sooner. In less than an hour, Seafile was running smoothly, quickly generating image previews and loading full images. The setup was simpler than with Nextcloud too. In this post, I'll demonstrate how to get Seafile up and running in minutes using Podman and Cockpit. 
 
-If you read [[homelab/v1/part 4]], this setup process will be *very* familiar.
+If you read [[homelab/v1/part 4|part 4]], this setup process will be *very* familiar.
 ## Setup
 TL;DR: Adapt [Seafile's docker-compose.yml](https://download.seafile.com/d/320e8adf90fa43ad8fee/files/?p=%2Fdocker%2Fdocker-compose.yml) into a rootless setup using a pod.
 ### Step 1: Acquire the necessary images
@@ -28,7 +28,7 @@ podman pull docker.io/library/memcached:1.6.32
 podman pull docker.io/seafileltd/seafile-mc:11.0-latest
 ```
 
-To pull the images via Cockpit's UI, follow the same steps given in [[homelab/v1/part 4]].
+To pull the images via Cockpit's UI, follow the same steps given in [[homelab/v1/part 4|part 4]].
 ### Step 2: Create the necessary volumes
 Seafile only requires 2 mounts:
 
@@ -110,8 +110,8 @@ In this post, I discussed how to setup Seafile using MariaDB and Memcached as us
 
 ---
 
-| Previous   | Next       |
-| ---------- | ---------- |
-| [[homelab/v1/part 4]] | [[part 6]] |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v1/part 4\|part 4]] | [[homelab/v1/part 6\|part 6]] |
 
 [^1]: https://dev.mysql.com/doc/refman/8.4/en/docker-mysql-more-topics.html

@@ -37,7 +37,7 @@ Caddy will install a config file at `/etc/caddy/Caddyfile`. By [default](https:/
 }
 ```
 
-I removed everything and started fresh. All I intend on routing for now is AdGuard and [[part 5|Seafile]], so I need only 2 rules. Quite simply:
+I removed everything and started fresh. All I intend on routing for now is AdGuard and [[homelab/v1/part 5|Seafile]], so I need only 2 rules. Quite simply:
 
 ```bash
 adguard.lab {
@@ -67,4 +67,4 @@ Configuring local domains with HTTPS is extremely simple using AdGuard and Caddy
 
 | Previous   | Next       |
 | ---------- | ---------- |
-| [[part 5]] | [[part 7]] |
+| [[homelab/v1/part 5|part 5]] | [[homelab/v1/part 7|part 7]] |

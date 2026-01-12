@@ -57,8 +57,8 @@ Backups don't have to be hard! This simple `rsync` + `cron` combination automati
 
 ---
 
-| Previous   | Next |
-| ---------- | ---- |
-| [[part 6]] | null |
+| Previous                      | Next |
+| ----------------------------- | ---- |
+| [[homelab/v1/part 6\|part 6]] | null |
 [^cron]: https://linux.die.net/man/8/cron
 [^rsync]: https://linux.die.net/man/1/rsync

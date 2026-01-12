@@ -41,6 +41,6 @@ With that, the server should be ready to do some serving!
 
 ---
 
-| Previous                      | Next       |
-| ----------------------------- | ---------- |
-| [[homelab/v1/part 1\|part 1]] | [[homelab/v1/part 3]] |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v1/part 1\|part 1]] | [[homelab/v1/part 3\|part 3]] |

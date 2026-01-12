@@ -13,7 +13,7 @@ While setting up my new [[homelab/v2/part 1|hardware]], I reflected on the limit
 
 Henceforth, all services will be defined as [compose](https://github.com/compose-spec/compose-spec) files and deployed using [podman-compose](https://github.com/containers/podman-compose) (although [Quadlet](https://www.redhat.com/en/blog/quadlet-podman) is the preferred option with Podman, it and [podlet](https://github.com/containers/podlet) do not support string interpolation, which I use for both volume and environment variable configuration). Such files are self-documenting and unambiguous, perfect for repeatable deployments. 
 
-In the migration process, warnings from previous posts will be addressed; namely, the "unprivileged users vs privileged ports" problem with [[homelab/v1/part 3|AdGuard Home]] and [[part 6|Caddy]]. A major motivation of this whole endeavour is to learn more about network security and system security, thus it is counterproductive to tolerate insecure configurations for the sake of convenience. 
+In the migration process, warnings from previous posts will be addressed; namely, the "unprivileged users vs privileged ports" problem with [[homelab/v1/part 3|AdGuard Home]] and [[homelab/v1/part 6|Caddy]]. A major motivation of this whole endeavour is to learn more about network security and system security, thus it is counterproductive to tolerate insecure configurations for the sake of convenience. 
 
 As part of sweating the small stuff, I wanted to put together a network diagram for my own sake. So here it is: 
 

@@ -10,7 +10,7 @@ I don't like Google Drive; something about storing my personal files on an adver
 
 This is where Nextcloud comes in. Nextcloud is one of the [[foss|FOSS]] file storage / management systems I mentioned at [[homelab/index|the beginning]]; it's something like a self-hosted Google Drive with similar bells and whistles. I don't need or particularly care for the bells and whistles, but since they're available, maybe I'll make some noise. 
 ## Setup
-Like [[homelab/v1/part 3]], I will be configuring this service as a user container using Podman. I used the [manual version](https://hub.docker.com/_/nextcloud/) of the Nextcloud image (as opposed to the [All-in-One version](https://github.com/nextcloud/all-in-one#nextcloud-all-in-one)) because I don't want anything fancy, just simple file management. Also, I'd rather do it myself, if possible. 
+Like [[homelab/v1/part 3|part 3]], I will be configuring this service as a user container using Podman. I used the [manual version](https://hub.docker.com/_/nextcloud/) of the Nextcloud image (as opposed to the [All-in-One version](https://github.com/nextcloud/all-in-one#nextcloud-all-in-one)) because I don't want anything fancy, just simple file management. Also, I'd rather do it myself, if possible. 
 ### Step 1: Acquire the necessary images
 Apart from the main Nextcloud container, two additional containers, while not necessary, are recommended to improve the performance of Nextcloud. The first is an external database and the second is in-memory storage which will be used as a cache. 
 
@@ -170,9 +170,9 @@ In this post, I discussed how to setup Nextcloud using MariaDB and Redis as user
 
 ---
 
-| Previous   | Next       |
-| ---------- | ---------- |
-| [[homelab/v1/part 3]] | [[part 5]] |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v1/part 3\|part 3]] | [[homelab/v1/part 5\|part 5]] |
 
 [^1]: https://github.com/redis/docker-library-redis/issues/176#issuecomment-723535421
 [^2]: https://github.com/nextcloud/previewgenerator/issues/105
