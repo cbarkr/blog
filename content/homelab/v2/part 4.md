@@ -123,13 +123,13 @@ adguard.lab {
 	tls internal
 }
  
-# See the next post!
+# See part 6!
 seafile.lab {
 	reverse_proxy host.containers.internal:8081
 	tls internal
 }
 
-# See the next post!
+# See part 6!
 immich.lab {
 	reverse_proxy host.containers.internal:8082
 	tls internal
@@ -168,9 +168,9 @@ In this post, I described how to bind rootless containers to privileged ports an
 
 ---
 
-| Previous                      | Next |
-| ----------------------------- | ---- |
-| [[homelab/v2/part 3\|part 3]] | null |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v2/part 3\|part 3]] | [[homelab/v2/part 5\|part 5]] |
 
 [^podman]: https://www.redhat.com/en/blog/hpc-containers-scale-using-podman
 [^rootless]: https://www.redhat.com/en/blog/basic-security-principles-containers
