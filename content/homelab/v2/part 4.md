@@ -26,7 +26,7 @@ sudo ufw allow https
 sudo ufw allow 53
 ```
 
-Due to the way Caddy and AdGuard are configured (as you'll see in a moment), the unprivileged ports must be opened up as well:
+The unprivileged ports must be opened up as well (as for why, you will see in a moment):
 
 ```bash
 sudo ufw allow 4443
@@ -53,7 +53,14 @@ Now we define the rules followed to perform the actual routing / translation. Us
 COMMIT
 ```
 
-These rules instruct the firewall to redirect UDP or TCP DNS requests from `53` -> `5300`, TCP HTTP requests from `80` -> `8000`, and UDP or TCP HTTPS requests from `443` -> `4443`. 
+These rules instruct the firewall to redirect UDP or TCP DNS requests from `53` -> `5300`, TCP HTTP requests from `80` -> `8000`, and UDP or TCP HTTPS requests from `443` -> `4443` *as soon as they come in*[^iptables]. The reason why "the unprivileged ports \[`5300`, `8000`, and `4443`\] must be opened up as well" is that the `PREROUTING` chain of the `nat` table redirects incoming packets *before* a routing decision is made. Thus, ports `5300`, `8000`, and `4443` must be allow-listed, otherwise the routing decision will always be a bit fat `DROP`. For context, please consult the following diagram: 
+
+> [!note]
+> Full credit for the following diagram goes to Phil Hagen! Find the original post [here](https://stuffphilwrites.com/2014/09/iptables-processing-flowchart/).
+
+![[iptables_flowchart.png]]
+
+As far as I can tell (based on the `man` page[^iptables] and relevant guides[^redirect3][^redirect4][^redirect5][^redirect6]), there does not exist an (obvious) better way to perform port redirection on incoming packets *after* the routing decision is made, hence this is the solution I am sticking with. I accept the risk of allow-listing select unprivileged ports (since they are already accessible via the privileged ports, after all).
 #### 1.3. Reload
 For the preceding changes to come into effect, `ufw` must be reloaded like so:
 
@@ -69,8 +76,8 @@ Now, all that's left is to deploy the services listening on these unprivileged p
 > - `compose.yml`: The [compose](https://github.com/compose-spec/compose-spec) file which defines each of the microservices which comprise the service
 > - `README.md`: Documentation for the service
 #### 2.1. AdGuard Home
-AdGuard Home acts as my DNS server, and is configured to perform *DNS rewrites* such that any request for a `*.lab` domain will be resolved to my server's IP address. For example, requests for `adguard.com` will be fulfilled by an upstream DNS server, while requests for `adguard.lab` will be fulfilled by AdGuard Home itself and resolve to my server's IP address.
-
+AdGuard Home acts as my DNS server and is configured to perform *DNS rewrites* such that any request for a `*.lab` domain will be resolved to my server's IP address. For example, requests for `adguard.com` will be fulfilled by an upstream DNS server, while requests for `adguard.lab` will be fulfilled by AdGuard Home itself and resolve to my server's IP address.
+##### Configuration
 Deploying AdGuard Home is quite simple as it is only a single container requiring two [volumes](https://docs.docker.com/engine/storage/volumes/) and three port bindings. It can be configured as follows.
 
 > [!note]
@@ -97,13 +104,24 @@ services:
       - '8080:80/tcp'
     restart: always
 ```
-#### Deploy
+##### Deploy
 ```bash
 podman compose up -d
 ```
 #### 2.2. Caddy
-Caddy acts as a reverse proxy, and is configured to forward traffic from specific `.lab` domains (redirected here by AdGuard Home) to the corresponding service. For example, traffic bound for `adguard.lab` is forwarded back to the container running AdGuard Home.
+Caddy acts as a reverse proxy and is configured to forward traffic from specific `.lab` domains (redirected here by AdGuard Home) to the corresponding service. For example, traffic bound for `adguard.lab` is forwarded back to the container running AdGuard Home.
+##### Aside
+Before proceeding to the configuration, I want to first clarify the second half of why "the unprivileged ports \[`8080`, `8081`, and `8082`\] must be opened up as well". It all comes down to [pasta](https://passt.top/passt/about/) - the networking application (*Pack A Subtle Tap Abstraction*), not the food. As of Podman 5.0, "pasta" is the default networking application[^pasta], which has the following implication:
 
+> Pasta, by default, does not use Network Address Translation (NAT). This means it will copy the host address into the container as well, which means both the host and container namespace use the same IP address. This, in turn, means if you try to connect to the host IP from the container, it will refer to itself, not the host.
+
+To overcome this problem, an IP address is mapped to the host and the `host.containers.internal` is mapped to this IP address in `/etc/hosts`. Thus, `host.containers.internal` resolves to the host; however, it must be noted that requests made to the host from the container are treated as *incoming packets* and the ports to which those packets are addressed must therefore be allow-listed. 
+
+My Caddy configuration uses `host.containers.internal:<port>` to address the service running on the host exposed on port `<port>`. Currently, the only such ports are `8080`, `8081`, and `8082`, and, per the prior discussion, these ports must be opened on the firewall. 
+
+> [!note]
+> That may have been more than "a moment", but I hope you get the point!
+##### Configuration
 Deploying Caddy is almost as simple as deploying AdGuard Home as it, too, is a single container requiring three port bindings; however it also requires a `conf` directory containing a [`Caddyfile`](https://caddyserver.com/docs/caddyfile) as a [bind mount](https://docs.docker.com/engine/storage/bind-mounts/).
 
 > [!note]
@@ -115,9 +133,6 @@ CONF_DIR=<...>
 ```
 #### `conf/Caddyfile`
 ```
-# `host.containers.internal` resolves to host's IP
-# See https://blog.podman.io/2024/10/podman-5-3-changes-for-improved-networking-experience-with-pasta/
-
 adguard.lab {
 	reverse_proxy host.containers.internal:8080
 	tls internal
@@ -153,7 +168,7 @@ services:
       - ${CONF_DIR}:/config
     restart: always
 ```
-#### Deploy
+##### Deploy
 ```bash
 podman compose up -d
 ```
@@ -175,4 +190,10 @@ In this post, I described how to bind rootless containers to privileged ports an
 [^podman]: https://www.redhat.com/en/blog/hpc-containers-scale-using-podman
 [^rootless]: https://www.redhat.com/en/blog/basic-security-principles-containers
 [^redirect]: https://linuxconfig.org/how-to-bind-a-rootless-container-to-a-privileged-port-on-linux
-[^redirect2]: https://github.com/containers/podman/blob/main/rootless.md
+[^redirect2]: https://github.com/containers/podman/blob/main/rootless.m
+[^redirect3]: https://www.baeldung.com/linux/port-redirection
+[^redirect4]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-configuring_nat_using_nftables#sec-Configuring_a_redirect_using_nftables
+[^redirect5]: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)
+[^redirect6]: https://www.cyberciti.biz/faq/linux-port-redirection-with-iptables/
+[^iptables]: https://linux.die.net/man/8/iptables
+[^pasta]: https://blog.podman.io/2024/10/podman-5-3-changes-for-improved-networking-experience-with-pasta/
