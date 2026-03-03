@@ -7,7 +7,7 @@ date: 2026-03-02
 ---
 I'm a big fan of [[foss|open source]]. Same with being in control of my data. 
 
-Since most of my data previously resided in Google Drive and Photos, these were the first services on the chopping block when I decided to start self-hosting. Seafile and Immich are their replacements, and I don't think I will ever look back.
+Since most of my data previously resided in Google Drive and Photos, these were the first services on the chopping block when I decided to start self-hosting. Seafile and Immich replaced them some time ago now and I don't think I'll ever look back.
 ## Setup
 > [!note]
 > All user services are defined in [my homelab repository](https://github.com/cbarkr/homelab/tree/main/srv). Each service will contain at least:
