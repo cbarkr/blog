@@ -82,12 +82,12 @@ Deploying AdGuard Home is quite simple as it is only a single container requirin
 
 > [!note]
 > See https://github.com/AdguardTeam/AdGuardHome/wiki/Docker for full configuration details
-#### `.env`
+###### `.env`
 ```
 WORK_DIR=<...>
 CONF_DIR=<...>
 ```
-#### `compose.yml`
+###### `compose.yml`
 ```yml
 name: adguardhome
 
@@ -104,7 +104,7 @@ services:
       - '8080:80/tcp'
     restart: always
 ```
-##### Deploy
+##### Deployment
 ```bash
 podman compose up -d
 ```
@@ -126,12 +126,12 @@ Deploying Caddy is almost as simple as deploying AdGuard Home as it, too, is a s
 
 > [!note]
 > See [https://hub.docker.com/_/caddy/#docker-compose-example](https://hub.docker.com/_/caddy/#docker-compose-example) for full configuration details
-#### `.env`
+###### `.env`
 ```
 DATA_DIR=<...>
 CONF_DIR=<...>
 ```
-#### `conf/Caddyfile`
+###### `conf/Caddyfile`
 ```
 adguard.lab {
 	reverse_proxy host.containers.internal:8080
@@ -150,7 +150,7 @@ immich.lab {
 	tls internal
 }
 ```
-#### `compose.yml`
+###### `compose.yml`
 ```yml
 name: caddy
 
@@ -168,7 +168,7 @@ services:
       - ${CONF_DIR}:/config
     restart: always
 ```
-##### Deploy
+##### Deployment
 ```bash
 podman compose up -d
 ```

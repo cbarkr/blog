@@ -7,7 +7,7 @@ date: 2026-01-11
 ---
 > [!note]
 > This is merely a rewrite of my [[part 7|original backup post]] with minor changes
-## Preamble
+
 I like to keep things simple and stupid wherever possible. So when I thought about making automated backups of my data, I turned to `cron` and `rsync`.
 ## Background
 `cron` is a daemon to execute scheduled commands[^cron] and `rsync` is a fast, versatile, remote (and local) file-copying tool[^rsync]. Together, they can be used to schedule backups from the command line.
@@ -78,8 +78,8 @@ Backups don't have to be hard! This simple `rsync` + `cron` combination automati
 
 ---
 
-| Previous                      | Next |
-| ----------------------------- | ---- |
-| [[homelab/v2/part 4\|part 4]] | null |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v2/part 4\|part 4]] | [[homelab/v2/part 6\|part 6]] |
 [^cron]: https://linux.die.net/man/8/cron
 [^rsync]: https://linux.die.net/man/1/rsync
