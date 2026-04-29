@@ -1,12 +1,15 @@
 ---
 title: now
 enableTags: false
-date: 2025-10-24
+date: 2026-04-28
 ---
-Everything was quiet..
 
-Much has happened since the last update - I survived my last semester, graduated, spent the greater half of a month in Japan, lived out a few dreams, finally figured out how to scan film without ruining its quality, etc., etc. Now the ash and dust has settled, and I return once again to the terminal.
+Long time no see!
 
-I suppose this marks the completion of yet another chapter in life. I'm relieved it's over, yet restless for what comes next - uncertainty! That said, I remain optimistic; excitement somewhat quells the anxiety - to renew passions [recent](https://blog.cbarkr.com/tags/ctf) and [old](https://www.cbarkr.com/photos), to develop new skills and experiences, and to welcome whatever else comes next. 
+Six months have already passed since my last update so I suppose it's about time I leave another trace of my existence.
 
-That's all for [[now]]. See you soon.
+I've been content; taking pride in my work; spending my free time running, reading, building vintage bicycles (and riding them too); drinking a little too much coffee; reducing technological dependence; practicing what I preach; reflecting on what I practice; etc.; etc.
+
+Much to say on all of this. Perhaps some other entries are overdue. We shall see.
+
+That's all for [[now]]. See you again soon (or maybe in another six months).
