@@ -5,7 +5,10 @@ tags:
   - homelab
 date: 2026-01-04
 ---
-This post serves as an informal playbook to deploy a new machine in my homelab. 
+This post serves as an informal playbook to deploy a new machine in my homelab.
+
+> [!NOTE]
+> See https://github.com/cbarkr/homelab/blob/main/bin/setup.sh for a slightly more formal approach
 ## 1. OS
 1. Download a Debian [live install](https://www.debian.org/CD/live/) image (as I remember the traditional installer being a pain last time) on another machine
 2. Create a live disk (e.g. using Ubuntu's *Startup Disk Creator*)
@@ -77,6 +80,13 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow 9090
 sudo ufw enable
+```
+## 4. User Configurations
+### 4.1. Lingering
+1. Enable lingering
+
+```bash
+loginctl enable-linger
 ```
 
 ---
