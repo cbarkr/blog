@@ -65,6 +65,6 @@ Configuring local domains with HTTPS is extremely simple using AdGuard and Caddy
 
 ---
 
-| Previous   | Next       |
-| ---------- | ---------- |
-| [[homelab/v1/part 5|part 5]] | [[homelab/v1/part 7|part 7]] |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v1/part 5\|part 5]] | [[homelab/v1/part 7\|part 7]] |

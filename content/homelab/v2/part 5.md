@@ -6,7 +6,7 @@ tags:
 date: 2026-01-11
 ---
 > [!note]
-> This is merely a rewrite of my [[part 7|original backup post]] with minor changes
+> This is merely a rewrite of my [[homelab/v1/part 7|original backup post]] with minor changes
 
 I like to keep things simple and stupid wherever possible. So when I thought about making automated backups of my data, I turned to `cron` and `rsync`.
 ## Background

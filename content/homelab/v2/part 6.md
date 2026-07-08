@@ -187,6 +187,6 @@ In this post, I walked through a deployment of Seafile and Immich as rootless Po
 
 ---
 
-| Previous                      | Next |
-| ----------------------------- | ---- |
-| [[homelab/v2/part 5\|part 5]] | null |
+| Previous                      | Next                          |
+| ----------------------------- | ----------------------------- |
+| [[homelab/v2/part 5\|part 5]] | [[homelab/v2/part 7\|part 7]] |
